@@ -1,0 +1,438 @@
+﻿.jljInfo {
+	position:relative;
+	width:100%;
+	height:9.3rem;
+	margin-bottom:1.11rem;
+}
+.jljInfo text {
+	display:block;
+}
+.topLine {
+	position:absolute;
+	top:1px;
+	left:0.6rem;
+	width:13.88rem;
+	height:1px;
+	margin:0 auto;
+	background:rgba(255,255,255,.21);
+}
+.jljInfoBg img {
+	width:100%;
+	height:9.3rem;
+}
+.jljTotal {
+	display:flex;
+	flex-direction:column;
+	margin-top:-8.49rem;
+	text-align:center;
+}
+.jljTotalName {
+	font-size:0.5rem;
+	line-height:.5rem;
+	margin-bottom:0.62rem;
+	color:#b5b5b5;
+	flex:1;
+}
+.jljTotalNum {
+	font-size:1.28rem;
+	line-height:1.28rem;
+	color:#fc0;
+	flex:1;
+}
+.moneyJlj {
+	display:flex;
+	margin-top:0.87rem;
+}
+.txJlj {
+	display:-webkit-flex;
+	display:flex;
+	flex-direction:column;
+	text-align:center;
+	flex:1;
+}
+.txJlj:nth-child(1) {
+	border-right:1px solid rgba(255,255,255,.21);
+}
+.txJljName {
+	font-size:0.51rem;
+	line-height:.51rem;
+	margin-bottom:.58rem;
+	color:#b5b5b5;
+	flex:1;
+}
+.txJljNum {
+	font-size:.77rem;
+	line-height:.77rem;
+	color:#fc0;
+	flex:1;
+}
+.jljBtn {
+	display:-webkit-flex;
+	display:flex;
+	width:9.98rem;
+	margin:1.11rem auto 0;
+}
+.jijBtn_item {
+	font-size:.77rem;
+	line-height:.77rem;
+	padding:.45rem 0;
+	text-align:center;
+	background:#fc0;
+	flex:1;
+}
+.jijBtn_item:nth-child(1) {
+	border-right:1px solid #36353b;
+	border-top-left-radius:.83rem;
+	border-bottom-left-radius:.83rem;
+}
+.jijBtn_item:nth-child(2) {
+	border-top-right-radius:.83rem;
+	border-bottom-right-radius:.83rem;
+}
+.promptBox {
+	display:none;
+	width:100%;
+	background:#e7e7e7;
+	margin-top:.6rem;
+}
+.prompt {
+	display:inline-block;
+	box-sizing:border-box;
+	width:97.3%;
+	margin:.21rem;
+	padding:.51rem 0 .6rem 1rem;
+	border-radius:10px;
+	background:#fff;
+}
+.prompt text {
+	font-size:.6rem;
+	line-height:1.07rem;
+	display:block;
+	color:#000;
+}
+/*激励金排行榜*/
+
+.jljphb {
+	margin-top:1rem;
+}
+.jljphbTitle {
+	padding:.62rem 0 .6rem;
+	text-align:center;
+	border-bottom:1px solid #fc0;
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:center;
+}
+.jljphbTitle img {
+	width:.94rem;
+	height:.9rem;
+}
+.jljphbTitle text {
+	font-size:.85rem;
+	margin-left:15px;
+	color:#000;
+}
+.rangking_item {
+	line-height:1.49rem;
+	display:flex;
+	height:1.49rem;
+	border-bottom:1px solid #e7e7e7;
+}
+.userinfo {
+	line-height:2.3rem;
+	height:2.3rem;
+	margin-left:0.64rem;
+	border-bottom:1px solid #e7e7e7;
+}
+.rangking_top {
+	text-align:center;
+	flex:1;
+}
+.rangking_top img {
+	width:.85rem;
+	height:.85rem;
+}
+.info_avatar {
+	width:1.36rem !important;
+	height:1.36rem !important;
+	margin:0 .53rem 0 0 !important;
+	border-radius:50%;
+}
+.rangking_item_text {
+	font-size:.64rem;
+	line-height:1.49rem;
+	height:1.49rem;
+	text-align:center;
+	color:#000;
+	flex:1;
+}
+.user_text {
+	line-height:2.3rem;
+	height:2.3rem;
+	margin-left:1.49rem;
+}
+.user_text1 {
+	font-size:.6rem;
+	color:#696969;
+}
+.user_text2 {
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+}
+.wycb {
+	font-size:0.53rem;
+	line-height:.85rem;
+	/* height:.85rem;
+	*/
+    margin-left:.21rem;
+	padding:.21rem 1.07rem .21rem 0.43rem;
+	color:#39354b;
+	border-radius:.21rem;
+	background:#fc0;
+}
+.wycb_img {
+	width:.68rem;
+	height:.85rem;
+	margin-left:-0.85rem;
+}
+.user_name {
+	font-size:.64rem;
+	line-height:2.3rem;
+	height:2.3rem;
+	color:#000;
+}
+.rangking_name {
+	color:#696969;
+}
+.rankingList {
+	margin-bottom:3.35rem;
+}
+/*提现明细*/
+
+.reflectInfo {
+	height:6.02rem;
+}
+.reflectBg {
+	width:100%;
+	height:6.02rem;
+}
+.xitianBtn {
+	width:2.77rem;
+	height:.96rem;
+}
+.reflectDetail {
+	display:flex;
+	flex-direction:column;
+	margin-top:-6.02rem;
+}
+.reflectDes {
+	font-size:.51rem;
+	margin:.38rem 0 .81rem 1.07rem;
+	color:#b5b5b5;
+	flex:1;
+}
+.reflectMoney {
+	position:relative;
+	margin:0 0 1.32rem 1.02rem;
+	color:#fc0;
+	flex:1;
+}
+.reflect_money_num {
+	font-size:1.79rem;
+	line-height:1.79rem;
+}
+.reflect_btn {
+	display:inline-block;
+	border:1px solid #fc0;
+	border-radius:.49rem;
+	padding:.17rem .55rem;
+	margin-left:1.64rem;
+	font-size:.64rem;
+	line-height:.64rem;
+}
+.xitianBtn {
+	position:absolute;
+	bottom:.21rem;
+	margin-left:1.54rem;
+}
+.reflectList {
+	margin-top:-2rem;
+}
+.reflectList_item {
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	overflow:hidden;
+	height:1.64rem;
+	line-height:1.64rem;
+	border-bottom:1px solid #e7e7e7;
+}
+.reflectDetailTitle {
+	margin-bottom:.21rem;
+}
+.reflectDetailTitle span {
+	font-size:.64rem !important;
+	color:#fff!important;
+}
+.reflectList_item span {
+	display:block;
+	font-size:.64rem;
+	text-align:center;
+	color:#696969;
+}
+.reflect_title_money {
+	margin:0 2.4rem 0 1.15rem;
+}
+.reflect_title_date {
+	margin-right:2.9rem;
+}
+.reflectList_item_money,.item_money {
+	color:#eb453e!important;
+	width:20%;
+}
+.item_state {
+	width:20%;
+}
+.item_date {
+	width:50%;
+}
+.item_right img {
+	width:.94rem;
+	height:.94rem;
+}
+/*激励金明细*/
+
+.incentiveList_item {
+	height:1.64rem;
+	line-height:1.64rem;
+	border-bottom:1px solid #e7e7e7;
+}
+.incentive_detail_title {
+	/* position:fixed;
+	top:0;
+	left:0;
+	z-index:1;
+	*/
+    width:100%;
+	height:2.13rem;
+	line-height:2.13rem;
+	background:url(/static/images/erji_bgbg.png) no-repeat 0 center;
+	background-size:100% 2.13rem;
+}
+.incentive_detail_title span {
+	color:#fff !important;
+}
+.incentiveList_item span {
+	font-size:.51rem;
+	text-align:center;
+	color:#696969;
+	flex:1;
+	padding:0;
+}
+.incentiveList_item_money {
+	color:#eb453e!important;
+}
+/*提现明细*/
+.txBg {
+	width:100%;
+	height:5.33rem;
+	background:#ffcc00;
+}
+.txBg img {
+	width:100%;
+	height:5.97rem;
+}
+.tx_item {
+	border-bottom:1px solid #e7e7e7;
+	padding:.51rem 0;
+}
+.item_title {
+	color:#000;
+	font-size:.64rem;
+	margin:0 4.08rem 0 1.15rem;
+}
+.item_detail {
+	color:#696969;
+	font-size:.64rem;
+}
+/*提现页面*/
+.drawcash_box {
+	margin-top:.64rem;
+}
+.drawcash_item {
+	padding-left:1.05rem;
+	border-bottom:2px solid #e7e7e7;
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+}
+.drawcash_item_text {
+	font-size:.64rem;
+	color:#000;
+	padding-right:1.28rem;
+}
+.drawcash_all {
+	font-size:.51rem;
+	color:#337ab7;
+}
+.drawcash_box input, .drawcash_box select {
+	font-size:.64rem;
+	line-height:1.92rem;
+	width:50%;
+	height:1.92rem;
+	color:#000;
+	border:0;
+}
+.drawcash_confirm {
+	margin:.85rem 0 0 .43rem;
+}
+.drawcash_confirm span {
+	display:block;
+	color:#a9a9a9;
+	font-size:.51rem;
+}
+.service_charge {
+	margin-top:3rem;
+	text-align:center;
+	color:#000;
+	font-size:.64rem;
+}
+.drawcash_btnbox {
+	width:100%;
+}
+.drawcash_btn {
+	width:11.05rem;
+	height:1.92rem;
+	line-height:1.92rem;
+	background:#fc0;
+	color:#000;
+	font-size:.85rem;
+	margin:0 auto;
+	border-radius:.96rem;
+	text-align:center;
+	margin-top:.85rem;
+}
+.drawcash_btn:hover {
+	background:#eab600;
+}
+
+
+/* 补充css */
+#id .content {
+    display:block;
+}
+.reflectList_item.content {
+    display:none;
+}
+.content {
+    text-indent:2em;
+    height:auto;
+}
+.content span {
+    width:95%;
+    display:block;
+    margin:0 auto;
+    text-align:left;
+}

@@ -1,0 +1,695 @@
+@charset "utf-8";html{color:#000;background:#fff;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+audio,canvas,video{display:inline-block;*display:inline;*zoom:1}
+body,button,input,select,textarea{font:12px/1.5 tahoma,arial,\5b8b\4f53}
+input,select,textarea{font-size:100%}
+table{border-collapse:collapse;border-spacing:0}
+th{text-align:inherit}
+fieldset,img{border:0}
+iframe{display:block}
+abbr,acronym{border:0;font-variant:normal}
+del{text-decoration:line-through}
+address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:500}
+ol,ul{list-style:none}
+caption,th{text-align:left}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}
+q:before,q:after{content:''}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-0.5em}
+sub{bottom:-0.25em}
+a:hover{text-decoration:underline}
+ins,a{text-decoration:none}
+.fn-clear:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}
+.fn-clear{zoom:1}
+body .fn-hide{display:none}
+.fn-left,.fn-right{display:inline}
+.fn-left{float:left}
+.fn-right{float:right}
+.ui-button *{margin:0;padding:0}
+.ui-button{padding:0;display:inline-block;position:relative;text-align:center;text-decoration:none!important;vertical-align:middle;overflow:visible;cursor:pointer;font-family:verdana,Hiragino Sans GB}
+div.ui-button,p.ui-button,span.ui-button{*display:inline}
+.ui-button-text{display:inline-block;*display:inline;*zoom:1;cursor:pointer;border:0;text-decoration:none;overflow:visible;font-size:14px;font-weight:700}
+.ui-button a.ui-button-text:hover{text-decoration:none}
+input.ui-button-text,button.ui-button-text{*vertical-align:top;font-family:Hiragino Sans GB}
+.ui-form{margin-top:30px}
+.ui-form legend{display:none}
+.ui-form-required{margin-right:6px;font-family:SimSun;font-size:14px;color:#f00}
+.ui-form-explain{padding:3px 0 0;padding:5px 0 0\9;_padding-top:3px;*margin-top:-1px;_margin-left:3px;font-size:12px;color:#b2b2b2}
+.ui-form-other{_display:inline-block;margin-left:4px}
+.ui-form-text{display:inline-block;margin-top:4px;*margin-top:6px;_margin-top:4px;zoom:1}
+.ui-form-status{color:#20b907;background:url(https://img.alipay.com/alice/ui-fm-loading.gif) right bottom no-repeat;padding-right:15px}
+.ui-form-list{_float:left;_width:100%}
+.ui-label{float:left;width:170px;margin-left:-170px;padding-top:3px;*padding-top:4px;text-align:right;font-size:14px}
+.ui-label-reset{padding-top:0}
+.ui-input{width:170px;padding:7px 9px 7px 9px;height:12px;line-height:12px;border:1px solid #ccc;border-top-color:#a6a6a6}
+.ui-input:hover,.ui-textarea:hover{border:1px #a6a6a6 solid;border-top-color:#808080}
+.ui-input:focus,.ui-textarea:focus{border:1px #68acff solid;outline:1px aqua solid}
+.ui-input-mini{height:15px;line-height:16px;padding:2px}
+.ui-input-mini:focus{*padding:1px}
+.ui-input-mini{width:150px;vertical-align:middle}
+.ui-input-amount{width:80px;font-weight:700}
+.ui-input-len10,.ui-input-date{width:67px}
+.ui-input-len5,.ui-input-time{width:35px}
+.ui-input-len6{width:44px}
+.ui-input-len8,.ui-input-tel{width:58px}
+.ui-input-len10cn{width:122px}
+.ui-input-len30cn{width:362px}
+.ui-input-len4{width:28px}
+.ui-textarea{width:422px;height:79px;line-height:15px;border:1px #9c9c9c solid;padding:1px 3px 0 4px;_padding:1px 2px 0 5px;overflow:auto;font-family:Arial}
+.ui-input-unwrite,.ui-textarea-unwrite{border:1px solid #ccc;background:#f2f2f2}
+.ui-input-unwrite:hover,.ui-textarea-unwrite:hover{border:1px solid #ccc;background:#f2f2f2}
+.ui-form-item:after{clear:both;content:'.';display:block;height:0;visibility:hidden}
+.ui-form-item{padding:0 5px 15px 170px;*padding:0 5px 12px 170px;_padding:0 5px 13px 170px;zoom:1;font-family:tahoma,\5b8b\4f53,\9ED1\4F53,"Hei",sans-serif}
+.ui-form-item select{vertical-align:middle;margin:4px 0 0}
+.ui-form-item input{vertical-align:middle}
+.ui-form-item .ui-input{font-size:12px;*font-size:11px;_font-size:12px;color:#595959;vertical-align:middle;*vertical-align:-5px}
+.ui-form-item .ui-button-group .ui-button-text-only{margin:3px 0 0;margin:2px 0 0\0}
+.ui-form-item .ui-button-text-only .ui-button-text{padding:.1em .5em}
+.ui-form-item .ui-button-checkboxes .ui-state-selected{padding-right:2px;background:url(https://img.alipay.com/alice/ui-button-checkboxes-selected.png) right bottom no-repeat}
+.ui-form-item .ui-form-item-placeholder{color:#b2b2b2}
+.ui-form-item-hover .ui-input,.ui-form-item-hover .ui-textarea{border:1px #727272 solid}
+.ui-form-item-focus .ui-input,.ui-form-item-focus .ui-textarea{border:1px #68acff solid;outline:1px aqua solid;*padding:3px 0 3px 2px;*border:2px #95ddff solid;cursor:text}
+.ui-form-item-focus .ui-textarea{*padding:1px 0 1px 2px}
+.ui-form-item-focus .ui-form-explain,.ui-form-item-hover .ui-form-explain{color:#333}
+.ui-form-item-error .ui-input,.ui-form-item-error .ui-textarea{border:1px #F00 solid;color:#ff5243}
+.ui-form-item-error .ui-input-reset{border:1px #9c9c9c solid;color:#000}
+.ui-form-item-error .ui-form-explain,.ui-form-item-warn .ui-form-explain,.ui-form-item-success .ui-form-explain{background-image:url(https://img.alipay.com/alice/ui-fm.png);background-repeat:no-repeat;padding-left:20px;*zoom:1}
+.ui-form-item-error .ui-form-explain{color:#ff5243;background-position:-186px 6px}
+.ui-form-item-warn .ui-form-explain{background-position:-138px -80px}
+.ui-form-item-error .ui-input:hover,.ui-form-item-error .ui-textarea:hover{border:1px #a6a6a6 solid}
+.ui-form-item-error .ui-input:focus,.ui-form-item-error .ui-textarea:focus{border:1px #68acff solid;color:#727272}
+.ui-form-item-success .ui-form-explain{background-position:-114px -123px}
+.ui-form-item-loading .ui-form-explain{padding-left:20px;background:url(https://img.alipay.com/alice/ico-loading16.gif) 0 4px no-repeat}
+.ui-checkcode-input{width:100px;height:24px;line-height:28px;margin:0;padding:0;color:#000;font-size:12px;vertical-align:middle;padding:2px 5px;border:1px solid #ccc;border-top-color:#a6a6a6;font-family:Tahoma;_float:left}
+.ui-checkcode-imgcode-img{cursor:pointer}
+.ui-checkcode-imgcode-text{color:#07f}
+.ui-checkcode-imgcode-text-limit{width:48px;position:absolute;left:340px;top:-3px}
+@charset "utf-8";.fn-hide,.hidden{display:none}
+.alieditContainer *{vertical-align:bottom}
+.alieditContainer{display:inline-block;*display:inline;zoom:1;width:184px;height:24px;vertical-align:bottom;position:relative}
+.alieditContainer object{width:100%;height:24px}
+.alieditContainer a.aliedit-install{border:1px solid #aeaeae;line-height:24px;color:#06F!important;_width:184px;min-width:184px;height:100%;display:block;text-align:center}
+.promptText_PTA{display:none}
+.edit-tips{background:#a8a8a8;height:28px;left:0;top:0;position:relative;margin-top:-64px;width:180px}
+.edit-tips-two-lines{background:none repeat scroll 0 0 #a8a8a8;height:48px;left:0;position:relative;top:-84px;width:180px}
+.edit-tips-text{background:none repeat scroll 0 0 #ffff8d;border:1px solid #dea90c;display:block;line-height:20px;left:-2px;padding:3px 5px;position:relative;top:-2px;width:168px}
+.edit-tips-angle{background:url("https://img.alipay.com/pa/frame/v2/ico-pa.png") no-repeat scroll -40px -128px transparent;display:block;height:11px;left:20px;overflow:hidden;line-height:11px;margin-top:-3px;position:absolute;top:100%;width:10px}
+.light-dialog{width:600px;height:370px;overflow:hidden;position:absolute;z-index:9999;top:5%;left:10%;border:6px solid #767576;background:#fff;visibility:hidden;-moz-box-shadow:3px 2px 6px #333;-webkit-box-shadow:#333 2px 2px 6px}
+.light-dialog iframe{width:100%;height:100%}
+.light-dialog-shadow{position:absolute;left:0;top:0;z-index:9998;width:100%;height:100%;background:#000;visibility:hidden;opacity:.2;filter:alpha(opacity=20);-ms-filter:'alpha(opacity=20)'}
+.light-dialog-shadow iframe{opacity:0;filter:alpha(opacity=0);-ms-filter:'alpha(opacity=0)'}
+.light-load{position:absolute;z-index:9999;visibility:hidden}
+.light-dialog-top{padding:20px}
+.light-dialog-title{border-bottom:1px solid #dbdbdb;margin-bottom:3px;overflow:hidden;padding-bottom:3px;position:relative;width:100%}
+.light-dialog-title h2{float:left;font:18px/22px SimHei}
+.light-dialog-title a{border-bottom:1px solid #fff;display:block;line-height:22px;position:absolute;text-decoration:none;right:0;top:0}
+.light-dialog-title s{-moz-transition:all .2s ease-in-out 0s;background:url("https://img.alipay.com/pa/frame/v2/ico-text.png") no-repeat scroll -2px -76px transparent;cursor:pointer;display:inline-block;height:11px;overflow:hidden;position:absolute;top:6px;vertical-align:middle;width:11px}
+.light-dialog-title em{cursor:pointer;display:inline-block;font-style:normal;font-weight:normal;margin-left:11px;text-align:right;font-size:12px;width:30px}
+.light-dialog-title a:hover{text-decoration:none}
+.light-dialog-title a:hover em{text-decoration:underline}
+.light-dialog-title a:hover s{-moz-transform:rotate(90deg)}
+.aliedit-dn{position:relative;display:block;width:165px;height:100%;margin:-24px 0 0;border:1px solid red;line-height:24px;text-align:center;color:#f00;font-size:12px;background:#fff}
+.aliedit-xbox{width:600px;height:370px;overflow:hidden;position:absolute;z-index:9999;top:5%;left:10%;border:6px solid #767576;background:#fff;-moz-box-shadow:3px 2px 6px #333;-webkit-box-shadow:#333 2px 2px 6px}
+.aliedit-xbox iframe,.aliedit-box-shadow iframe{width:100%;height:100%}
+.aliedit-box-shadow{position:absolute;left:0;top:0;z-index:9998;width:100%;height:100%;background:#000;opacity:.2;filter:alpha(opacity=20);-ms-filter:'alpha(opacity=20)'}
+.aliedit-box-shadow iframe{opacity:0;filter:alpha(opacity=0);-ms-filter:'alpha(opacity=0)'}
+.aliedit-load{z-index:9999}
+.aliedit-tips{position:relative;_position:absolute;display:block;width:192px;height:37px;background:url(https://img.alipay.com/pa/global/home/bg-aliedit.png) 0 -36px no-repeat;margin-top:-61px}
+.aliedit-tips-update{background-position:0 -76px}
+.pop-aliedit .container{padding:20px;overflow:hidden;border:3px #a2a2a2 solid;background:#f3f3f3}
+.ui-separator{color:#b2b2b2}
+.ui-separator-pd{color:#b2b2b2;padding:0 5px}
+.ui-tiptext{color:#4d4d4d;position:relative;overflow:hidden;vertical-align:middle;line-height:15px;*line-height:17px;_line-height:15px;line-height:17px\0;zoom:1}
+.ui-tiptext-container{padding:8px 12px;position:relative;zoom:1}
+.ui-tiptext-icon{background:transparent url('https://i.alipayobjects.com/e/201201/2NBAbOHc4g.png') no-repeat}
+.ui-tiptext-icon{width:15px;height:15px;vertical-align:top;margin-right:8px;display:inline-block;*display:inline;*zoom:1}
+.ui-tiptext-message .ui-tiptext-icon{background-position:0 -33px}
+.ui-tiptext-container-message{background:#e5f5ff;border:1px solid #c9d5e2}
+.ui-tiptext-success .ui-tiptext-icon{background-position:-45px -33px}
+.ui-tiptext-container-success{background:#e7ffce;border:1px solid #b9e2a0}
+.ui-tiptext-error .ui-tiptext-icon{background-position:-30px -33px}
+.ui-tiptext-container-error{background:#fceee8;border:1px solid #f6c8b5}
+.ui-tiptext-warning .ui-tiptext-icon{background-position:-15px -33px}
+.ui-tiptext-container-warning{background:#ffff8d;border:1px solid #e7c560}
+.ui-tiptext-question .ui-tiptext-icon{background-position:-60px -33px}
+.ui-tiptext-container-question{background:#e5f5ff;border:1px solid #c9d5e2}
+.ui-tiptext-stop .ui-tiptext-icon{background-position:-75px -33px}
+.ui-tiptext-container-stop{background:#fceee8;border:1px solid #f6c8b5}
+.ui-tiptext-wait .ui-tiptext-icon{background-position:-90px -33px}
+.ui-tiptext-container-wait{background:#fff9d9;border:1px solid #e6cbb1}
+.ui-tiptext-arrowup,.ui-tiptext-arrowup em,.ui-tiptext-arrowup span,.ui-tiptext-arrowleft,.ui-tiptext-arrowleft em,.ui-tiptext-arrowleft span,.ui-tiptext-arrowdown,.ui-tiptext-arrowdown em,.ui-tiptext-arrowdown span{position:absolute;font-size:14px;font-family:"SimSun";top:0;left:0}
+.ui-tiptext-arrowup,.ui-tiptext-arrowleft,.ui-tiptext-arrowdown{height:10px;width:16px}
+.ui-tiptext-arrowup{left:32px;top:-10px;_top:-9px}
+.ui-tiptext-arrowup em{top:-1px}
+:root .ui-tiptext-arrowup{top:-9px\9}
+.ui-tiptext-arrowleft{left:-6px;top:5px;_top:6px}
+.ui-tiptext-arrowleft em{left:-1px}
+.ui-tiptext-arrowdown{left:32px;top:20px;top:22px\0;*top:22px;_top:21px}
+:root .ui-tiptext-arrowdown{top:23px\9}
+.ui-tiptext-arrowdown em{top:1px}
+.ui-tiptext-container-message .ui-tiptext-arrow em{color:#c9d5e2}
+.ui-tiptext-container-message .ui-tiptext-arrow span{color:#e5f5ff}
+.ui-tiptext-container-success .ui-tiptext-arrow em{color:#b9e2a0}
+.ui-tiptext-container-success .ui-tiptext-arrow span{color:#e7ffce}
+.ui-tiptext-container-error .ui-tiptext-arrow em{color:#f6c8b5}
+.ui-tiptext-container-error .ui-tiptext-arrow span{color:#fceee8}
+.ui-tiptext-container-warning .ui-tiptext-arrow em{color:#e7c560}
+.ui-tiptext-container-warning .ui-tiptext-arrow span{color:#ffff8d}
+.ui-tiptext-container-question .ui-tiptext-arrow em{color:#c9d5e2}
+.ui-tiptext-container-question .ui-tiptext-arrow span{color:#e5f5ff}
+.ui-tiptext-container-stop .ui-tiptext-arrow em{color:#f6c8b5}
+.ui-tiptext-container-stop .ui-tiptext-arrow span{color:#fceee8}
+.ui-tiptext-container-wait .ui-tiptext-arrow em{color:#e6cbb1}
+.ui-tiptext-container-wait .ui-tiptext-arrow span{color:#fff9d9}
+.ui-tiptext2-container{padding:0 15px}
+.ui-tiptext2-message{height:25px;line-height:25px;padding:0;padding-left:24px;font-size:12px;border:1px solid #e6daa1;background:#fffbcc;border-radius:2px}
+.ui-tiptext2-red{color:#f24a30;background:url("https://i.alipayobjects.com/e/201204/2xbvjZL1yM.gif") no-repeat scroll 4px 6px #fffbcc}
+.ui-tiptext2-black{color:#4d4d4d;background:url("https://i.alipayobjects.com/e/201204/2xbvjZL1yM.gif") no-repeat scroll 4px -27px #fffbcc}
+.ui-resultstep-item,.ui-resultstep-icon{background-image:url('https://i.alipayobjects.com/e/201206/2oAYejc69B.png')}
+.ui-resultstep-container{margin-left:15px}
+.ui-resultstep-item{float:left;text-align:left;background-position:0 -30px;margin-left:12px}
+.ui-resultstep-item p{position:relative;left:-27px;color:#666}
+.ui-resultstep-icon{height:27px;width:20px;position:relative;left:-13px}
+.ui-resultstep-item .ui-resultstep-icon{background-position:-2px -170px}
+.ui-resultstep-current .ui-resultstep-icon{background-position:-2px -107px}
+.ui-resultstep-finish{background-position:0 30px;background-repeat:repeat-x}
+.ui-resultstep-finish .ui-resultstep-icon{background-position:-2px bottom}
+.ui-resultstep-current p{color:#62b212}
+.ui-resultstep-last{background:0}
+.ui-resultstep-four li{width:195px}
+.ui-poptip{position:absolute;color:#db7c22;z-index:101}
+.ui-poptip-shadow{background-color:rgba(229,169,107,0.15);FILTER:progid:DXImageTransform.Microsoft.Gradient(startColorstr=#26e5a96b,endColorstr=#26e5a96b);border-radius:2px;padding:2px;float:left}
+.ui-poptip-container{position:relative;background-color:#fffcef;border:1px solid #ffbb76;border-radius:2px;padding:5px 22px 5px 10px;float:left}
+a.ui-poptip-close{position:absolute;right:3px;top:3px;border:1px solid #ffc891;border-radius:3px;width:12px;height:12px;font-family:tahoma;color:#dd7e00;line-height:10px;line-height:10px\0;*line-height:12px;text-align:center;font-size:14px;background:#ffd7af;background:-webkit-gradient(linear,left top,left bottom,from(#fff0e1),to(#ffe7cd));background:-moz-linear-gradient(top,#fff0e1,#ffe7cd);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF0E1',endColorstr='#FFE7CD');background:-o-linear-gradient(top,#fff0e1,#ffe7cd);background:linear-gradient(top,#fff0e1,#ffe7cd);overflow:hidden}
+a.ui-poptip-close:hover{border:1px solid #ffb24c;text-decoration:none;color:#dd7e00;background:#ffd7af;background:-webkit-gradient(linear,left top,left bottom,from(#ffe5ca),to(#ffcc98));background:-moz-linear-gradient(top,#ffe5ca,#ffcc98);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFE5CA',endColorstr='#FFCC98');background:-o-linear-gradient(top,#ffe5ca,#ffcc98);background:linear-gradient(top,#ffe5ca,#ffcc98)}
+.ui-poptip-arrow,.ui-poptip-arrow em,.ui-poptip-arrow span{position:absolute;font-size:14px;font-family:SimSun;line-height:21px;z-index:10;*zoom:1}
+.ui-poptip-arrow em,.ui-poptip-arrow-left em,.ui-poptip-arrow-right em{color:#ffbb76}
+.ui-poptip-arrow span,.ui-poptip-arrow-left span,.ui-poptip-arrow-right span{color:#fffcef;top:0;left:0}
+.ui-poptip-arrow-left,.ui-poptip-arrow-left em,.ui-poptip-arrow-left span{position:absolute;font-size:14px;font-family:SimSun}
+.ui-poptip-arrow-left,.ui-poptip-arrow-10{top:6px;left:-6px}
+.ui-poptip-arrow-left em,.ui-poptip-arrow-10 em{top:0;left:-1px}
+.ui-poptip-arrow-right,.ui-poptip-arrow-right em,.ui-poptip-arrow-right span{position:absolute;font-size:14px;font-family:SimSun}
+.ui-poptip-arrow-right,.ui-poptip-arrow-2{top:6px;right:8px;*right:7px;right:7px\0}
+.ui-poptip-arrow-right em,.ui-poptip-arrow-2 em{top:0;left:1px}
+.ui-poptip-arrow-11{left:14px;top:-10px;top:-9px\0}
+.ui-poptip-arrow-11 em{top:-1px;left:0}
+.ui-poptip-arrow-1{right:28px;top:-10px;top:-9px\0}
+.ui-poptip-arrow-1 em{top:-1px;left:0}
+.ui-poptip-arrow-7{left:14px;bottom:11px;_bottom:10px;bottom:10px\0}
+.ui-poptip-arrow-7 em{top:1px;left:0}
+.ui-poptip-arrow-5{right:28px;bottom:11px;_bottom:10px;bottom:10px\0}
+.ui-poptip-arrow-5 em{top:1px;left:0}
+.ui-poptip-icon{float:left;display:inline;margin-right:6px;width:50px;height:42px}
+.ui-poptip-icon-notice{background:transparent url('https://i.alipayobjects.com/e/201207/32UMBEuECH.png') no-repeat}
+.ui-poptip-icon-trade{background:transparent url('https://i.alipayobjects.com/e/201207/3coEJviyzD.png') no-repeat}
+.ui-poptip-icon-text{display:none}
+.ui-poptip-content{*zoom:1;float:none;display:block}
+.ui-poptip-content:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}
+.ui-poptip-link{margin-top:4px;float:left}
+.ui-poptip-link a{color:#08c}
+:root .ui-poptip-shadow{FILTER:none\9}
+.ui-poptip-blue{color:#4d4d4d}
+.ui-poptip-blue .ui-poptip-shadow{background-color:rgba(0,0,0,0.05);FILTER:progid:DXImageTransform.Microsoft.Gradient(startColorstr=#0c000000,endColorstr=#0c000000)}
+.ui-poptip-blue .ui-poptip-container{background-color:#f8fcff;border:1px solid #b9c8d3}
+.ui-poptip-blue .ui-poptip-arrow em,.ui-poptip-blue .ui-poptip-arrow-left em,.ui-poptip-blue .ui-poptip-arrow-right em{color:#b9c8d3}
+.ui-poptip-blue .ui-poptip-arrow span,.ui-poptip-blue .ui-poptip-arrow-left span,.ui-poptip-blue .ui-poptip-arrow-right span{color:#f8fcff}
+.ui-poptip-white{color:#333}
+.ui-poptip-white .ui-poptip-shadow{background-color:rgba(0,0,0,0.05);FILTER:progid:DXImageTransform.Microsoft.Gradient(startColorstr=#0c000000,endColorstr=#0c000000)}
+.ui-poptip-white .ui-poptip-container{background-color:#fff;border:1px solid #b1b1b1}
+.ui-poptip-white .ui-poptip-arrow em,.ui-poptip-white .ui-poptip-arrow-left em,.ui-poptip-white .ui-poptip-arrow-right em{color:#b1b1b1}
+.ui-poptip-white .ui-poptip-arrow span,.ui-poptip-white .ui-poptip-arrow-left span,.ui-poptip-white .ui-poptip-arrow-right span{color:#fff}
+.ui-button-ldisable,.ui-button-mdisable,.ui-button-sdisable,.ui-button-ldisable .ui-button-text,.ui-button-mdisable .ui-button-text,.ui-button-sdisable .ui-button-text{background:transparent url(https://i.alipayobjects.com/e/201208/3IgyctwEjp.png) no-repeat;color:#fff;cursor:default}
+.ui-button-ldisable{background-position:0 -1021px}
+.ui-button-ldisable .ui-button-text{padding:0 20px;background-position:right -1063px;line-height:35px;height:35px}
+.ui-button-mdisable{background-position:0 -891px}
+.ui-button-mdisable .ui-button-text{padding:0 22px;background-position:right -927px;line-height:31px;height:31px}
+.ui-button-sdisable{background-position:0 -962px}
+.ui-button-sdisable .ui-button-text{padding:0 12px;font-size:12px;background-position:right -991px;line-height:25px;height:25px}
+.ui-button-lorange,.ui-button-lorange:hover,.ui-button-morange,.ui-button-morange:hover,.ui-button-sorange,.ui-button-sorange:hover,.ui-button-lorange .ui-button-text,.ui-button-morange .ui-button-text,.ui-button-sorange .ui-button-text{background:transparent url(https://i.alipayobjects.com/e/201208/3IgyctwEjp.png) no-repeat;color:#fff}
+.ui-button-lorange{background-position:0 0}
+.ui-button-lorange .ui-button-text{padding:0 20px;background-position:right -177px;line-height:35px;height:35px}
+.ui-button-lorange:hover{background-position:0 -45px}
+.ui-button-lorange:hover .ui-button-text{background-position:right -222px}
+.ui-button-morange{background-position:0 -355px}
+.ui-button-morange .ui-button-text{padding:0 22px;background-position:right -503px;line-height:31px;height:31px}
+.ui-button-morange:hover{background-position:0 -392px}
+.ui-button-morange:hover .ui-button-text{background-position:right -540px}
+.ui-button-sorange{background-position:0 -651px}
+.ui-button-sorange .ui-button-text{padding:0 12px;font-size:12px;background-position:right -771px;line-height:25px;height:25px}
+.ui-button-sorange:hover{background-position:0 -681px}
+.ui-button-sorange:hover .ui-button-text{background-position:right -801px}
+.ui-button-lwhite,.ui-button-lwhite:hover,.ui-button-mwhite,.ui-button-mwhiter:hover,.ui-button-swhite,.ui-button-swhite:hover,.ui-button-lwhite .ui-button-text,.ui-button-mwhite .ui-button-text,.ui-button-swhite .ui-button-text{background:transparent url(https://i.alipayobjects.com/e/201208/3IgyctwEjp.png) no-repeat;color:#595959}
+.ui-button-lwhite{background-position:0 -89px}
+.ui-button-lwhite .ui-button-text{padding:0 20px;background-position:right -266px;line-height:35px;height:35px}
+.ui-button-lwhite:hover{background-position:0 -133px}
+.ui-button-lwhite:hover .ui-button-text{background-position:right -310px}
+.ui-button-mwhite{background-position:0 -429px}
+.ui-button-mwhite .ui-button-text{padding:0 22px;background-position:right -577px;line-height:31px;height:31px}
+.ui-button-mwhite:hover{background-position:0 -466px}
+.ui-button-mwhite:hover .ui-button-text{background-position:right -614px}
+.ui-button-swhite{background-position:0 -711px}
+.ui-button-swhite .ui-button-text{padding:0 12px;font-size:12px;background-position:right -831px;line-height:25px;height:25px}
+.ui-button-swhite:hover{background-position:0 -741px}
+.ui-button-swhite:hover .ui-button-text{background-position:right -861px}
+.fn-hide,.hidden{display:none}
+.alieditContainer *{vertical-align:bottom}
+.alieditContainer{display:inline-block;*display:inline;zoom:1;width:184px;height:24px;vertical-align:bottom;position:relative}
+.alieditContainer object{width:100%;height:24px}
+.alieditContainer a.aliedit-install{border:1px solid #aeaeae;line-height:24px;color:#06F!important;_width:184px;min-width:184px;height:100%;display:block;text-align:center}
+.promptText_PTA{display:none}
+.edit-tips{background:#a8a8a8;height:28px;left:0;top:0;position:relative;margin-top:-64px;width:180px}
+.edit-tips-two-lines{background:none repeat scroll 0 0 #a8a8a8;height:48px;left:0;position:relative;top:-84px;width:180px}
+.edit-tips-text{background:none repeat scroll 0 0 #ffff8d;border:1px solid #dea90c;display:block;line-height:20px;left:-2px;padding:3px 5px;position:relative;top:-2px;width:168px}
+.edit-tips-angle{background:url("https://img.alipay.com/pa/frame/v2/ico-pa.png") no-repeat scroll -40px -128px transparent;display:block;height:11px;left:20px;overflow:hidden;line-height:11px;margin-top:-3px;position:absolute;top:100%;width:10px}
+.light-dialog{width:600px;height:370px;overflow:hidden;position:absolute;z-index:9999;top:5%;left:10%;border:6px solid #767576;background:#fff;visibility:hidden;-moz-box-shadow:3px 2px 6px #333;-webkit-box-shadow:#333 2px 2px 6px}
+.light-dialog iframe{width:100%;height:100%}
+.light-dialog-shadow{position:absolute;left:0;top:0;z-index:9998;width:100%;height:100%;background:#000;visibility:hidden;opacity:.2;filter:alpha(opacity=20);-ms-filter:'alpha(opacity=20)'}
+.light-dialog-shadow iframe{opacity:0;filter:alpha(opacity=0);-ms-filter:'alpha(opacity=0)'}
+.light-load{position:absolute;z-index:9999;visibility:hidden}
+.light-dialog-top{padding:20px}
+.light-dialog-title{border-bottom:1px solid #dbdbdb;margin-bottom:3px;overflow:hidden;padding-bottom:3px;position:relative;width:100%}
+.light-dialog-title h2{float:left;font:18px/22px SimHei}
+.light-dialog-title a{border-bottom:1px solid #fff;display:block;line-height:22px;position:absolute;text-decoration:none;right:0;top:0}
+.light-dialog-title s{-moz-transition:all .2s ease-in-out 0s;background:url("https://img.alipay.com/pa/frame/v2/ico-text.png") no-repeat scroll -2px -76px transparent;cursor:pointer;display:inline-block;height:11px;overflow:hidden;position:absolute;top:6px;vertical-align:middle;width:11px}
+.light-dialog-title em{cursor:pointer;display:inline-block;font-style:normal;font-weight:normal;margin-left:11px;text-align:right;font-size:12px;width:30px}
+.light-dialog-title a:hover{text-decoration:none}
+.light-dialog-title a:hover em{text-decoration:underline}
+.light-dialog-title a:hover s{-moz-transform:rotate(90deg)}
+.aliedit-dn{position:relative;display:block;width:165px;height:100%;margin:-24px 0 0;border:1px solid red;line-height:24px;text-align:center;color:#f00;font-size:12px;background:#fff}
+.aliedit-xbox{width:600px;height:370px;overflow:hidden;position:absolute;z-index:9999;top:5%;left:10%;border:6px solid #767576;background:#fff;-moz-box-shadow:3px 2px 6px #333;-webkit-box-shadow:#333 2px 2px 6px}
+.aliedit-xbox iframe,.aliedit-box-shadow iframe{width:100%;height:100%}
+.aliedit-box-shadow{position:absolute;left:0;top:0;z-index:9998;width:100%;height:100%;background:#000;opacity:.2;filter:alpha(opacity=20);-ms-filter:'alpha(opacity=20)'}
+.aliedit-box-shadow iframe{opacity:0;filter:alpha(opacity=0);-ms-filter:'alpha(opacity=0)'}
+.aliedit-load{z-index:9999}
+.aliedit-tips{position:relative;_position:absolute;display:block;width:192px;height:37px;background:url(https://img.alipay.com/pa/global/home/bg-aliedit.png) 0 -36px no-repeat;margin-top:-61px}
+.aliedit-tips-update{background-position:0 -76px}
+.pop-aliedit .container{padding:20px;overflow:hidden;border:3px #a2a2a2 solid;background:#f3f3f3}
+.ui-securitycore{font:12px/1.5 tahoma,arial,\5b8b\4f53}
+.ui-securitycore .ui-form{margin-top:30px}
+.ui-securitycore .ui-form legend{display:none}
+.ui-securitycore .ui-form-required{margin-right:6px;font-size:14px;color:#f00;font-family:SimSun}
+.ui-securitycore .ui-form-explain{padding:3px 0 0;padding:5px 0 0\9;_padding-top:3px;*margin-top:-1px;_margin-left:3px;font-size:12px;color:#b2b2b2;clear:both}
+.ui-securitycore .ui-form-other{_display:inline-block;margin-left:4px}
+.ui-securitycore .ui-form-text{display:inline-block;margin-top:4px;*margin-top:6px;_margin-top:4px;zoom:1}
+.ui-securitycore .ui-form-status{color:#20b907;background:url(https://img.alipay.com/alice/ui-fm-loading.gif) right bottom no-repeat;padding-right:15px}
+.ui-securitycore .ui-form-list{_float:left;_width:100%}
+.ui-securitycore .ui-label{float:left;width:170px;margin-left:-170px;padding-top:3px;*padding-top:4px;text-align:right;font-size:14px}
+.ui-securitycore .ui-label-reset{padding-top:0}
+.ui-securitycore .ui-input{width:170px;padding:2px 5px;height:24px;line-height:24px;border:1px solid #ccc;border-top-color:#a6a6a6}
+.ui-securitycore .ui-input:hover,.ui-securitycore .ui-textarea:hover{border:1px #a6a6a6 solid;border-top-color:#808080}
+.ui-securitycore .ui-input:focus,.ui-securitycore .ui-textarea:focus{border:1px #68acff solid;outline:1px aqua solid}
+.ui-securitycore .ui-input-mini{height:15px;line-height:16px;padding:2px}
+.ui-securitycore .ui-input-mini:focus{*padding:1px}
+.ui-securitycore .ui-input-mini{width:150px;vertical-align:middle}
+.ui-securitycore .ui-input-amount{width:80px;font-weight:700}
+.ui-securitycore .ui-input-len10,.ui-securitycore .ui-input-date{width:67px}
+.ui-securitycore .ui-input-len5,.ui-securitycore .ui-input-time{width:35px}
+.ui-securitycore .ui-input-len6{width:44px}
+.ui-securitycore .ui-input-len8,.ui-securitycore .ui-input-tel{width:58px}
+.ui-securitycore .ui-input-len10cn{width:122px}
+.ui-securitycore .ui-input-len30cn{width:362px}
+.ui-securitycore .ui-input-len4{width:28px}
+.ui-securitycore .ui-textarea{width:422px;height:79px;line-height:15px;border:1px #9c9c9c solid;padding:1px 3px 0 4px;_padding:1px 2px 0 5px;overflow:auto;font-family:Arial}
+.ui-securitycore .ui-input-unwrite,.ui-securitycore .ui-textarea-unwrite{border:1px solid #ccc;background:#f2f2f2}
+.ui-securitycore .ui-input-unwrite:hover,.ui-securitycore .ui-textarea-unwrite:hover{border:1px solid #ccc;background:#f2f2f2}
+.ui-securitycore .ui-form-item:after{clear:both;content:'.';display:block;height:0;visibility:hidden}
+.ui-securitycore .ui-form-item{padding:0 5px 15px 170px;*padding:0 5px 12px 170px;_padding:0 5px 13px 170px;zoom:1;font-family:tahoma,\5b8b\4f53,\9ED1\4F53,"Hei",sans-serif}
+.ui-securitycore .ui-form-item select{vertical-align:middle;margin:4px 0 0}
+.ui-securitycore .ui-form-item input{vertical-align:middle}
+.ui-securitycore .ui-form-item .ui-input{font-size:12px;color:#595959;vertical-align:middle;*vertical-align:-5px}
+.ui-securitycore .ui-form-item .ui-button-group .ui-button-text-only{margin:3px 0 0;margin:2px 0 0\0}
+.ui-securitycore .ui-form-item .ui-button-text-only .ui-button-text{padding:.1em .5em}
+.ui-securitycore .ui-form-item .ui-button-checkboxes .ui-state-selected{padding-right:2px;background:url(https://img.alipay.com/alice/ui-button-checkboxes-selected.png) right bottom no-repeat}
+.ui-securitycore .ui-form-item .ui-form-item-placeholder{color:#b2b2b2}
+::-webkit-input-placeholder{color:#b2b2b2}
+:-moz-placeholder{color:#b2b2b2}
+.ui-securitycore .ui-form-item-hover .ui-input,.ui-securitycore .ui-form-item-hover .ui-textarea{border:1px #727272 solid}
+.ui-securitycore .ui-form-item-focus .ui-input,.ui-securitycore .ui-form-item-focus .ui-textarea{border:1px #68acff solid;outline:1px aqua solid;*padding:3px 0 3px 2px;*border:2px #95ddff solid;cursor:text}
+.ui-securitycore .ui-form-item-focus .ui-textarea{*padding:1px 0 1px 2px}
+.ui-securitycore .ui-form-item-focus .ui-form-explain,.ui-securitycore .ui-form-item-hover .ui-form-explain{color:#333}
+.ui-securitycore .ui-form-item-error .alieditContainer,.ui-securitycore .ui-form-item-error .ui-input,.ui-securitycore .ui-form-item-error .ui-textarea{border:1px #F00 solid;color:#ff5243}
+.ui-securitycore .ui-form-item-error .ui-input-reset{border:1px #9c9c9c solid;color:#000}
+.ui-securitycore .ui-form-item-error .ui-form-explain,.ui-securitycore .ui-form-item-warn .ui-form-explain,.ui-securitycore .ui-form-item-success .ui-form-explain,.ui-securitycore .ui-form-item-success .ui-form-text{background-image:url(https://i.alipayobjects.com/common/widgets/ui-tip.png);background-repeat:no-repeat;padding-left:20px;*zoom:1}
+.ui-securitycore .ui-form-item-error .ui-form-explain{color:#ff5243;background-position:-272px -472px}
+.ui-securitycore .ui-form-item-warn .ui-form-explain{background-position:-230px -500px}
+.ui-securitycore .ui-form-item-error .ui-input:hover,.ui-securitycore .ui-form-item-error .ui-textarea:hover{border:1px #a6a6a6 solid}
+.ui-securitycore .ui-form-item-error .ui-input:focus,.ui-securitycore .ui-form-item-error .ui-textarea:focus{border:1px #68acff solid;color:#727272}
+.ui-securitycore .ui-form-item-success .ui-form-text{padding:0 20px 0 0;background-position:-236px -448px;color:#20b907}
+.ui-securitycore .ui-form-item-success .ui-form-explain{background-position:-314px -444px}
+.ui-securitycore .ui-form-item-loading .ui-form-explain{padding-left:20px;background:url(https://img.alipay.com/alice/ico-loading16.gif) 0 4px no-repeat}
+.ui-securitycore .ui-form-field input{vertical-align:top}
+.ui-securitycore .ui-form-field .ui-link{_vertical-align:-5px}
+.ui-securitycore .cert-section .ui-form-explain{height:25px}
+.ui-securitycore .ui-checkcode-input{width:100px;height:24px;line-height:24px;margin:0;padding:0;color:#000;font-size:12px;vertical-align:middle;padding:2px 5px;border:1px solid #ccc;border-top-color:#a6a6a6;_float:left}
+.ui-securitycore .ui-checkcode-imgcode-img{cursor:pointer}
+.ui-securitycore .ui-checkcode-imgcode-text{color:#07f}
+.ui-securitycore .ui-checkcode-imgcode-text-limit{width:48px;position:absolute;left:340px;top:-3px}
+.ui-securitycore .ui-checkcode-messagecode-btn{height:30px;margin-left:8px;padding:0 10px;vertical-align:middle;text-align:center;text-decoration:none;cursor:pointer;color:#000;border:1px solid #ccc;filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=#fcfcfc,endcolorstr=#eeeeee,gradientType=0);background:#fff;background:-moz-linear-gradient(top,#fcfcfc,#eee);background:-webkit-gradient(linear,0 0,0 bottom,from(#fcfcfc),to(#eee));background:-o-linear-gradient(top,#fcfcfc,#eee);background:linear-gradient(top,#fcfcfc,#eee);overflow:visible}
+.ui-securitycore .send-btn{margin-left:0}
+.ui-securitycore .ui-checkcode-messagecode-disabled-btn{background:#d9d9d9;filter:none;cursor:auto;border:1px solid #ccc}
+.ui-securitycore .ui-link{margin-left:8px;color:#07f}
+.ui-securitycore .ui-link:hover{text-decoration:underline}
+.ui-securitycore .ui-button{padding:0;display:inline-block;position:relative;text-align:center;text-decoration:none!important;vertical-align:middle;overflow:visible;cursor:pointer}
+.ui-securitycore div.ui-button,.ui-securitycore p.ui-button,span.ui-button{*display:inline}
+.ui-securitycore .ui-button-text{display:block;cursor:pointer;border:0;text-decoration:none;overflow:visible}
+.ui-securitycore .ui-button a.ui-button-text:hover{text-decoration:none}
+.ui-securitycore .ui-button input.ui-button-text,.ui-securitycore .ui-button button.ui-button-text{*display:inline}
+.ui-securitycore .ui-button-lorange,.ui-securitycore .ui-button-lorange:hover,.ui-securitycore .ui-button-morange,.ui-securitycore .ui-button-morange:hover,.ui-securitycore .ui-button-sorange,.ui-securitycore .ui-button-sorange:hover,.ui-securitycore .ui-button-text{background-image:url(https://i.alipayobjects.com/e/201112/2BDRs1RcuB.png);background-repeat:no-repeat;background-color:transparent;text-decoration:none}
+.ui-securitycore .ui-button-lorange .ui-button-text,.ui-securitycore .ui-button-morange .ui-button-text,.ui-securitycore .ui-button-sorange .ui-button-text{font-family:verdana,\5b8b\4f53,\9ED1\4F53,sans-serif;font-size:14px;font-weight:700}
+.ui-securitycore .ui-button-lorange{background-position:0 0}
+.ui-securitycore .ui-button-lorange .ui-button-text{padding:8px 20px;background-position:right -177px;color:#fff}
+.ui-securitycore .ui-button-lorange:hover{background-position:0 -45px}
+.ui-securitycore .ui-button-lorange:hover .ui-button-text{background-position:right -222px}
+.ui-securitycore .ui-button-morange{background-position:0 -355px}
+.ui-securitycore .ui-button-morange .ui-button-text{padding:5px 22px 6px 22px;background-position:right -503px;color:#fff}
+.ui-securitycore .ui-button-morange:hover{background-position:0 -392px}
+.ui-securitycore .ui-button-morange:hover .ui-button-text{background-position:right -540px}
+.ui-securitycore .ui-button-sorange{background-position:0 -651px}
+.ui-securitycore .ui-button-sorange .ui-button-text{padding:3px 12px 4px 12px;font-size:12px;background-position:right -771px;color:#fff}
+.ui-securitycore .ui-button-sorange:hover{background-position:0 -681px}
+.ui-securitycore .ui-button-sorange:hover .ui-button-text{background-position:right -801px}
+.ui-securitycore .ui-button-lorange input.ui-button-text,.ui-securitycore .ui-button-morange input.ui-button-text,.ui-securitycore .ui-button-sorange input.ui-button-text{*overflow:visible}
+.ui-securitycore .ui-tiptext,.ui-securitycore .ui-tiptext-container{position:relative}
+.ui-securitycore .ui-tiptext-content{padding:0 0 0 22px}
+.ui-securitycore .ui-tiptext-container .ui-tiptext-content{border:1px solid #fff;padding:8px 12px 9px 34px}
+.ui-securitycore .ui-tip-content strong,.ui-securitycore .ui-tiptext-content strong{color:#f60;font-weight:400}
+.ui-securitycore .ui-separator{color:#b2b2b2;padding:0 5px}
+.ui-securitycore .ui-tiptext-container-message{background:#e5f5ff;border:1px solid #c9d5e2}
+.ui-securitycore .ui-tiptext-container-success{background:#f9f9f9;border:1px solid #d4d4d4}
+.ui-securitycore .ui-tiptext-container-error{background:#fceee8;border:1px solid #f6c8b5}
+.ui-securitycore .ui-tiptext-container-warning{background:#ffff8d;border:1px solid #e7c560}
+.ui-securitycore .ui-tiptext-container-question{background:#e5f5ff;border:1px solid #c9d5e2}
+.ui-securitycore .ui-tiptext-container-stop{background:#fceee8;border:1px solid #f6c8b5}
+.ui-securitycore .ui-tiptext-container-wait{background:#e5f5ff;border:1px solid #c9d5e2}
+.ui-securitycore .ui-tiptext-icon{width:15px;height:15px;position:absolute;top:0;left:0;text-indent:-9999px}
+.ui-securitycore .ui-tiptext-icon,.ui-securitycore .ui-tiptext-arrow{background-image:url('https://i.alipayobjects.com/common/widgets/ui-tip.png');background-repeat:no-repeat}
+.ui-securitycore .ui-tiptext-container .ui-tiptext-icon{top:12px;left:12px}
+.ui-securitycore .ui-tiptext-message .ui-tiptext-icon,.ui-securitycore .ui-tiptext-container-message .ui-tiptext-icon{background-position:-188px -534px}
+.ui-securitycore .ui-tiptext-success .ui-tiptext-icon,.ui-securitycore .ui-tiptext-container-success .ui-tiptext-icon{background-position:-314px -450px}
+.ui-securitycore .ui-tiptext-error .ui-tiptext-icon,.ui-securitycore .ui-tiptext-container-error .ui-tiptext-icon{background-position:-272px -478px}
+.ui-securitycore .ui-tiptext-warning .ui-tiptext-icon,.ui-securitycore .ui-tiptext-container-warning .ui-tiptext-icon{background-position:-230px -506px}
+.ui-securitycore .ui-tiptext-question .ui-tiptext-icon,.ui-securitycore .ui-tiptext-container-question .ui-tiptext-icon{background-position:-62px -618px}
+.ui-securitycore .ui-tiptext-stop .ui-tiptext-icon,.ui-securitycore .ui-tiptext-container-stop .ui-tiptext-icon{background-position:-104px -590px}
+.ui-securitycore .ui-tiptext-wait .ui-tiptext-icon,.ui-securitycore .ui-tiptext-container-wait .ui-tiptext-icon{background-position:-146px -562px}
+.ui-securitycore .ui-tiptext-check .ui-tiptext-icon,.ui-securitycore .ui-tiptext-container-check .ui-tiptext-icon{background:url(https://img.alipay.com/alice/ico-loading16.gif) 0 0 no-repeat}
+.ui-securitycore .ui-tiptext-arrow{display:inline-block;height:9px;left:40px;position:absolute;text-indent:-9999em;width:16px;z-index:1;top:-8px;_top:-7px}
+.ui-securitycore .ui-tiptext-container-message .ui-tiptext-arrowup{background-position:0 0}
+.ui-securitycore .ui-tiptext-container-warning .ui-tiptext-arrowup{background-position:0 -28px}
+.ui-securitycore .ui-tiptext-container-message .ui-tiptext-arrowdown{background-position:0 -14px}
+.ui-securitycore .ui-tiptext-container-warning .ui-tiptext-arrowdown{background-position:0 -42px}
+.ui-securitycore .ui-tip{position:relative}
+.ui-securitycore .ui-tip-content{padding:0 0 0 22px}
+.ui-securitycore .ui-tip-content h4{font-size:12px;font-weight:400}
+.ui-securitycore .ui-tip-other{display:none}
+.ui-securitycore .ui-tip-icon{width:15px;height:15px;position:absolute;top:2px;left:0;text-indent:-9999px;background-image:url('https://i.alipayobjects.com/common/widgets/ui-tip.png');background-repeat:no-repeat}
+.ui-securitycore .ui-tip-message .ui-tip-icon{background-position:-188px -534px}
+.ui-securitycore .ui-tip-success .ui-tip-icon{background-position:-314px -450px}
+.ui-securitycore .ui-tip-error .ui-tip-icon{background-position:-272px -478px}
+.ui-securitycore .ui-tip-warning .ui-tip-icon{background-position:-230px -506px}
+.ui-securitycore .ui-tip-question .ui-tip-icon{background-position:-62px -618px}
+.ui-securitycore .ui-tip-stop .ui-tip-icon{background-position:-104px -590px}
+.ui-securitycore .ui-tip-wait .ui-tip-icon{background-position:-146px -562px}
+.ui-securitycore .ui-tip-check .ui-tip-icon{background:url(https://img.alipay.com/alice/ico-loading16.gif) 0 0 no-repeat}
+.ui-securitycore .ui-tip .ui-tip-icon{top:12px;left:12px}
+.ui-securitycore .ui-tip-content{border:1px solid #fff;padding:8px 12px 9px 34px}
+.ui-securitycore .ui-tip-message{background:#e5f5ff;border:1px solid #c9d5e2}
+.ui-securitycore .ui-tip-success{background:#f9f9f9;border:1px solid #d4d4d4}
+.ui-securitycore .ui-tip-error{background:#fceee8;border:1px solid #f6c8b5}
+.ui-securitycore .ui-tip-warning{background:#ffff8d;border:1px solid #e7c560}
+.ui-securitycore .ui-tip-question{background:#e5f5ff;border:1px solid #c9d5e2}
+.ui-securitycore .ui-tip-stop{background:#fceee8;border:1px solid #f6c8b5}
+.ui-securitycore .ui-tip-wait{background:#e5f5ff;border:1px solid #c9d5e2}
+.ui-securitycore .ui-tip-check .ui-tip-content{border:0}
+.ui-tipbox{position:relative;zoom:1}
+.ui-tipbox .ui-tipbox-icon{width:32px;height:32px;position:absolute;top:17px;left:40px;text-indent:-9999px}
+.ui-tipbox-icon{background:transparent url('https://i.alipayobjects.com/e/201201/2NBAbOHc4g.png') no-repeat}
+.ui-tipbox-message{border:1px solid #cbd7e2;background:#e4f5fe}
+.ui-icon-message{background-position:0 0}
+.ui-tipbox-success{border:1px solid #e1e1ca;background:#edfed0}
+.ui-icon-success{background-position:-99px 0}
+.ui-tipbox-error{background:#fdeee9;border:1px solid #f6c7b8}
+.ui-icon-error{background-position:-66px 0}
+.ui-tipbox-warning{background:#fefea4;border:1px solid #e6c46a}
+.ui-icon-warning{background-position:-33px 0}
+.ui-tipbox-question{border:1px solid #cbd7e2;background:#e4f5fe}
+.ui-icon-question{background-position:-132px 0}
+.ui-tipbox-stop{background:#fdeee9;border:1px solid #f4c7b5}
+.ui-icon-stop{background-position:-165px 0}
+.ui-tipbox-wait{border:1px solid #e6cbb1;background:#fff9d9}
+.ui-icon-wait{background-position:-198px 0}
+.ui-tipbox-content{margin:14px 0 14px 87px}
+.ui-tipbox-content-simple{margin:24px 0 24px 87px}
+.ui-tipbox-content h3{color:#333;font-size:14px;font-weight:bold}
+.ui-tipbox-explain{color:#808080}
+.ui-tipbox-other{color:#333}
+.ui-tipbox-other a{color:#3d86e5}
+.ui-tipbox-xbox{background:#fff;border:1px solid transparent}
+.ui-tipbox-container{width:700px;position:relative;zoom:1}
+.ui-tipbox-container .ui-tipbox-icon{width:32px;height:32px;position:absolute;top:17px;left:40px;text-indent:-9999px}
+.ui-tipbox-container-message{border:1px solid #cbd7e3;background:#e5f5ff}
+.ui-tipbox-container-success{border:1px solid #e5e5ce;background:#edffcc}
+.ui-tipbox-container-error{background:#fceee8;border:1px solid #f6c8b5}
+.ui-tipbox-container-warning{background:#ffff9d;border:1px solid #e7c560}
+.ui-tipbox-container-question{border:1px solid #cbd7e3;background:#e5f5ff}
+.ui-tipbox-container-stop{background:#fceee8;border:1px solid #f6c8b5}
+.ui-tipbox-container-wait{border:1px solid #cbd7e3;background:#e5f5ff}
+.n-explain{color:#808080}
+.n-other{color:#333}
+.n-other a{color:#3d86e5}
+html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+.single-task #header,.single-task #container,#content{width:990px}
+.icon{float:left;display:block;overflow:hidden}
+.icon-app{margin:0;width:24px;height:24px}
+.icon-bank{margin:8px 3px 7px 0;height:15px;width:25px}
+.ui-pentagon,.withdraw-cnt-tit,.withdraw-cnt-tit .link .add,.withdraw-cnt-det .addcard .addcard-link a,.withdraw-cnt-det .intro-item-split,.choose-more .link,.choose-list .b-action .b-action-list .edit span,.choose-list .b-action .b-action-list .edit a:hover span,.withdraw-detail-time,.choose-list .b-amount-more-icon{background-image:url(https://i.alipayobjects.com/e/201208/3HOF6ZFCET.png)}
+.ui-pentagon{display:inline-block;*display:inline;_display:inline;background-repeat:no-repeat;background-position:0 -91px;height:16px;line-height:14px;font-size:12px;padding-left:8px;overflow:hidden}
+.ui-pentagon-text{padding:1px 1px;background:#75a6c9;color:#fefefe;display:inline-block}
+.ui-form .ui-fm-focus .ui-input,.ui-input-focus{*border:1px #68acff solid}
+.ui-form-notop{margin-top:0;zoom:1}
+.ui-form-item{padding-left:190px;padding-bottom:35px;position:relative}
+.ui-form-item-bank{z-index:10}
+.ui-form-item-amount{z-index:1}
+.ui-form-item-double{*z-index:20;_z-index:20}
+.ui-securitycore .ui-form-item{padding-left:190px}
+.ui-form-submit{padding-bottom:60px;*z-index:1;_z-index:1;zoom:1}
+.ui-form-item-phone{padding-bottom:10px}
+.ui-form-item-submit{padding-top:15px;position:relative;*z-index:10;_z-index:10;zoom:1}
+.ui-form-item-submit .ui-button-text{*float:left;_float:left}
+.ui-form-item-submit .stop-nextstep{position:absolute;top:55px;left:0}
+.ui-form-item-submit .stop-nextstep .ui-tiptext-container,.ui-form-item-submit .stop-nextstep .ui-tiptext-container,.ui-form-item-submit .stop-nextstep .ui-tiptext-content,.ui-form-item-submit .stop-nextstep .ui-tiptext{_display:inline}
+.ui-label{width:160px;margin-left:-190px;font-size:14px;padding-top:4px}
+.ui-securitycore .ui-form-item .ui-label{width:160px;margin-left:-190px;font-size:14px;padding-top:4px}
+.ui-label-forbank{padding-top:12px}
+.ui-label-gray{color:#818181}
+.ui-label-special{line-height:18px;vertical-align:middle}
+.ui-label-special span{padding-left:6px;color:#818181;position:relative;top:1px}
+.ui-form .ui-input{font-size:14px;line-height:18px;height:16px;vertical-align:middle}
+.ui-securitycore .ui-form-item .ui-input{font-size:14px;line-height:18px;height:16px;vertical-align:middle;padding:7px 9px}
+.ui-form .ui-input-140{width:128px}
+.ui-form .ui-form-other-yuan{font-size:14px;color:#4d4d4d;position:relative;left:5px;top:3px;display:inline-block;font-weight:700}
+.ui-button-text{line-height:1.5}
+.withdraw{margin:25px 0 25px 0}
+.withdraw-tip{margin-bottom:10px}
+.withdraw-tip .ui-tiptext2-container{padding:0}
+.withdraw-tip .ui-tiptext2-message{border-radius:3px 3px}
+.withdraw-cnt{border:1px solid #bcccf0;background:#fcfcfd;height:auto;width:988px}
+.withdraw-cnt-tit{padding:15px 30px;height:29px;background-repeat:repeat-x;background-position:0 0;border-bottom:1px solid #afbedf}
+.withdraw-cnt-tit .title{float:left;display:inline-block;margin:0;color:#4d4d4d;font:700 18px/28px \5FAE\8F6F\96C5\9ED1}
+.withdraw-cnt-tit .amount{float:left;display:inline-block;padding-left:30px;line-height:28px;font-size:12px}
+.withdraw-cnt-tit .amount .number{font-size:20px;font-family:Tahoma;color:#fc491e;padding-right:3px}
+.withdraw-cnt-tit .link{float:right;height:28px;line-height:28px;font-size:14px}
+.withdraw-cnt-tit .link .add{padding-left:24px;background-position:-184px -68px;*background-position:-184px -71px;_background-position:-184px -70px;background-repeat:no-repeat}
+.withdraw-cnt-tit .link .add-stop{position:relative}
+.withdraw-cnt-tit .link .add-stop-tips{position:absolute;top:-38px;left:0;line-height:1.5;font-size:12px;width:150px}
+.withdraw-cnt-tit .link .add-stop-tips .ui-tiptext-container{padding-bottom:6px\0;*padding-bottom:7px;_padding-bottom:7px}
+:root .withdraw-cnt-tit .link .add-stop-tips .ui-tiptext-arrow{top:22px\9}
+.withdraw-cnt-tit .link .ui-separator{padding:0 5px;color:#b2b2b2}
+.withdraw-cnt-det{padding:15px 15px}
+.withdraw-cnt-det .addcard{padding:30px 0 0;width:900px;height:100px}
+.withdraw-cnt-det .addcard .addcard-tit{float:left;display:inline-block;width:170px;height:56px;line-height:56px;vertical-align:middle;font-size:14px;text-align:right;font-weight:400;color:#4d4d4d}
+.withdraw-cnt-det .addcard .addcard-link{float:left;width:650px;height:56px;background:#cde1ec;border-radius:5px 5px;margin-left:20px}
+.withdraw-cnt-det .addcard .addcard-link a{padding-left:70px;line-height:54px;display:block;border-radius:5px 5px;background-repeat:no-repeat;background-position:-150px -98px;border:1px solid #cde1ec;font-size:16px;font-weight:700}
+.withdraw-cnt-det .addcard .addcard-link a:hover{text-decoration:none}
+.withdraw-cnt-det .addcard .addcard-tips{float:left;width:650px;margin-top:8px;margin-left:190px;_margin-left:95px;height:30px}
+.withdraw-cnt-det .addcard .addcard-tips .ui-tiptext{color:#9a9a9a}
+.withdraw-cnt-det .intro{width:700px;margin:30px 0 30px 190px;height:95px}
+.withdraw-cnt-det .intro-item{float:left;height:95px}
+.withdraw-cnt-det .intro .bank{width:160px;vertical-align:middle}
+.withdraw-cnt-det .intro .time{width:170px;padding:0 40px 0 30px}
+.withdraw-cnt-det .intro .rule{width:220px;padding-left:30px}
+.withdraw-cnt-det .intro .rule2{width:220px;padding-left:55px}
+.withdraw-cnt-det .intro-item .title{color:#4d4d4d;margin:0;padding-bottom:15px}
+.withdraw-cnt-det .intro-item .text{color:#9a9a9a}
+.withdraw-cnt-det .intro-item .text a{padding-right:5px}
+.withdraw-cnt-det .intro-item .lists-item{padding-bottom:10px;line-height:14px}
+.withdraw-cnt-det .intro-item .lists-item-lf{width:50px;height:14px;margin-right:10px;position:relative;float:left}
+.withdraw-cnt-det .intro-item .lists-item-lf .ui-pentagon{position:absolute;right:0;top:0}
+.withdraw-cnt-det .intro-item .lists-item-rg{color:#9a9a9a;float:left:display:inline}
+.withdraw-cnt-det .lists-dig .lists-item a{color:#9a9a9a}
+.withdraw-cnt-det .intro-item-split{background-position:-196px -180px;background-repeat:no-repeat}
+.withdraw-btm{padding:20px 0 0}
+.withdraw-btm .tit{padding:0 0 20px 10px;line-height:18px}
+.withdraw-btm .tit h4{margin:0;font-weight:700;font-size:14px;display:inline;float:left}
+.withdraw-btm .tit .more{margin-left:20px;line-height:18px;font-size:12px}
+.withdraw-btm .applist{padding:10px 0 0 40px}
+.withdraw-btm .applist-item{float:left;width:330px;height:80px;position:relative}
+.withdraw-btm .applist-item-last{width:250px}
+.withdraw-btm .applist-item .icon{position:absolute;top:0;left:0;width:24px;height:24px}
+.withdraw-btm .applist-item .det{margin-left:35px;width:250px;height:80px}
+.withdraw-btm .applist-item .det .name{font-size:14px;font-wegiht:400;padding-bottom:10px}
+.withdraw-btm .applist-item .det .info{color:#9a9a9a}
+.choose{width:745px;position:relative;height:auto;min-height:55px;height:55px}
+.choose-list{position:absolute;width:731px;height:32px;padding:7px 6px;border:1px solid #ececec;border-radius:3px 3px;background:#fcfcfd;left:0;z-index:100;cursor:pointer;zoom:1}
+.choose-list-select,.choose-list-hover,.choose-list-confirm,.choose-list-warning{border-color:#90c1dc;background:#ecf3f8;height:32px;padding:7px 6px}
+.choose-list-select{cursor:text}
+.choose-list-bg{display:none;border-color:#dedede;background:#f1f1f1;cursor:pointer}
+.choose-more{display:none;position:absolute;left:0;top:60px;width:735px;height:20px;padding:8px 0;font-size:14px;padding-left:10px}
+.choose-more .link{padding-left:25px;height:20px line-height:21px;display:block;width:90px;background-repeat:no-repeat;background-position:-184px -293px}
+.choose-more .link:hover{text-decoration:none}
+.choose-list .b-raido{float:left;width:20px;padding-left:4px;height:32px;line-height:32px}
+.choose-list .b-raido input{_margin-top:6px}
+.choose-list .b-nemo{float:left;width:70px;padding-left:5px;height:32px;line-height:28px;zoom:1;overflow:hidden;position:relative}
+.choose-list .b-nemo-txt{padding-left:9px;width:70px;color:#8c8c8c;position:absolute;top:3px;left:1px;overflow:hidden}
+.choose-list .b-nemo-txt-hover{color:#08c}
+.choose-list .b-nemo-input{width:50px;position:absolute;top:0;left:1px;overflow:hidden;font-size:12px}
+.choose-list .b-logo{float:left;margin-left:5px;padding:1px 0;width:295px;height:30px;line-height:30px;color:#030303;font-size:14px}
+.choose-list .b-logo .bank{display:inline-block;float:left;line-height:30px}
+.choose-list .b-logo .num{display:inline-block;float:left;color:#363c47;line-height:30px;padding-left:10px}
+.choose-list .b-logo .katong{display:inline-block;float:left;color:#fefefe;background:#73a6cb;height:16px;line-height:14px;font-size:12px;padding:0 1px;margin:8px 0 8px 5px;border-radius:1px 1px;vertical-align:middle;zoom:1}
+.choose-list .b-logo .katong span{zoom:1}
+.choose-list .b-time{float:left;width:130px;height:16px;line-height:16px;padding:8px 0}
+.choose-list .b-amount{float:left;width:125px;height:18px;color:#9a9a9a;font-size:12px;padding:7px 0}
+.choose-list .b-amount span{line-height:18px;float:left}
+.choose-list .b-amount-more{position:relative;margin-left:2px;width:18px;height:18px;display:inline-block;zoom:1}
+.choose-list .b-amount-more-icon{width:18px;height:18px;display:inline-block;background-position:2px -295px;background-repeat:no-repeat}
+.choose-list .b-amount-more-txt{width:65px;margin-left:0}
+.choose-list .b-amount-more-tips{position:absolute;top:22px;right:268px;*right:270px;_right:270px;zoom:1}
+.choose-list .b-amount-more-tipsmore{position:absolute;top:22px;right:200px;*right:201px;_right:201px;zoom:1}
+.choose-list .b-amount-more-tips .ui-poptip-container{padding:10px 10px;position:relative;zoom:1;*width:253px;_width:253px;_height:80px}
+.choose-list .b-amount-more-tips .ui-poptip-content{width:250px;line-height:24px}
+.choose-list .b-amount-more-tipsmore .ui-poptip-container{*width:193px;_width:193px;_height:80px;zoom:1}
+.choose-list .b-amount-more-tipsmore .ui-poptip-content{width:190px;line-height:24px}
+.choose-list .b-amount-more-tipsmore .ui-poptip-content .ui-poptip-arrow{zoom:1}
+.choose-list .b-amount-more-tips .ui-poptip-arrow-1{top:-9px\0;zoom:1}
+.choose-list .b-action{float:left;margin-left:8px;width:68px;padding-top:2px;font-size:14px;height:30px;position:relative}
+.choose-list .b-action .b-action-list{width:65px;position:absolute;top:4px;left:0;border-radius:3px 3px;border:1px solid #ecf3f8;display:none;zoom:1}
+.choose-list-select .b-action .b-action-list{display:block}
+.choose-list .b-action .b-action-list li{display:none;zoom:1;vertical-align:middle}
+.choose-list .b-action .b-action-list .edit{display:block;position:relative;cursor:pointer}
+.choose-list .b-action-hover .b-action-list .edit a{cursor:text}
+.choose-list .b-action .default .J-choose-confirm{display:none}
+.choose-list .b-action .default .J-choose-cancel{display:block}
+.choose-list .b-action .default-confirm .J-choose-confirm{display:block}
+.choose-list .b-action .default-confirm .J-choose-cancel{display:none}
+.choose-list .b-action .b-action-list .edit span{width:10px;height:10px;display:block;background-position:0 -157px;background-repeat:no-repeat;position:absolute;right:16px;top:7px}
+.choose-list .b-action-hover .b-action-list{background:#fff;width:66px;border:1px solid #9bd0ed;box-shadow:1px 1px 2px #e0e0e0}
+.choose-list .b-action-hover .b-action-list li{display:block;zoom:1;overflow:hidden}
+.choose-list .b-action .b-action-list li a{display:block;padding:0 3px 3px 3px;zoom:1}
+.choose-list .b-action .b-action-list a:hover{background:#137cb6;color:#fefefe;text-decoration:none}
+.choose-list .b-action .b-action-list .edit a:hover span{background-position:0 -129px;background-repeat:no-repeat}
+.choose-list .b-action .b-action-list-show{display:block;z-index:999}
+.choose #J-choose-cfbox{z-index:910}
+.choose .b-tips{position:absolute;top:55px;left:0;cursor:text;zoom:1}
+.choose .b-tips .ui-tiptext-container,.choose .b-tips .ui-tiptext{*display:inline;_display:inline}
+.choose .b-message{position:absolute;top:-42px;_top:-40px;left:0;cursor:text;zoom:1}
+.choose .b-message .ui-tiptext-container,.choose .b-message .ui-tiptext{*display:inline;_display:inline}
+.choose .b-message .ui-tiptext-container{padding-bottom:6px\0;*padding-top:6px;*padding-bottom:6px;_padding-top:6px;_padding-bottom:6px}
+:root .choose .b-message .ui-tiptext-arrow{top:22px\9}
+.choose .b-message .close{color:#4d4d4d;font-family:tahoma;font-size:14px;line-height:15px;margin-left:10px;position:relative;top:-5px;right:0}
+.choose .b-message .close:hover{text-decoration:none}
+.choose .b-tips .ui-tiptext-content .edit{margin-left:15px}
+.choose .b-tips .ui-tiptext-content .split{padding:0 5px;color:#a9a9a9}
+.choose .ui-confirmation .ui-dialog-container{border:2px solid #767676;background:#f5f5f5;padding:4px 10px}
+.choose .ui-confirmation .ui-dialog-container .ui-button-text{_float:left;*float:left}
+.ui-doubleradio-item{width:400px;float:left;font-size:14px;padding:4px 0;vertical-align:middle;line-height:20px;position:relative;z-index:10}
+.ui-doubleradio-item label{padding-left:5px;position:relative;top:1px}
+.ui-doubleradio-item-other label{padding-left:0}
+.ui-doubleradio-item-disable{width:400px;color:#c3c3c3}
+.ui-doubleradio-item-normal{width:180px}
+.ui-doubleradio-item .text{font-size:12px;padding-left:5px;color:#999}
+.ui-doubleradio-item .text-usetime{color:#c3c3c3}
+.ui-doubleradio-item .text-amount{position:relative;z-index:100}
+.ui-doubleradio-item .text-amount a:hover{text-decoration:none}
+.ui-doubleradio-item .text-amount-detail{position:absolute;top:20px;left:5px;zoom:1}
+.ui-doubleradio-item .text-amount-detail .ui-poptip-container{padding:10px 10px;*width:433px;*height:115px;_width:433px;_height:115px;zoom:1}
+.ui-doubleradio-item .text-amount-detail .ui-poptip-arrow{zoom:1!important;top:-8px\0}
+.ui-doubleradio-item .text-amount-detail .ui-poptip-content{width:430px}
+.ui-doubleradio-item .server-amount{position:absolute;left:20px;top:30px;font-size:12px;z-index:99;zoom:1;*width:120px;_width:120px}
+.ui-doubleradio-item .server-amount .ui-tiptext-container{_display:inline;*display:inline}
+.ui-doubleradio-item .server-amount .ui-tiptext-message{padding-left:0;font-size:12px;*display:inline;_display:inline}
+.ui-doubleradio-item .server-amount .ui-tiptext-arrow{top:-8px\0;*top:-8px}
+.ui-doubleradio-item .server-amount .ui-tiptext-message .type{color:#fd6720}
+.ui-doubleradio-item .server-amount .ui-tiptext-message .number{color:#fd6720;padding:0 5px}
+.ui-doubleradio-item .server-warning{position:absolute;left:20px;top:30px;font-size:12px;z-index:99px}
+.ui-doubleradio-item .server-warning .ui-tiptext-arrow{top:-8px\0;*top:-9px}
+.ui-doubleradio-item .server-warning .ui-tiptext{*width:300px}
+.withdraw-confirm{width:765px;height:auto;margin:0 auto}
+.withdraw-confirm-tit h3{color:#333;font:700 16px/30px \5FAE\8F6F\96C5\9ED1}
+.withdraw-confirm-cnt{width:764px;border:1px solid #d2e8ec;border-radius:5px 5px}
+.withdraw-detail{height:auto;padding:45px 15px 0 15px;border-bottom:1px solid #d2e8ec;background:#ebf2f9}
+.withdraw-detail .ui-form-item{padding-bottom:15px}
+.withdraw-detail-bank{padding-top:5px}
+.withdraw-detail-bank .username{font-size:16px;padding-bottom:5px;line-height:20px;font-weight:700;color:#333}
+.withdraw-detail-bank .cardinfo{line-height:30px;height:30px}
+.withdraw-detail-bank .cardinfo .cardinfo-nemo{display:inline-block;float:left;padding-right:10px}
+.withdraw-detail-bank .ui-button-morange input.ui-button-text{padding-left:18px;padding-right:18px}
+.withdraw-detail-bank .cardinfo .cardinfo-bank{display:inline-block;float:left;font-size:14px;color:#333;font-weight:700;padding-right:10px}
+.withdraw-detail-bank .cardinfo .cardinfo-num{display:inline-block;float:left;font-size:14px;color:#333;padding-right:10px}
+.withdraw-detail-amount{font-size:14px}
+.withdraw-detail-amount .money{color:#fc5f20;padding-right:5px;font-size:16px}
+.withdraw-detail-amount .servermoney{font-size:12px;padding-left:5px}
+.withdraw-detail-amount .servermoney .servermoney-num{color:#fc5f20;padding:0 4px}
+.withdraw-detail-time{padding-top:3px;font-size:14px;padding-left:28px;background-position:-180px -325px;background-repeat:no-repeat}
+.confirm-form{padding:30px 15px 0 15px}
+.confirm-form .ui-button{float:left}
+.confirm-form .ui-back{float:left;display:inline-block;padding-left:15px;font-size:12px;color:#0188cc;position:relative;top:6px;*width:60px;_width:60px;zoom:1}
+.confirm-form .ui-back a{zoom:1}
+.withdraw-result{margin-bottom:10px}
+.withdraw-result .ui-tipbox-icon{top:30px;left:70px}
+.withdraw-result .ui-tipbox-content{margin:35px 0 35px 120px}
+.withdraw-result .ui-tipbox-content h3{font-size:16px}
+.withdraw-result-tips{padding:0 20px;border-left:1px solid #e1e1e1;border-right:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;font-size:14px}
+.withdraw-result-tips .text{padding:30px 0 30px 100px;line-height:24px;border-bottom:1px dashed #eee}
+.withdraw-result-tips .link{padding:10px 0 10px 100px;line-height:24px}
+.withdraw-result-tips .link a{padding-right:20px}
+.withdraw-result-tips .link .ui-separator{padding-left:10px;padding-right:10px}
+.withdraw-result .ui-resultstep{padding:15px 0 40px 100px;border-bottom:1px dashed #eee}
+.withdraw-result-tips .ui-resultstep-title{color:#808080}
+.withdraw-result-tips .ui-resultstep-container{margin-top:15px;font-size:12px}
+.withdraw-result-tips .ui-resulstep-txt{position:relative;left:-30px;color:#4a4a4a}
+.withdraw-result-tips .ui-resulstep-txt span{display:block;line-height:18px}
+.withdraw-result-tips .ui-resultstep-item{background-position:0 -10px;width:290px}
+.withdraw-result-tips .ui-resultstep-finish{background-position:0 50px;width:110px}
+.withdraw-result-tips .ui-resultstep-current .ui-resulstep-txt .tit,.withdraw-result-tips .ui-resultstep-finish .ui-resulstep-txt .tit{font-weight:700;color:#5eac11}
+.withdraw-result-tips .ui-resultstep-realtime{width:260px}
+.withdraw-result-pic{width:990px;height:80px;margin:0 0 10px 0}
+#xbox-overlay{position:fixed}
+#xbox-mock{z-index:999;left:50%;top:50%;width:500px;background-color:rgba(0,0,0,0.5);background:transparent\0;*background:transparent;_background:transparent;FILTER:progid:DXImageTransform.Microsoft.Gradient(startColorstr=#7F000000,endColorstr=#7F000000);padding:6px}
+root:#xbox-mock{background:transparent\9}
+.ui-xbox-withdraw .ui-xbox-action{top:20px}
+.ui-xbox-withdraw .ui-xbox-action a:hover{text-decoration:none}
+.ui-xbox-hack .ui-xbox-action{width:120px;height:38px;top:10px;right:7px;background:#fff}
+.ui-xbox-hack .ui-xbox-close{position:absolute;right:15px;top:15px}
+.ui-securitycore .ui-tiptext-container{padding:0}
+.ui-securitycore .ui-tiptext-container .ui-tiptext-content{border:0}
+.ui-securitycore .ui-tip-warning{margin:0 0 15px 190px}
+.ui-form-item input.placeholder,.ui-form-item input.ui-fm-placeholder{color:#a0a0a0}
+.ui-form-item input::-webkit-input-placeholder{color:#a0a0a0}
+.ui-form-item input:-moz-placeholder{color:#a0a0a0}
+.ui-fm-focus input.placeholder,.ui-fm-focus input.ui-fm-placeholder{color:#a0a0a0}
+.ui-fm-focus input::-webkit-input-placeholder{color:#a0a0a0}
+.ui-fm-focus input:-moz-placeholder{color:#a0a0a0}
+.ui-poptip-white{color:#4d4d4d}
+.ui-poptip-white .ui-poptip-shadow{background-color:rgba(0,0,0,0.05);FILTER:progid:DXImageTransform.Microsoft.Gradient(startColorstr=#0c000000,endColorstr=#0c000000)}
+.ui-poptip-white .ui-poptip-container{background-color:#f8fcff;border:1px solid #b9c8d3}
+.ui-poptip-white .ui-poptip-container .ui-poptip-arrow{zoom:1}
+.ui-poptip-white .ui-poptip-arrow em,.ui-poptip-white .ui-poptip-arrow-left em,.ui-poptip-white .ui-poptip-arrow-right em{color:#b9c8d3}
+.ui-poptip-white .ui-poptip-arrow span,.ui-poptip-white .ui-poptip-arrow-left span,.ui-poptip-white .ui-poptip-arrow-right span{color:#f8fcff;line-height:1.5}
+.ui-poptip-content table{border:1px solid #ccc;width:100%;color:#4d4d4d}
+.ui-poptip-content table caption{height:25px;vertical-align:middle;font-weight:bold}
+.ui-poptip-content table caption span{font-weight:normal;padding-left:10px}
+.ui-poptip-content table caption span em{color:#ff8160}
+.ui-poptip-content table th{padding:3px 5px;border-right:1px solid #ccc;border-bottom:1px solid #ccc;background:#f9f9f9}
+.ui-poptip-content table td{padding:5px 5px;border-right:1px solid #ccc;border-bottom:1px solid #ccc;background:#fff;font-size:12px}
+.ui-poptip-content table td span{color:#f95607;font-weight:bold}

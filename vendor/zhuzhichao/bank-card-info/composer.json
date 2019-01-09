@@ -1,0 +1,29 @@
+{
+    "name": "zhuzhichao/bank-card-info",
+    "description": "Get the bank card info",
+	"keywords": ["bank", "card info", "chinese"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "zhuzhichao",
+            "email": "me@zhuzhichao.com"
+        }
+    ],
+	"autoload": {
+		"psr-4": {
+			"Zhuzhichao\\BankCardInfo\\": "src/"
+		}
+	},
+    "extra": {
+      "laravel": {
+        "aliases": {
+          "BankCard": "Zhuzhichao\\BankCardInfo\\BankCard"
+        }
+      }
+    },
+    "minimum-stability": "stable",
+    "require": {},
+    "require-dev": {
+      "phpunit/phpunit": "^4.0"
+    }
+}

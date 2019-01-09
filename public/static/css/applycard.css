@@ -1,0 +1,751 @@
+body {
+    margin: 0 auto;
+    background-color: #eee;
+}
+
+@font-face {
+    font-family: DINPro-Bold;
+    src: url('/static/fonts/DINPro-Bold.otf');
+}
+
+@font-face {
+    font-family: DINPro-Regular;
+    src: url('/static/fonts/DINPro-Regular.otf');
+}
+
+header,
+section,
+footer {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+header img {
+    width: 100%;
+    float: left;
+}
+
+.message {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.message-img {
+    width: 30px;
+    margin-right: 5%;
+    position: absolute;
+}
+
+.message input {
+    font-size: 14px;
+    width: 60%;
+    margin-top: 10px;
+    margin-left: 40px;
+    border: none;
+    outline: none;
+}
+
+.message button {
+    background-color: #EE5C42;
+    color: white;
+    border: none;
+    width: 30%;
+    height: 30px;
+}
+
+input,
+img {
+    vertical-align: middle;
+}
+
+footer {
+    width: 100%;
+    background-color: #D3D3D3;
+}
+
+footer button {
+    color: white;
+    background-color: #EE5C42;
+    border: none;
+    width: 80%;
+    height: 40px;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+
+.input {
+    /* border-bottom:1px solid #E4E4E4; */
+    /* height:45px; */
+    /* padding-top:10px; */
+    display: inline;
+}
+
+.input input {
+    margin-left: 15px;
+    width: 60%;
+    /* height:65%; */
+    border: none;
+    line-height: 50px;
+    padding: 0px;
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+    margin-bottom: -6px;
+    margin-top: -8px;
+}
+
+.inputbox {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10px;
+}
+
+.btn {
+    width: 80%;
+    height: 40px;
+    border: 0;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 16px;
+    background-color: #ffcc00;
+    color: #FFFFFF;
+    margin-left: 10%;
+}
+
+.line {
+    display: block;
+}
+
+.clear {
+    clear: both;
+}
+
+.clear_20 {
+    clear: both;
+    height: 20px;
+}
+
+
+/* 边框0.5px */
+
+.cardDiv {
+    width: 80%;
+    position: relative;
+    padding: 7px 0;
+    z-index: 99;
+}
+
+.cardDiv:after {
+    content: "  ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    width: 200%;
+    height: 200%;
+    border: 1px solid #e0e0e0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(.5, .5);
+    transform: scale(.5, .5);
+}
+
+.cardDiv.on:after {
+    border-color: #ffcc00;
+    background-color: #ffcc00;
+}
+
+.yc {
+    display: none;
+}
+
+.cardDiv.on {
+    width: 100%;
+}
+
+.cardDiv.on .yc {
+    display: inline-block;
+}
+
+.cardDiv div {
+    width: 100%;
+}
+
+#XzDiv .on .infoDiv {
+    color: #fff;
+}
+
+#XzDiv img {
+    margin-top: 12px;
+}
+
+#XzDiv .infoDiv {
+    color: #666;
+    margin: 0 10px;
+    font-size: 13px;
+    line-height: 25px;
+}
+
+#addcardTX p {
+    font-size: 12px;
+    color: #999;
+    width: 90%;
+    margin-left: 5%;
+}
+
+#subDiv {
+    margin-left: 10px;
+    background-color: #fff;
+}
+
+.zy_mask {
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.sj_txt {
+    height: 22px;
+    line-height: 22px;
+    text-align: left;
+    font-size: 12px;
+    color: #999;
+}
+
+#content {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.defaultApp {
+    padding: 10px 20px 10px 20px;
+    background: #fff;
+    font-size: 14px;
+    color: #333;
+}
+
+.chooes {
+    width: 80%;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 10%;
+    border: 1px solid #333;
+    border-radius: 3px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.okimg {
+    background: #eee;
+}
+
+.okimg img {
+    width: 22%;
+    margin-left: 39%
+}
+
+.okimg .txt {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+}
+
+.okimg .smallTxt {
+    width: 80%;
+    text-align: center;
+    font-size: 12px;
+    margin-left: 10%;
+    color: #ff4400;
+    margin-top: 10px;
+}
+
+.xian {
+    width: 100%;
+    height: 1px;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.infoLeft {
+    font-size: 14px;
+    float: left;
+    color: #333;
+    line-height: 50px;
+    display: block;
+    width: 60px;
+    text-align: right;
+}
+
+.infoRight {
+    color: #999;
+    text-align: right;
+    line-height: 50px;
+    border: none;
+    outline: none;
+    float: right;
+    font-size: 13px;
+    text-align: left;
+}
+
+.littleimg {
+    width: 20px;
+    height: 20px;
+    display: block;
+    margin-top: 10px;
+    margin-right: 10px;
+    float: left;
+}
+
+.appInfo {
+    background: #fff;
+    padding: 0px 10px 10px 10px;
+}
+
+.appInfo .top {
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    text-align: left;
+    color: #ff4400;
+}
+
+.appInfo .bottom {
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    text-align: left;
+    color: #ff4400;
+}
+
+.appInfo .top .name {
+    width: auto;
+    float: left;
+    text-align: left;
+    font-family: DINPro-Regular;
+}
+
+@media (min-width:375px) {
+    .appInfo .top .name {
+        width: 120px;
+    }
+}
+
+.appInfo .top .phone {
+    float: left;
+    text-align: left;
+    font-family: DINPro-Regular;
+}
+
+.appInfo .bottom .idcard {
+    font-family: DINPro-Regular;
+}
+
+.xian2 {
+    width: 100%;
+    height: 1px;
+    display: block;
+    padding-top: 5px;
+}
+
+.tool .upd {
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    float: left;
+    margin-top: 15px;
+    border-radius: 3px;
+    border: 1px solid #fed500;
+    font-size: 13px;
+    color: #fed500;
+}
+
+.thetitle {
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    text-align: left;
+    font-size: 14px;
+    padding-left: 5px;
+    color: #333;
+    background: #eee;
+    margin-top: 10px;
+}
+
+.newbtn01 {
+    width: 100%;
+    height: 100%;
+    line-height: 45px;
+    font-size: 15px;
+    background: #fed500;
+    color: #fff;
+    border: 0px;
+}
+
+.backdrop {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 99999;
+    top: 0px;
+    left: 0px;
+    background: black;
+    opacity: 0.7;
+    display: none;
+}
+
+.popup {
+    width: 80%;
+    min-height: 60%;
+    position: fixed;
+    z-index: 100000;
+    top: 15%;
+    margin-left: 10%;
+    border-radius: 8px;
+    background: #fff;
+    display: none;
+}
+
+.popup .content {
+    padding: 20px 20px 20px 20px;
+}
+
+.popup .content .top {
+    line-height: 18px;
+    font-size: 14px;
+    color: #333;
+    text-align: justify;
+}
+
+.popup .content .bottom {
+    line-height: 18px;
+    font-size: 12px;
+    color: #666;
+    text-align: justify;
+    margin-top: 5px;
+}
+
+.popup .content .btn {
+    width: 80%;
+    height: 35px;
+    line-height: 35px;
+    margin-left: 10%;
+    background: #fed500;
+    color: #333;
+    border-radius: 3px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.fontStyle-field {
+    font-size: 14px;
+    float: left;
+    color: #333;
+    line-height: 50px;
+    display: block;
+    width: 60px;
+    text-align: left;
+}
+
+#dqinfo select {
+    color: #999;
+    margin: 7px 0 7px 14px;
+    width: 80%;
+    outline: 0px;
+    float: left;
+    line-height: 36px;
+    height: 36px;
+    border: none;
+    background-color: #e6e6e6;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    font-size: 12px;
+    text-align: center;
+}
+
+#popupOfmsg {
+    width: 90%;
+    margin-left: 5%;
+}
+
+#popupOfsure {
+    width: 90%;
+    margin-left: 5%;
+}
+
+#popupOfsure .top {
+    padding: 10px 20px;
+}
+
+#popupOfsure .top .title {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+}
+
+#popupOfsure .top .ftitle {
+    height: 32px;
+    line-height: 16px;
+    text-align: center;
+    font-size: 12px;
+    color: #ff4400;
+    width: 90%;
+    margin: 0 auto;
+    /* margin-left: 10%; */
+}
+
+#popupOfsure .top .num {
+    width: 70%;
+    float: right;
+    height: 30px;
+    line-height: 30px;
+    text-align: left;
+    /* font-size: 16px; */
+    font-size: 0.8em;
+    font-family: DINPro-Bold;
+    color: #ff4400;
+}
+
+#popupOfsure .bottom {}
+
+#popupOfsure .bottom .yesBtn {
+    width: 49%;
+    line-height: 40px;
+    float: right;
+    text-align: center;
+    border-radius: 5px;
+    border-left: 1px solid #333;
+    border-top: 1px solid #333;
+}
+
+#popupOfsure .bottom .noBtn {
+    width: 49%;
+    float: left;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    border-right: 1px solid #333;
+    border-top: 1px solid #333;
+}
+
+#popupOfmsg .top {
+    padding: 10px 10px 10px 10px;
+}
+
+#popupOfmsg .top .title {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+}
+
+#popupOfmsg .top .input {
+    width: 35%;
+    height: 35px;
+    line-height: 37px;
+    float: left;
+    border-radius: 3px;
+    text-align: center;
+    border: 1px solid #999;
+    margin-left: 13%;
+    font-size: 20px;
+}
+
+#popupOfmsg .top .input2 {
+    width: 80%;
+    height: 35px;
+    line-height: 37px;
+    float: left;
+    border-radius: 3px;
+    text-align: center;
+    border: 1px solid #999;
+    margin-left: 10%;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+#popupOfmsg .top .btn {
+    width: 35%;
+    height: 37px;
+    line-height: 37px;
+    float: right;
+    border-radius: 3px;
+    text-align: center;
+    border: 1px solid #999;
+    margin-right: 13%;
+}
+
+.bottom .next {
+    width: 45%;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    font-size: 13px;
+    float: right;
+    border-radius: 3px;
+    border: 1px solid #fed500;
+    background: #fed500;
+    color: #fff;
+}
+
+.bottom .quit {
+    width: 45%;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    font-size: 13px;
+    float: left;
+    border-radius: 3px;
+    border: 1px solid #fed500;
+    color: #fed500;
+}
+
+.backdrop2 {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 99999;
+    top: 0px;
+    left: 0px;
+    background: black;
+    opacity: 0.7;
+    display: none;
+}
+
+.popup2 {
+    width: 80%;
+    height: 130px;
+    position: fixed;
+    z-index: 100000;
+    top: 15%;
+    margin-left: 10%;
+    border-radius: 3px;
+    background: #fff;
+    display: none;
+}
+
+.input_pic {
+    height: 33px;
+    outline: none;
+    border: none;
+    line-height: 35px;
+    text-align: center;
+    ime-mode: disabled;
+}
+
+.infoLeft {
+    font-size: 14px;
+    float: left;
+    color: #333;
+    line-height: 50px;
+    display: block;
+    width: 60px;
+    text-align: left;
+}
+
+.infoRight {
+    color: #333;
+    text-align: right;
+    line-height: 50px;
+    border: none;
+    outline: none;
+    float: right;
+    font-size: 14px;
+    text-align: right;
+    font-family: DINPro-Regular;
+}
+
+ :-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #999;
+    opacity: 1;
+    font-size: 12px;
+}
+
+ ::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #999;
+    opacity: 1;
+    font-size: 12px;
+}
+
+input:-ms-input-placeholder {
+    color: #999;
+    opacity: 1;
+    font-size: 12px;
+}
+
+input::-webkit-input-placeholder {
+    color: #999;
+    opacity: 1;
+    font-size: 12px;
+}
+
+.phonecode {
+    width: 100%;
+    height: 50px;
+}
+
+#content_head {
+    font-size: 14px;
+    color: #999;
+    line-height: 20px;
+    text-align: justify;
+    padding: 30px 5% 30px 5%;
+}
+
+.xian3 {
+    width: 100%;
+    height: 1px;
+    display: block;
+    padding-top: 5px;
+}
+
+.sureTitle {
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: normal;
+    color: #999;
+    width: 60px;
+    float: left;
+    text-align: right;
+}
+
+
+/*prompt_box*/
+
+.prompt_box {
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 10rem;
+    text-align: center;
+    z-index: 9999999999;
+}
+
+.prompt_box span {
+    display: inline-block;
+    border: 1px solid #fc0;
+    height: 1.7rem;
+    line-height: 1.7rem;
+    padding: 0 1rem;
+    color: #000;
+    font-size: .64rem;
+    margin: 0 auto;
+    border-radius: .85rem;
+    background: #fc0;
+}

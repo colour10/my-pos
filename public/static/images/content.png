@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>404 - page not found</title>  
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+		body {
+			max-width: 640px;
+			margin: 0 auto;
+			font-family: DINPro-Regular, NotoSansHans-DemiLight;
+		}
+	</style>
+	<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript">
+		$(function(){ 
+		    $(window).resize(); 
+		});	
+		$(window).resize(function(){ 
+		    $(".mydiv").css({ 
+		        position: "absolute", 
+		        left: ($(window).width() - $(".mydiv").outerWidth())/2, 
+		        top: ($(window).height() - $(".mydiv").outerHeight())/2 
+		    });        
+		});
+	</script>
+</head>  
+<body>  
+	<div class="mydiv">
+		<img src="/images/404.png">
+	</div>
+</body>   
+</html>  

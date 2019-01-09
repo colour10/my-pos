@@ -1,0 +1,7 @@
+﻿@font-face {
+	font-family: customfontstyle;
+	/* src:url('/static/fonts/times.ttf'); */
+	src:url('/static/fonts/roboto-light.ttf');
+	
+}
+*{font-family:customfontstyle;}

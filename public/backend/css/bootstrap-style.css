@@ -1,0 +1,14 @@
+.login-box,
+.register-box {
+    margin-bottom: 25px;
+}
+
+.login-box .login-logo {
+    padding-top: 1em;
+    font-size: 2em;
+}
+
+.login-page {
+    background: -webkit-linear-gradient(90deg, #c0abde, #98e2bf);
+    background: linear-gradient(90deg, #c0abde, #98e2bf);
+}

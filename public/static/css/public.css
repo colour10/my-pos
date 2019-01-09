@@ -1,0 +1,450 @@
+﻿html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+}
+
+div,
+p,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+input {
+    outline: 0 !important;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+input:focus {
+    outline: 0 !important;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    font-size: .64rem;
+    color: #c9c9c9;
+}
+
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+    font-size: .64rem;
+    color: #c9c9c9;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+    font-size: .64rem;
+    color: #c9c9c9;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    font-size: .64rem;
+    color: #c9c9c9;
+}
+
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-align: center;
+    border: 0 !important;
+}
+
+a:hover {
+    border: 0 !important;
+    background: translate;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+.tab_box {
+    position: fixed;
+    z-index: 1000;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    border-top: 1px solid #e7e7e7;
+    background: #fff;
+}
+
+.tab_box .tab_item {
+    text-align: center;
+    height: 2.35rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab_box .tab_item img {
+    width: 1.28rem;
+    height: 1.28rem;
+}
+
+.tab_box .tab_item span {
+    font-size: .43rem;
+    display: block;
+    color: #b3b3b3;
+}
+
+.choosed {
+    color: #0e0e0e !important;
+}
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.myInfo {
+    position: relative;
+    height: 4.27rem;
+}
+
+.myInfoBg img {
+    width: 100%;
+    height: 4.27rem;
+}
+
+.myAvatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.txbg {
+    width: 2.77rem;
+    height: 2.77rem;
+    margin: .55rem 0 0 .62rem;
+}
+
+.touxiang {
+    width: 2.3rem;
+    height: 2.3rem;
+    margin-top: .59rem;
+    margin-left: -2.61rem;
+    border-radius: 50%;
+}
+
+.myInfoText {
+    font-size: .51rem;
+    position: absolute;
+    top: 1.26rem;
+    left: 3.82rem;
+    display: flex;
+    flex-direction: column;
+    color: #b5b5b5;
+}
+
+.infoText {
+    line-height: .85rem;
+}
+
+.infoName {
+    font-size: .64rem;
+    color: #fff;
+    flex: 1;
+}
+
+.hyjb {
+    font-size: .64rem;
+    color: #fc0;
+    flex: 1;
+}
+
+
+/*tab*/
+
+.navtab_box .nav-tabs li a text {
+    display: block;
+}
+
+li.active {
+    color: #fc0;
+    border-bottom: 3px solid #fc0;
+}
+
+li.active a {
+    color: #fc0!important;
+    background: inherit!important;
+}
+
+
+/*prompt_box*/
+
+.prompt_box {
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 10rem;
+    text-align: center;
+}
+
+.prompt_box span {
+    display: inline-block;
+    border: 1px solid #fc0;
+    height: 1.7rem;
+    line-height: 1.7rem;
+    padding: 0 1rem;
+    color: #000;
+    font-size: .64rem;
+    margin: 0 auto;
+    border-radius: .85rem;
+    background: #fc0;
+}
+
+
+/*下划文字提示*/
+
+.understroke {
+    background: url(../images/line.png) no-repeat center center;
+    background-size: 9.41rem 1px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.understroke_text {
+    color: #b9b9b9;
+    font-size: .43rem;
+}
+
+.understroke_img {
+    width: .51rem;
+    height: .51rem;
+}
+
+
+/*图片验证码,及刷新图片*/
+
+.yzm_img {
+    width: 4.27rem;
+    height: 1.15rem;
+}
+
+.regImg {
+    width: 1.49rem;
+    height: 1.49rem;
+}
+
+
+/*下拉刷新提示信息*/
+
+.dropload-down {}
+
+
+/*功能暂未开放提示*/
+
+.notopenbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    z-index: 3333;
+}
+
+.notopen {
+    width: 60%;
+    margin: 0 auto;
+    /* border: 1px solid red; */
+    background: #fc0;
+    border-radius: 20px;
+    margin-top: 6rem;
+    padding: .64rem;
+}
+
+.notopen_text {
+    color: #fff;
+    font-size: .64rem;
+}
+
+.notopen_btn {
+    color: #fff;
+    font-size: .64rem;
+    text-align: center;
+}
+
+.dropload-down-nodata {
+    height: auto !important;
+}
+
+.nodata {
+    font-size: .43rem;
+    color: #000;
+    text-align: center;
+    margin: .43rem 0;
+}
+
+
+/*轮播图*/
+
+.swiper-container,
+.swiper-container1 {
+    width: 94%;
+    border: 1px solid #e7e7e7;
+    border-radius: .43rem;
+}
+
+.swiper-container1 {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+}
+
+
+/*安卓图片放大*/
+
+.nopoint {
+    pointer-events: none;
+}
+
+
+/*下拉刷新*/
+
+#pullUp {
+    text-align: center;
+}
+
+#thelist {
+    padding-bottom: 3rem;
+    /* overflow-y: scroll;
+	width: 100%;
+	height: 100.25%;  */
+}
+
+.data_null {
+    width: 100%;
+    height: 10rem;
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.data_null img {
+    width: 6.4rem;
+    height: 6.4rem;
+}
+
+.data_notmore {
+    text-align: center;
+    /* margin: 0 1.21rem 0 .43rem; */
+    padding: 2rem;
+}
+
+.data_notmore span {
+    color: #b9b9b9;
+    font-size: .43rem;
+}
+
+#wrapper {
+    width: 100%;
+    height: 28rem;
+}
+
+#wrapper1 {
+    width: 100%;
+}
+
+#scroller {
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 32222;
+    background: rgba(0, 0, 0, .5) url(/static/images/subcribe-bg.png) no-repeat center 2rem;
+    background-size: 13.4rem 15.72rem;
+}
+
+.popup_close {
+    position: absolute;
+    top: 3rem;
+    right: 1.3rem;
+    width: 1.216rem;
+    height: 1.216rem
+}
+
+.popup_text {
+    position: absolute;
+    top: 8rem;
+    left: 50%;
+    margin-left: -3.2rem;
+    color: #000;
+    font-size: .469rem
+}
+
+.popup_img {
+    position: absolute;
+    top: 9rem;
+    left: 50%;
+    margin: .64rem 0 .64rem -3.465rem;
+    width: 6.93rem;
+    height: 6.93rem
+}
+
+#strategy {
+    width: 90%;
+    margin: 0 auto;
+    text-align: justify;
+    text-justify: inter-ideograph;
+    padding-top: 1.5rem;
+    font-size: 0.75rem;
+}
+
+#strategy p {
+    margin-bottom: 1.5rem;
+}

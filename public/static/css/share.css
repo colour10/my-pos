@@ -1,0 +1,355 @@
+/* 公共样式表css */
+
+html,
+body {
+    color: #333;
+    margin: 0;
+    height: 100%;
+    font-family: "Myriad Set Pro", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+img {
+    border: 0;
+}
+
+
+/* 必要布局样式css */
+
+html {
+    width: 100%;
+}
+
+p {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body,
+div,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+button,
+fieldset,
+form,
+input,
+legend,
+textarea,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    width: 100%;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+.main {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+body {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    padding: 0;
+    margin: 0 auto;
+    font-family: "微软雅黑";
+    background-color: #f2f2f2;
+    box-shadow: 0 2px 30px 5px rgba(0, 0, 0, .2);
+    position: relative;
+}
+
+button {
+    outline: 0;
+}
+
+img {
+    border: 0;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    outline: none;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    color: #666;
+    text-decoration: none
+}
+
+a:hover {
+    color: #eee;
+    text-decoration: none
+}
+
+.clearfix::after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+
+/*banner*/
+
+.banner img {
+    width: 100%;
+}
+
+.bankLi {
+    width: 100%;
+}
+
+.bankLi dt {
+    background-color: #fff;
+    margin-bottom: 20px;
+    display: block;
+    overflow: hidden;
+}
+
+.bankLi dt ul li {
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.8rem;
+    float: left;
+    width: 33.3333%;
+}
+
+.bankLi dd {
+    background-color: #fff;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto 15px;
+    width: 95%;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+.bankLi dd ul li {
+    padding: 10px 1%;
+    text-align: center;
+    font-size: 0.6rem;
+    float: left;
+    width: 31%;
+    position: relative;
+    font-weight: bold;
+}
+
+.bankLi dd ul li img {
+    width: 25%;
+    margin-right: 5px;
+}
+
+.bankLi dd ul li span {
+    font-weight: normal;
+    color: #666;
+    font-size: 0.8em;
+}
+
+.bankLi dd ul li p {
+    color: #ee1b12;
+}
+
+.bankLi dd ul li i {
+    width: 1px;
+    background-color: #e8eefa;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    display: black;
+    display: block;
+    top: 20px;
+}
+
+.bankLi dd ul li:nth-child(1) {
+    padding: 17px 1%;
+}
+
+.tit {
+    position: relative;
+    margin-top: 20px;
+    color: #2c8be7;
+    font-weight: bold;
+    font-size: 0.8rem;
+    height: 60px;
+}
+
+.tit span {
+    padding: 0 5px;
+    width: 30%;
+    background-color: #f2f2f2;
+    line-height: 50px;
+    position: absolute;
+    top: 0;
+    left: 35%;
+    z-index: 2;
+    display: block;
+}
+
+.tit i {
+    width: 60%;
+    height: 2px;
+    background-color: #2c8be7;
+    position: absolute;
+    top: 25px;
+    left: 20%;
+    z-index: 1
+}
+
+p.wz {
+    width: 90%;
+    margin: 0 auto 30px;
+    text-align: left;
+    line-height: 1.8;
+}
+
+p.wz span {
+    padding-left: 10px;
+}
+
+.tg {
+    width: 95%;
+    background-color: #2c8be7;
+    line-height: 40px;
+    text-align: center;
+    height: 40px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+    color: #fff;
+}
+
+#toshare {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .8);
+}
+
+.toshareimg {
+    width: 100%;
+    height: 25.73rem;
+}
+
+.tosharebtnbox {
+    position: absolute;
+    bottom: 3.63rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tosharebtn {
+    width: 4.69rem;
+    height: 1.37rem;
+}
+
+
+/*prompt_box*/
+
+.prompt_box {
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 10rem;
+    text-align: center;
+    z-index: 99999999;
+}
+
+.prompt_box span {
+    display: inline-block;
+    border: 1px solid #fc0;
+    height: 1.7rem;
+    line-height: 1.7rem;
+    padding: 0 1rem;
+    color: #000;
+    font-size: .64rem;
+    margin: 0 auto;
+    border-radius: .85rem;
+    background: #fc0;
+}
+
+
+/* 公众号 */
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 32222;
+    background: rgba(0, 0, 0, .5) url(/static/images/subcribe-bg.png) no-repeat center 2rem;
+    background-size: 13.4rem 15.72rem;
+}
+
+.popup_close {
+    position: absolute;
+    top: 3rem;
+    right: 1.3rem;
+    width: 1.216rem;
+    height: 1.216rem
+}
+
+.popup_text {
+    position: absolute;
+    top: 8rem;
+    left: 50%;
+    margin-left: -3.2rem;
+    color: #000;
+    font-size: .469rem
+}
+
+.popup_img {
+    position: absolute;
+    top: 9rem;
+    left: 50%;
+    margin: .64rem 0 .64rem -3.465rem;
+    width: 6.93rem;
+    height: 6.93rem
+}

@@ -1,0 +1,114 @@
+﻿input,
+button {
+	border: 0;
+}
+
+.formOut {
+	padding: .43rem 0 0 1rem;
+}
+
+.formOut .section {
+	display: flex;
+	flex-direction: row;
+	height: 2.02rem;
+	border-bottom: 1px solid #e7e7e7;
+	align-items: center;
+	line-height: 2.02rem;
+    /* margin-top: .21rem; */
+}
+
+.formOut .section .title {
+	width: 2em;
+	text-align: center;
+}
+
+.formOut .section input {
+	font-size: .73rem;
+	height: 1rem;
+	line-height: 1rem;
+}
+
+.hqyzmBtn {
+	font-size: .52rem!important;
+	line-height: .58rem;
+	display: block;
+	width: 4.27rem;
+	height: 1.15rem !important;
+	line-height: 1.15rem !important;
+	margin-top: -0.235rem;
+	color: #39354b;
+	border-radius: .58rem;
+	background: #fc0;
+}
+
+.readProtocol {
+	display: flex;
+	flex-direction: row;
+	margin: .96rem 0 4.07rem;
+}
+
+.readProtocol img {
+	width: .55rem;
+	height: .55rem;
+}
+
+.agree {
+	font-size: .51rem;
+	margin-left: .28rem;
+	color: #9e9797;
+}
+
+.proto {
+	font-size: .51rem;
+    /* color: #39354b; */
+}
+
+.watched {
+	width: .55rem;
+	height: .55rem;
+}
+
+.button_area {
+	width: 100%;
+	text-align: center;
+	margin-top: 1.5em;
+}
+
+.button_area button {
+	font-size: .64rem;
+	line-height: 1.88rem;
+	display: inline-block;
+	width: 6rem;
+	height: 1.88rem;
+	margin: 0 auto;
+	border-radius: .94rem;
+	background: #fc0;
+}
+
+.loading {
+	opacity: .7;
+}
+
+.errInfo {
+	display: block;
+	flex-direction: column;
+	padding: 0 .64rem;
+}
+
+.errInfo text {
+	font-size: .51rem;
+	line-height: .64rem;
+	color: red;
+}
+
+.back_btn {
+	margin-top: .85rem;
+	text-align: center;
+}
+
+.back_btn span {
+	color: #337ab7;
+	font-size: .43rem;
+	border-bottom: 1px solid #337ab7;
+	padding-bottom: 1px;
+}

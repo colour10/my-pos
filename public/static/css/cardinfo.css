@@ -1,0 +1,410 @@
+@font-face {
+    font-family: DIN Engschrift Bali;
+    src: url('/fonts/DIN Engschrift Bali.otf');
+}
+
+.btn {
+    width: 50%;
+    height: 28px;
+    line-height: 28px;
+    background: #00A0E6;
+    color: white;
+    border: 0;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.item ul li {
+    list-style: none;
+    float: left;
+    width: 33.33%;
+    text-align: center;
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    margin: -1px;
+}
+
+img {
+    border: 0;
+}
+
+ul,
+p {
+    padding: 0;
+    margin: 0;
+}
+
+.clear_1 {
+    width: 100%;
+    height: 20px;
+    clear: both;
+}
+
+.p1 {
+    margin-top: 5px;
+    width: 96%;
+    height: 38px;
+    line-height: 19px;
+}
+
+.clear_10 {
+    width: 100%;
+    height: 10px;
+    clear: both;
+}
+
+ul li {
+    list-style: none;
+    float: left;
+    text-align: center;
+}
+
+.module_div {
+    float: left;
+    width: 100%;
+}
+
+.module_div .img_div {
+    width: 31%;
+    float: left;
+}
+
+.module_div .img_select {
+    width: 70%;
+    margin-left: 15%;
+}
+
+.module_div .module_title {
+    color: #333;
+    margin: 0 0 0 3%;
+    font-size: 0;
+}
+
+.service-provider {
+    /* padding: 10px 0 0 0; */
+    float: left;
+    width: 13%;
+}
+
+.service-provider img {
+    height: 32px;
+    width: 32px;
+    /* border-radius: 50%; */
+    margin-left: 10px;
+    border: 4px solid #e6e6e6;
+}
+
+.service_info {
+    float: left;
+    /* width: 35%; */
+    position: relative;
+    left: 30px;
+    top: 0px;
+}
+
+.service_info .service_id img {
+    width: 15px;
+    position: relative;
+    top: 0px;
+}
+
+.service_info .service_nmae {
+    text-align: left;
+    margin-top: 7px;
+    /* margin-right: 20px; */
+    font-size: 14px;
+    padding-top: 8px;
+}
+
+.service_info .service_id {
+    text-align: left;
+    color: #999;
+    font-size: 12px;
+    /* margin-right: 20px; */
+}
+
+.scDetail {
+    width: 100%;
+}
+
+.scDetail div {
+    width: 31%;
+    height: 30%;
+    float: left;
+    /* margin-left: 1%; */
+}
+
+.clear_100 {
+    width: 100%;
+    height: 80px;
+    clear: both;
+}
+
+.clear {
+    width: 100%;
+    clear: both;
+}
+
+.loadmore {
+    color: #00A0E6;
+}
+
+.fontColor {
+    color: #FF4400;
+}
+
+.background_color {
+    background: #1b1a1f;
+}
+
+.zy-repayment {
+    width: 45%;
+    height: 35px;
+    line-height: 35px;
+    color: white;
+    background-color: #FFcc00;
+    border: none;
+    font-size: 16px;
+    border-radius: 3px;
+}
+
+.zy-repayment2 {
+    width: 50%;
+    height: 35px;
+    line-height: 35px;
+    color: white;
+    background-color: #ccc;
+    border: none;
+    font-size: 16px;
+    border-radius: 3px;
+    margin-right: 7%;
+}
+
+.zy_mask {
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.fontStyle-field {
+    font-size: 14px;
+    float: left;
+    color: #333;
+    line-height: 50px;
+    display: block;
+    width: 60px;
+    text-align: left;
+}
+
+#dqinfo select {
+    color: #999;
+    margin: 7px 0 7px 14px;
+    width: 80%;
+    outline: 0px;
+    float: left;
+    height: 36px;
+    border: none;
+    background-color: #e6e6e6;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    font-size: 12px;
+    text-align: center;
+}
+
+.newbtn01 {
+    width: 50%;
+    height: 100%;
+    border: 0px;
+    margin: 0px;
+    float: left;
+    color: #fff;
+    font-size: 15px;
+}
+
+.newbtn11 {
+    width: 33.33%;
+}
+
+.no01 {
+    background: #ffffff;
+    color: #333;
+}
+
+.no02 {
+    background: #fed500;
+}
+
+.no03 {
+    background: #ff4400;
+}
+
+.no11 {
+    background: #ffffff;
+    color: #333;
+}
+
+.no12 {
+    background: #fed500;
+}
+
+.no13 {
+    background: #ff4400;
+}
+
+.posterBottom {
+    width: 100%;
+    height: 210px;
+    background: #fff;
+    position: fixed;
+    bottom: 0px;
+    z-index: 95557;
+    display: none;
+}
+
+.posterBottom .item {
+    padding: 10px 20px 10px 20px;
+}
+
+.posterBottom .item .top {
+    font-size: 13px;
+    color: #333;
+    text-align: justify;
+}
+
+.posterBottom .item .middle {
+    margin-top: 20px;
+}
+
+.posterBottom .item .bottom {
+    margin-top: 20px;
+}
+
+.posterBottom .item .middle .input {
+    border: 1px solid #999;
+    border-radius: 3px;
+    line-height: 40px;
+    height: 40px;
+    width: 70%;
+    font-size: 13px;
+    color: #333;
+    float: left;
+}
+
+.posterBottom .item .btn {
+    float: right;
+    width: 28%;
+    text-align: cneter;
+    background: #fed500;
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 3px;
+}
+
+.posterBottom .item .bottom .btn {
+    width: 100%;
+    float: none;
+}
+
+.posterBottom .item .middle .ntype {
+    float: left;
+    width: 80px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    font-size: 12px;
+    background: #fff;
+    border: 1px solid #999;
+    border-radius: 3px;
+    color: #999;
+    margin-right: 10px;
+}
+
+.posterBottom .item .middle .y {
+    height: 27px;
+    width: 82px;
+    border: 0;
+    color: #fff;
+    background: #fed500;
+}
+
+#item2 .middle {
+    margin-top: 10px;
+}
+
+#item2 .bottom {
+    margin-top: 10px;
+}
+
+#item1 .middle {
+    margin-top: 5px;
+}
+
+#item1 .bottom {
+    margin-top: 5px;
+}
+
+#item2 .middle .contact {
+    margin-top: 10px;
+}
+
+.xian {
+    width: 100%;
+    height: 1px;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.lBtn {
+    margin-left: 20px;
+    height: 50px;
+    float: left;
+    line-height: 50px;
+    background: #fff;
+    font-size: 16px;
+    color: #fed500
+}
+
+.rBtn {
+    width: 50%;
+    height: 50px;
+    float: right;
+    line-height: 50px;
+    text-align: center;
+    background: #fff;
+    font-size: 16px;
+    color: #fff
+}
+
+.applyBtn {
+    width: 80%;
+    height: 35px;
+    line-height: 35px;
+    margin: 0 auto;
+    margin-top: 7.5px;
+    text-align: center;
+    border-radius: 30px;
+    background: #ff4400;
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 7.5px;
+}
+
+#jiangli {
+    width: 150px;
+    /* height: 150px; */
+    background: url("/static/images/7a8968a2730c4a0091a5055582509259.gif");
+    position: fixed;
+    top: 30%;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: auto;
+    background-size: 150px;
+    background-repeat: no-repeat;
+}
