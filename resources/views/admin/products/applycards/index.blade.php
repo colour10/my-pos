@@ -42,11 +42,11 @@
 
         <!-- 导出 -->
         @if ($card_status == 0)
-        <div class="pull-right text-right" style="width:16%;margin-top:20px;">
+        <div class="pull-right text-right" style="width:16%; margin-top:20px;">
             <a href="/admin/products/applycards/unaudited/export?<?php echo $_SERVER['QUERY_STRING']; ?>" class="btn btn-large btn-add marginTop">导出excel</a>
         </div>
         @else
-        <div class="pull-right text-right" style="width:16%;margin-top:20px;">
+        <div class="pull-right text-right" style="width:16%; margin-top:20px;">
             <a href="/admin/products/applycards/finished/export?<?php echo $_SERVER['QUERY_STRING']; ?>" class="btn btn-large btn-add marginTop">导出excel</a>
         </div>
         @endif
