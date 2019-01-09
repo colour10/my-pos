@@ -14,20 +14,21 @@
                         <input type="text" class="form-control" placeholder="请输入卡片名称" name="merCardName">
                     </div>
 
+                    <br><br>
+
                     <div class="form-select">
-                        <label class="form-select-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;申请人信息检索：</label>
-                        <select class="form-control" name="method">
+                        <label class="form-select-title">申请人检索：</label>
+                        <select class="form-control" name="method" style="width:150px;">
                             <option value="">== 请选择 ==</option>
                             <option value="1">姓名</option>
                             <option value="2">手机</option>
                             <option value="3">身份证</option>
                         </select>
-                        <input type="text" class="form-control" placeholder="" name="applyer" style="margin-left:10px; width:300px;">
+                        <input type="text" class="form-control" placeholder="" name="applyer" style="margin-left:10px; width:150px;">
                     </div>
 
                     <div class="form-select">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="submit" class="btn btn-large btn-update">提交</button>
+                        <button type="submit" class="btn btn-large btn-update" style="margin-left:10px;">提交</button>
                     </div>
                     <div class="form-select">
                         &nbsp;&nbsp;&nbsp;<button type="reset" class="btn btn-large btn-default">重置</button>
@@ -41,11 +42,11 @@
 
         <!-- 导出 -->
         @if ($card_status == 0)
-        <div class="pull-right text-right" style="width:16%">
+        <div class="pull-right text-right" style="width:16%;margin-top:20px;">
             <a href="/admin/products/applycards/unaudited/export?<?php echo $_SERVER['QUERY_STRING']; ?>" class="btn btn-large btn-add marginTop">导出excel</a>
         </div>
         @else
-        <div class="pull-right text-right" style="width:16%">
+        <div class="pull-right text-right" style="width:16%;margin-top:20px;">
             <a href="/admin/products/applycards/finished/export?<?php echo $_SERVER['QUERY_STRING']; ?>" class="btn btn-large btn-add marginTop">导出excel</a>
         </div>
         @endif

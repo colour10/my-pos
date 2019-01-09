@@ -25,12 +25,12 @@ use EasyWeChat\Factory;
 use Illuminate\Support\Facades\Cache;
 // 为了防止Redis和系统内部的冲突，这里写全路径
 use Illuminate\Support\Facades\Redis;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 // 验证码
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
 // 启用日志
-use Log;
+use Illuminate\Support\Facades\Log;
 // 自定义验证器
 use Illuminate\Support\Facades\Validator;
 
