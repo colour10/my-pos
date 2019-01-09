@@ -34,8 +34,11 @@ class ProductController extends Controller
         $this->agent_auth = new AgentauthController($this->request);
     }
 
+
     /**
      * 办卡银行模块-首页&&搜索
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function cardboxindex(Request $request)
     {
@@ -63,8 +66,10 @@ class ProductController extends Controller
         return view('admin.products.cardbox.index', compact('page_title', 'cardboxes', 'request', 'controller_action'));
     }
 
+
     /**
      * 办卡银行模块-创建
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function cardboxcreate()
     {
@@ -73,8 +78,12 @@ class ProductController extends Controller
         return view('admin.products.cardbox.create', compact('page_title'));
     }
 
+
+
     /**
      * 办卡银行模块-新增逻辑
+     * @param Request $request
+     * @return array
      */
     public function cardboxstore(Request $request)
     {
@@ -148,8 +157,11 @@ class ProductController extends Controller
     }
     
 
+
     /**
      * 办卡银行模块-编辑页面
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function cardboxedit($id)
     {
@@ -161,8 +173,12 @@ class ProductController extends Controller
     }
 
 
+
     /**
      * 办卡银行模块-更新逻辑
+     * @param Request $request
+     * @param $id
+     * @return array
      */
     public function cardboxupdate(Request $request, $id)
     {
@@ -240,8 +256,11 @@ class ProductController extends Controller
     }
 
 
+
     /**
      * 办卡银行模块-单个查看【接口】
+     * @param $id
+     * @return array
      */
     public function cardboxshow($id)
     {
@@ -262,8 +281,11 @@ class ProductController extends Controller
         return $response;
     }
 
+
     /**
      * 办卡银行模块-单个删除
+     * @param $id
+     * @return array
      */
     public function cardboxdestroy($id)
     {
@@ -289,8 +311,11 @@ class ProductController extends Controller
     }
 
 
+
     /**
      * 办卡银行模块-批量删除
+     * @param Request $request
+     * @return array
      */
     public function cardboxdestroys(Request $request)
     {
@@ -397,8 +422,11 @@ class ProductController extends Controller
         return $response;
     }
 
+
     /**
      * 待审核信用卡申请记录
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function applycardsindex(Request $request)
     {
@@ -465,8 +493,11 @@ class ProductController extends Controller
     }
 
 
+
     /**
      * 已完毕信用卡申请记录
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function applycardsfinished(Request $request)
     {
@@ -494,7 +525,12 @@ class ProductController extends Controller
                             $query->where('c.merCardName', 'like', '%'.$merCardName.'%');
                         }
                     })
-                    ->where('ac.status', '>', '0')
+                    ->where(function ($query) use ($request) {
+                        $status = $request->status;
+                        if (!empty($status)) {
+                            $query->where('ac.status', $status);
+                        }
+                    })
                     ->orderBy('ac.created_at', 'desc')
                     ->paginate(10);
 
@@ -523,8 +559,11 @@ class ProductController extends Controller
     }
 
 
+
     /**
      * 卡片状态查看
+     * @param $id
+     * @return array
      */
     public function applycardsshow($id)
     {
@@ -562,8 +601,11 @@ class ProductController extends Controller
         return $response;
     }
 
+
     /**
      * 卡片状态修改
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function applycardsedit($id)
     {
@@ -600,8 +642,11 @@ class ProductController extends Controller
         return $response;
     }
 
+
     /**
      * 卡片批量审核通过
+     * @param Request $request
+     * @return array
      */
     public function applycardsenables(Request $request)
     {
@@ -719,8 +764,11 @@ class ProductController extends Controller
         }
     }
 
+
     /**
      * 卡片批量审核不通过
+     * @param Request $request
+     * @return array
      */
     public function applycardsdisables(Request $request)
     {
@@ -768,6 +816,8 @@ class ProductController extends Controller
 
     /**
      * 卡片批量审核为无记录
+     * @param Request $request
+     * @return array
      */
     public function applycardsnorecords(Request $request)
     {
@@ -940,7 +990,8 @@ class ProductController extends Controller
 
     /**
      * 卡片单条审核通过 [非首卡]
-     * @param $id {number} 卡片申请记录id
+     * @param $id 卡片申请记录id
+     * @return array
      */
     public function applycardsreviewsuccessed($id)
     {
@@ -977,8 +1028,11 @@ class ProductController extends Controller
         }
     }
 
+
     /**
      * 卡片单条审核不通过
+     * @param $id
+     * @return array
      */
     public function applycardsreviewfailed($id)
     {
@@ -1015,8 +1069,11 @@ class ProductController extends Controller
     }
 
 
+
     /**
      * 卡片单条审核-无记录
+     * @param $id
+     * @return array
      */
     public function applycardsreviewnorecord($id)
     {
@@ -1071,8 +1128,10 @@ class ProductController extends Controller
     }
 
 
+
     /**
      * Excel文件导出功能-未审核
+     * @param Request $request
      */
     public function unauditedexport(Request $request)
     {
@@ -1161,8 +1220,10 @@ class ProductController extends Controller
         })->export('xls');
     }
 
+
     /**
      * Excel文件导出功能-已经审核
+     * @param Request $request
      */
     public function finishedexport(Request $request)
     {
