@@ -1112,12 +1112,22 @@ class ProductController extends Controller
         foreach ($applycards as $k => $applycard) {
             // 邀请人和邀请人上级信息
             if ($applycard->invite_openid) {
-                $parent_name = Agent::where('openid', $applycard->invite_openid)->first()->name;
+                $parent_Agent = Agent::where('openid', $applycard->invite_openid)->first();
+                if ($parent_Agent) {
+                    $parent_name = $parent_Agent->name;
+                } else {
+                    $parent_name = '';
+                }
             } else {
                 $parent_name = '';
             }
             if ($applycard->top_openid) {
-                $top_name = Agent::where('openid', $applycard->top_openid)->first()->name;
+                $top_agent = Agent::where('openid', $applycard->top_openid)->first();
+                if ($top_agent) {
+                    $top_name = $top_agent->name;
+                } else {
+                    $top_name = '';
+                }
             } else {
                 $top_name = '';
             }
@@ -1192,12 +1202,22 @@ class ProductController extends Controller
         foreach ($applycards as $k => $applycard) {
             // 邀请人和邀请人上级信息
             if ($applycard->invite_openid) {
-                $parent_name = Agent::where('openid', $applycard->invite_openid)->first()->name;
+                $parent_Agent = Agent::where('openid', $applycard->invite_openid)->first();
+                if ($parent_Agent) {
+                    $parent_name = $parent_Agent->name;
+                } else {
+                    $parent_name = '';
+                }
             } else {
                 $parent_name = '';
             }
             if ($applycard->top_openid) {
-                $top_name = Agent::where('openid', $applycard->top_openid)->first()->name;
+                $top_agent = Agent::where('openid', $applycard->top_openid)->first();
+                if ($top_agent) {
+                    $top_name = $top_agent->name;
+                } else {
+                    $top_name = '';
+                }
             } else {
                 $top_name = '';
             }
