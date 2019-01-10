@@ -36,7 +36,6 @@
                             <label class="form-select-title">状态检索：</label>
                             <select class="form-control" name="status" style="width:150px;">
                                 <option value="">== 请选择 ==</option>
-                                <option value="0">未审核</option>
                                 <option value="1">已通过</option>
                                 <option value="2">未通过</option>
                                 <option value="3">无记录</option>

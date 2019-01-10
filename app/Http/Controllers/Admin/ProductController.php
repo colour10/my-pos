@@ -526,9 +526,10 @@ class ProductController extends Controller
                         }
                     })
                     ->where(function ($query) use ($request) {
-                        $status = $request->status;
-                        if (!empty($status)) {
-                            $query->where('ac.status', $status);
+                        if ($request->status) {
+                            $query->where('ac.status', $request->status);
+                        } else {
+                            $query->where('ac.status', '>', '0');
                         }
                     })
                     ->orderBy('ac.created_at', 'desc')
