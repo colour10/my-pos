@@ -38,10 +38,19 @@
 			</div>
 			<div id="wrapper">
 				<div id="scroller">
-					<ul id="thelist"></ul>
+					<ul id="thelist">
+						<!--<li>原始数据</li>-->
+					</ul>
+					<div id="pullUp">
+						<span class="pullUpLabel">上拉加载更多</span>
+					</div>
 				</div>
 			</div>
 		</div>
+		<div class="understroke">
+      		<text class="understroke_text">下划加载更多</text>
+      		<img  class="understroke_img" src="/static/images/more.png" />
+      	</div>
 	</div>
 
     @include('agent.layout.floatbtn')
@@ -97,6 +106,70 @@
                     $("#thelist").append(html);
                 }
             });
+        }
+
+        var myScroll,pullDownEl, pullDownOffset,pullUpEl, pullUpOffset,generatedCount = 0;
+
+        function loaded() {
+            //动画部分
+            pullUpEl = document.getElementById('pullUp');
+            pullUpOffset = pullUpEl.offsetHeight;
+            myScroll = new iScroll('wrapper', {
+                useTransition: true,
+                topOffset: pullDownOffset,
+                onRefresh: function () {
+                    if (pullUpEl.className.match('loading')) {
+                        pullUpEl.className = '';
+                        pullUpEl.querySelector('.pullUpLabel').innerHTML = '下拉加载更多';
+                    }
+                },
+                onScrollMove: function () {
+
+                    if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+                        pullUpEl.className = 'flip';
+                        pullUpEl.querySelector('.pullUpLabel').innerHTML = '释放刷新';
+                        this.maxScrollY = this.maxScrollY;
+                    } else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+                        pullUpEl.className = '';
+                        pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Pull up to load more...';
+                        this.maxScrollY = pullUpOffset;
+                    }
+                },
+                onScrollEnd: function () {
+                    if (pullUpEl.className.match('flip')) {
+                        pullUpEl.className = 'loading';
+                        pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中';
+                        pullUpAction();
+                    }
+                }
+            });
+
+            loadAction();
+        }
+        document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);//阻止冒泡
+        document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 0); }, false);
+
+        //初始状态，加载数据
+        function loadAction() {
+            getTeamData();
+            myScroll.refresh();
+        }
+
+        //下拉刷新当前数据
+        function pullDownAction () {
+            setTimeout(function () {
+                //这里执行刷新操作
+                getTeamData();
+                myScroll.refresh();
+            }, 400);
+        }
+
+        //上拉加载更多数据
+        function pullUpAction () {
+            setTimeout(function () {
+                getTeamData();
+                myScroll.refresh();
+            }, 400);
         }
     </script>
 </body>
