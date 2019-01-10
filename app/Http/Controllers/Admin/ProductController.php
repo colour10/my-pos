@@ -1252,8 +1252,14 @@ class ProductController extends Controller
                 if (!empty($merCardName)) {
                     $query->where('c.merCardName', $merCardName);
                 }
-            })           
-            ->where('ac.status', '>', '0')
+            })
+            ->where(function ($query) use ($request) {
+                if ($request->status) {
+                    $query->where('ac.status', $request->status);
+                } else {
+                    $query->where('ac.status', '>', '0');
+                }
+            })
             ->orderBy('ac.created_at', 'desc')
             ->get();
 
