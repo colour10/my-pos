@@ -2386,7 +2386,7 @@ class AgentauthController extends Controller
                 if (empty($finances[$k]->creater)) {
                     $finances[$k]->source = '办卡返佣';
                 } else {
-                    $finances[$k]->source = '月度分润';
+                    $finances[$k]->source = $finances[$k]->description;
                 }
             }
             $response = [
