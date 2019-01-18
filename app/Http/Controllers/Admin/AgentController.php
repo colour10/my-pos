@@ -109,7 +109,7 @@ class AgentController extends Controller
             // 上级代理人
             // 如果不小心存入了null，那么就为空
             if ($agents[$k]->parentopenid == 'null' || $agents[$k]->parentopenid == 'NULL' || !$agents[$k]->parentopenid) {
-                $agents[$k]['parentopenid'] = null;
+                $agents[$k]->parentopenid = null;
             }
 
             if ($agents[$k]->parentopenid) {
@@ -581,7 +581,7 @@ class AgentController extends Controller
             // 上级代理人
             // 如果不小心存入了null，那么就为空
             if ($agents[$k]->parentopenid == 'null' || $agents[$k]->parentopenid == 'NULL' || !$agents[$k]->parentopenid) {
-                $agents[$k]['parentopenid'] = null;
+                $agents[$k]->parentopenid = null;
             }
 
             if ($agents[$k]->parentopenid) {
