@@ -578,33 +578,41 @@ class AgentController extends Controller
             // DB查询不支持orm关联,重新写逻辑
             $agents[$k]->agentaccount = Agent::find($agent->id)->agentaccount;
 
-
             // 上级代理人
+            // 如果不小心存入了null，那么就为空
+            if ($agents[$k]->parentopenid == 'null' || $agents[$k]->parentopenid == 'NULL' || !$agents[$k]->parentopenid) {
+                $agents[$k]['parentopenid'] = null;
+            }
+
             if ($agents[$k]->parentopenid) {
-                $current_agent = Agent::where('openid', $agent->parentopenid)->first();
-                if ($current_agent->name) {
-                    $agents[$k]->parentopenid_name = $current_agent->mobile . '（' . $current_agent->name . '）';
+                // 如果是null，那么就为空
+                $parent_agent = Agent::where('openid', $agents[$k]->parentopenid)->first();
+                // 如果上级合伙人不存在，说明被禁用了，那么上级合伙人无效
+                if ($parent_agent) {
+                    if ($parent_agent->name) {
+                        $agents[$k]->parentopenid_name = $parent_agent->mobile . '（' . $parent_agent->name . '）';
+                    } else {
+                        $agents[$k]->parentopenid_name = $parent_agent->mobile;
+                    }
                 } else {
-                    $agents[$k]->parentopenid_name = $current_agent->mobile;
+                    $agents[$k]->parentopenid_name = '无';
                 }
             } else {
                 $agents[$k]->parentopenid_name = '无';
             }
 
             // 如果openid为NULL，那么就赋值为空
-            if ($agent->openid === null) {
-                $agents[$k]->openid = '';
+            if ($agent->openid == 'null' || $agent->openid == 'NULL' || !$agent->openid) {
+                $agent->openid = '';
             }
 
             // 查找每一个用户下面的下级代理
             foreach ($format_agents as $format_agent) {
                 if ($format_agent['openid'] == $agent->openid) {
-                    // $level = $format_agent['level'];
-                    $agents[$k]->second_level = $this->agentapi->formatagents($format_agents, $agent->openid, $format_agent['level'] + 1);
-                } else {
-                    $agents[$k]->second_level = [];
+                    $agents[$k]->level = $format_agent['level'];
                 }
             }
+            $agents[$k]->second_level = $this->agentapi->formatagents($format_agents, $agent->openid, $agents[$k]->level + 1);
         }
 
         // 渲染
