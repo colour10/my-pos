@@ -17,11 +17,11 @@
                         <input type="text" class="form-control" placeholder="请输入合伙人姓名/手机号码" name="keyword">
                     </div>
 
-                    <div class="form-select"> 
+                    <div class="form-select">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-large btn-update">提交</button>
                     </div>
 
-                    <div class="form-select"> 
+                    <div class="form-select">
                         &nbsp;&nbsp;&nbsp;<button type="reset" class="btn btn-large btn-default">重置</button>
                     </div>
 
@@ -31,14 +31,14 @@
 
                 </div>
             </form>
-        
+
         </div>
 
     </div>
     <!-- 内容检索 End -->
 
 
-    @if ($keyword && $agent)
+    @if ($keyword && $agents)
     <!-- 列表Start -->
     <div class="table-main">
 
@@ -47,7 +47,6 @@
             @csrf
 
             <table class="table table-hover">
-
                 <tr class="th">
                     <th>合伙人ID</th>
                     <th>合伙人姓名</th>
@@ -60,8 +59,8 @@
                     <th>操作</th>
                 </tr>
 
-
-                <tr>
+                @foreach ($agents as $agent)
+                <tr class="tr_agent" id="agent{{ $agent->id }}">
                     <td>{{ $agent->sid }}</td>
                     <td>{{ $agent->name }}</td>
                     <td>{{ $agent->mobile }}</td>
@@ -88,37 +87,90 @@
                         <label for="t2"><input type="radio" name="type" value="2" id="t2"> 调出</label>
                     </td>
                     <td>
-                        <input type="text" name="amount" id="" class="white" />
+                        <input type="text" name="amount" id="amout{{ $account->id }}" class="white" />
                     </td>
                     <td>
-                        <input type="text" name="description" id="" />
+                        <input type="text" name="description" id="desc{{ $account->id }}" />
                     </td>
                     <td class="text-center">
                         <input type="hidden" name="agent_id" value="{{ $agent->id }}">
                         <button type="submit" id="addyh" class="btn-groups btn-submit" onclick="transactor_check(); return false;">经办</button>
                     </td>
                 </tr>
-
+                @endforeach
 
             </table>
         </form>
 
     </div>
     <!-- 列表End -->
-    @elseif ($keyword && !$agent)
+    @elseif ($keyword && !$agents)
     <p class="text-left text-indent2">该商户不存在!</p>
     @else
     <p class="text-left text-indent2 hidden">请输入待查询的合伙人手机号码</p>
     @endif
 
 </div>
-
+<style>
+    .layui-layer-page .layui-layer-content {
+        padding:20px;
+    }
+</style>
 <script type="text/javascript">
+
+    // 如果存在多条记录，只能选择一个进入
+    $(function() {
+        var infos = '';
+        var agents = '{!! $agents !!}';
+        var keyword = '{{ $keyword }}';
+        var agents_obj = JSON.parse(agents);
+        var tab = '&nbsp;&nbsp;&nbsp;&nbsp;';
+        console.log(agents_obj);
+        if (agents_obj.length > 1 && keyword) {
+            // 循环账户信息
+            for (var i=0;i<agents_obj.length;i++) {
+                infos += '<a style="cursor: pointer;" onclick="choose('+agents_obj[i].id+');return false;">ID：'+agents_obj[i].sid+tab+'姓名：'+agents_obj[i].name+tab+'手机号：'+agents_obj[i].mobile+'</a><br><br>';
+            }
+            //信息框
+            //自定页
+            layer.open({
+                type: 1,
+                title: '请选择代操作的合伙人账户',
+                skin: 'layui-layer-demo', //样式类名
+                closeBtn: 0, //不显示关闭按钮
+                anim: 2,
+                shadeClose: false, //开启遮罩关闭
+                content: infos,
+            });
+        }
+    });
+
+    // 隐藏其他合伙人
+    function choose(agent_id) {
+        $('.tr_agent').each(function() {
+            $(this).hide();
+            if ($(this).attr('id') == 'agent'+agent_id) {
+                $(this).show();
+            }
+            // 再把所有的hidden元素彻底删除
+            if ($(this).is(':hidden')) {
+                $(this).remove();
+            }
+        });
+        layer.closeAll();
+    }
+
     // 调账经办添加逻辑
     function transactor_check() {
+        // 调账类型
+        var type = $('input:radio[name="type"]:checked').val();
+        if(type==null){
+            layer.msg('请选择调账类型！');
+            return false;
+        }
         // 验证调账金额
-        if (document.transactor_form.amount.value==""){
-            layer.msg('请填写调账金额！');
+        if (document.transactor_form.amount.value == '') {
+            layer.msg('调账金额不能为空');
             document.transactor_form.amount.focus();
             return false;
         }
@@ -127,7 +179,7 @@
             document.transactor_form.amount.focus();
             return false;
         }
-        if (parseInt(document.transactor_form.amount.value) <= 0) {
+        if (document.transactor_form.amount.value <= 0) {
             layer.msg('调账金额必须大于0！');
             document.transactor_form.amount.focus();
             return false;
@@ -143,7 +195,6 @@
         // 如果都通过了，那么就ajax提交
         var fd = getFormData('transactor_form');
         ajax("{{ route('FinanceTransactorstore') }}", fd, "{{ $url }}");
-
     }
 </script>
 

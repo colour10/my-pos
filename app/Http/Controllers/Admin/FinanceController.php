@@ -49,21 +49,21 @@ class FinanceController extends Controller
         $keyword = request('keyword');
 
         // 查出合伙人模型
-        $agent = Agent::select(['id', 'sid', 'name', 'mobile'])->orderBy('created_at', 'desc')->where('mobile', $keyword)->orwhere('name', $keyword)->first();
+        $agents = Agent::select(['id', 'sid', 'name', 'mobile'])->orderBy('created_at', 'desc')->where('mobile', $keyword)->orwhere('name', $keyword)->get();
 
         // 账户类型
         $accounts = Account::select(['id', 'name'])->orderBy('created_at', 'asc')->get();
 
         // 渲染
         $page_title = '调账经办';
-        return view('admin.finance.transactor', compact('page_title', 'agent', 'accounts', 'keyword'));
+        return view('admin.finance.transactor', compact('page_title', 'agents', 'accounts', 'keyword'));
     }
+
 
     /**
      * 调账经办创建逻辑
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return array
      */
     public function transactorstore(Request $request)
     {
@@ -126,21 +126,25 @@ class FinanceController extends Controller
 
             // 提交
             DB::commit();
+
+            // json
+            $data = [
+                'code' => '0',
+                'msg' => '调账经办新纪录添加成功',
+            ];
+
+            // 返回
+            return $data;
+            
         } catch (\Exception $e) {
             // 回滚
             DB::rollback();
-            return $e->getCode() . '------' . $e->getMessage();
+            $data = [
+                'code' => '1',
+                'msg' => $e->getMessage(),
+            ];
+            return $data;
         }
-
-        // json
-        $data = [
-            'code' => '0',
-            'msg' => '调账经办新纪录添加成功',
-        ];
-        
-        // 返回
-        return $data;
-
     }
 
 
@@ -1023,8 +1027,7 @@ class FinanceController extends Controller
 
     /**
      * 调账经办(批量)-逻辑
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
      */
     public function transactorsstore(Request $request)
     {
