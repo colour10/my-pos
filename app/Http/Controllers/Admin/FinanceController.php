@@ -49,7 +49,7 @@ class FinanceController extends Controller
         $keyword = request('keyword');
 
         // 查出合伙人模型
-        $agents = Agent::select(['id', 'sid', 'name', 'mobile'])->orderBy('created_at', 'desc')->where('mobile', $keyword)->orwhere('name', $keyword)->get();
+        $agents = Agent::select(['id', 'sid', 'name', 'mobile'])->orderBy('created_at', 'asc')->where('mobile', $keyword)->orwhere('name', $keyword)->get();
 
         // 账户类型
         $accounts = Account::select(['id', 'name'])->orderBy('created_at', 'asc')->get();
