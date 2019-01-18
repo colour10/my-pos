@@ -162,6 +162,12 @@
 
     // 调账经办添加逻辑
     function transactor_check() {
+        // 资金账户
+        var account_type = $('input:radio[name="account_type"]:checked').val();
+        if(account_type==null){
+            layer.msg('请选择账户类型！');
+            return false;
+        }
         // 调账类型
         var type = $('input:radio[name="type"]:checked').val();
         if(type==null){
