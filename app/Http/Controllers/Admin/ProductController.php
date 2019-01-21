@@ -1160,7 +1160,7 @@ class ProductController extends Controller
                 if (!empty($merCardName)) {
                     $query->where('c.merCardName', $merCardName);
                 }
-            })           
+            })
             ->where('ac.status', '0')
             ->orderBy('ac.created_at', 'desc')
             ->get();
@@ -1231,7 +1231,7 @@ class ProductController extends Controller
         // 逻辑
         // DB类搜索逻辑
         $applycards = DB::table('apply_cards as ac')
-            ->select(['ac.id', 'ac.order_id', 'ac.order_id', 'ac.card_id', 'a.name', 'a.mobile', 'ac.status', 'ac.created_at', 'ac.updated_at', 'c.merCardName', 'c.source',  'ac.invite_money', 'ac.top_money', 'ac.invite_openid', 'ac.top_openid', 'a.id_number'])
+            ->select(['ac.id', 'ac.order_id', 'ac.order_id', 'ac.card_id', 'a.name', 'a.mobile', 'ac.status', 'ac.created_at', 'ac.updated_at', 'c.merCardName', 'c.source', 'ac.invite_money', 'ac.top_money', 'ac.invite_openid', 'ac.top_openid', 'ac.invite_openid', 'ac.top_openid', 'a.id_number'])
             ->leftJoin('agents as a', 'a.openid', '=', 'ac.user_openid')
             ->leftJoin('cardboxes as c', 'c.id', '=', 'ac.card_id')
             ->where(function ($query) use ($request) {
@@ -1250,7 +1250,7 @@ class ProductController extends Controller
             ->where(function ($query) use ($request) {
                 $merCardName = $request->merCardName;
                 if (!empty($merCardName)) {
-                    $query->where('c.merCardName', $merCardName);
+                    $query->where('c.merCardName', 'like', '%'.$merCardName.'%');
                 }
             })
             ->where(function ($query) use ($request) {
