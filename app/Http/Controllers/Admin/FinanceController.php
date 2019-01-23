@@ -1377,47 +1377,53 @@ class FinanceController extends Controller
         // 逻辑
         // DB类搜索逻辑
         $finances = DB::table('finances as f')
-                    ->select(['f.id', 'a.sid', 'a.name', 'a.mobile', 'a.status as as', 'f.amount', 'f.type', 'f.creater', 'f.status as fs', 'f.created_at', 'f.description', 'at.name as at_name', 'f.operater', 'f.operated_at', 'f.status'])
-                    ->join('agents as a', 'f.agent_id', '=', 'a.id')
-                    ->join('accounts as at', 'at.id', '=', 'f.account_type')
-                    ->where(function($query) use($request) {
-                        $mobile = $request->input('mobile');
-                        if (!empty($mobile)) {
-                            $query->where('a.mobile', $mobile);
-                        }
-                    })
-                    ->where(function($query) use($request) {
-                        $account_type = $request->get('account_type');
-                        if (!empty($account_type)) {
-                            $query->where('f.account_type', $account_type);
-                        }
-                    })
-                    ->where(function($query) use($request) {
-                        $type = $request->get('type');
-                        if (!empty($type)) {
-                            $query->where('f.type', $type);
-                        }
-                    })
-                    ->where(function($query) use($request) {
-                        $start_time = $request->input('start_time');
-                        if (!empty($start_time)) {
-                            $query->where('f.created_at', '>=', $start_time);
-                        }
-                    })
-                    ->where(function($query) use($request) {
-                        $end_time = $request->input('end_time');
-                        if (!empty($end_time)) {
-                            $query->where('f.created_at', '<=', $end_time);
-                        }
-                    })
-                    ->where(function($query) use($request) {
-                        $status = $request->get('status');
-                        if ($status != '') {
-                            $query->where('f.status', '=', $status);
-                        }
-                    })
-                    ->orderBy('f.created_at', 'desc')
-                    ->get();
+            ->select(['f.id', 'a.sid', 'a.name', 'a.mobile', 'a.status as as', 'f.amount', 'f.type', 'f.creater', 'f.status as fs', 'f.created_at', 'f.description', 'at.name as at_name', 'f.operater', 'f.operated_at', 'f.status'])
+            ->join('agents as a', 'f.agent_id', '=', 'a.id')
+            ->join('accounts as at', 'at.id', '=', 'f.account_type')
+            ->where(function($query) use($request) {
+                $name = $request->input('name');
+                if (!empty($name)) {
+                    $query->where('a.name', $name);
+                }
+            })
+            ->where(function($query) use($request) {
+                $mobile = $request->input('mobile');
+                if (!empty($mobile)) {
+                    $query->where('a.mobile', $mobile);
+                }
+            })
+            ->where(function($query) use($request) {
+                $account_type = $request->get('account_type');
+                if (!empty($account_type)) {
+                    $query->where('f.account_type', $account_type);
+                }
+            })
+            ->where(function($query) use($request) {
+                $type = $request->get('type');
+                if (!empty($type)) {
+                    $query->where('f.type', $type);
+                }
+            })
+            ->where(function($query) use($request) {
+                $start_time = $request->input('start_time');
+                if (!empty($start_time)) {
+                    $query->where('f.created_at', '>=', $start_time);
+                }
+            })
+            ->where(function($query) use($request) {
+                $end_time = $request->input('end_time');
+                if (!empty($end_time)) {
+                    $query->where('f.created_at', '<=', $end_time);
+                }
+            })
+            ->where(function($query) use($request) {
+                $status = $request->get('status');
+                if ($status != '') {
+                    $query->where('f.status', '=', $status);
+                }
+            })
+            ->orderBy('f.created_at', 'desc')
+            ->get();
 
         // 定义一个excel对象
          $cellData = [];
