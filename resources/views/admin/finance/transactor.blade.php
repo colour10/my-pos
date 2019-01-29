@@ -135,7 +135,7 @@
             //自定页
             layer.open({
                 type: 1,
-                title: '请选择代操作的合伙人账户',
+                title: '请选择待操作的合伙人账户',
                 skin: 'layui-layer-demo', //样式类名
                 closeBtn: 0, //不显示关闭按钮
                 anim: 2,
