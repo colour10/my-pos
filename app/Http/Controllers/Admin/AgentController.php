@@ -12,6 +12,7 @@ use App\Model\AgentAccount;
 use Illuminate\Support\Facades\DB;
 use Zhuzhichao\BankCardInfo\BankCard;
 use App\Http\Controllers\Agent\AgentauthController as AgentApi;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AgentController extends Controller
 {
@@ -286,7 +287,7 @@ class AgentController extends Controller
         // 这个赋值为null，和上面的空值区分开来
         if ($agent->parentopenid == 'null' || $agent->parentopenid == 'NULL') {
             $agent->parentopenid = null;
-        }   
+        }
 
         // 渲染
         $page_title = '合伙人详情';
@@ -377,7 +378,7 @@ class AgentController extends Controller
             // 如果存在openid，则增加缓存
             if ($agent->openid) {
                 $this->agentapi->createAgentCache($agent->openid);
-            }            
+            }
 
             // 如果都无错，则提交
             DB::commit();
@@ -415,7 +416,7 @@ class AgentController extends Controller
     public function reviewsuccessed($id)
     {
         // 逻辑
-        $agent = Agent::findOrFail($id);        
+        $agent = Agent::findOrFail($id);
         $result = $agent->update([
             'status' => '1',
         ]);
@@ -434,7 +435,7 @@ class AgentController extends Controller
 
         // 重新生成缓存
         if ($agent->openid) {
-            $this->agentapi->createAgentCache($agent->openid);   
+            $this->agentapi->createAgentCache($agent->openid);
         }
 
         // 返回
@@ -466,9 +467,9 @@ class AgentController extends Controller
 
         // 重新生成缓存
         if ($agent->openid) {
-            $this->agentapi->createAgentCache($agent->openid);   
+            $this->agentapi->createAgentCache($agent->openid);
         }
-     
+
         // 返回
         return $data;
     }
@@ -478,13 +479,25 @@ class AgentController extends Controller
     {
         // DB类搜索逻辑
         $agents = DB::table('agents as a')
-            ->select(['a.id', 'a.sname', 'a.sid', 'a.name', 'a.method', 'a.created_at', 'a.updated_at', 'a.mobile', 'a.status', 'c.branch', 'c.card_number', 'a.id_number', 'c.bank_id', 'b.name as bank_name', 'a.openid', 'a.parentopenid'])
+            ->select(['a.id', 'a.sname', 'a.sid', 'a.name', 'a.method', 'a.created_at', 'a.updated_at', 'a.mobile', 'a.status', 'c.branch', 'c.card_number', 'a.id_number', 'c.bank_id', 'b.name as bank_name', 'a.openid', 'a.parentopenid', 'aa.available_money'])
             ->leftJoin('cards as c', 'c.agent_id', '=', 'a.id')
             ->leftJoin('banks as b', 'b.id', '=', 'c.bank_id')
+            ->leftJoin('agent_accounts as aa', 'aa.agent_id', '=', 'a.id')
             ->where(function ($query) use ($request) {
                 $name = $request->input('name');
                 if (!empty($name)) {
                     $query->where('a.name', 'like binary', '%' . $name . '%');
+                }
+            })
+            ->where(function ($query) use ($request) {
+                $amount = $request->input('amount');
+                if (!empty($amount)) {
+                    // 等于1是取出余额大于0的数据
+                    if ($amount == '1') {
+                        $query->where('aa.available_money', '>', '0');
+                    } else {
+                        $query->where('aa.available_money', '0');
+                    }
                 }
             })
             ->where(function ($query) use ($request) {
@@ -634,7 +647,6 @@ class AgentController extends Controller
     }
 
 
-
     /**
      * 合伙人复核审核通过(多条记录审核)
      */
@@ -691,7 +703,6 @@ class AgentController extends Controller
     }
 
 
-
     /**
      * 合伙人复核审核不通过(多条记录审核)
      */
@@ -745,6 +756,121 @@ class AgentController extends Controller
             ];
             return $data;
         }
+    }
+
+
+    /**
+     * Excel文件导出功能
+     */
+    public function export(Request $request)
+    {
+        // 逻辑
+        // DB类搜索逻辑
+        $lists = DB::table('agents as a')
+            ->select(['a.id', 'a.sname', 'a.sid', 'a.name', 'a.method', 'a.created_at', 'a.updated_at', 'a.mobile', 'a.status', 'c.branch', 'c.card_number', 'a.id_number', 'c.bank_id', 'b.name as bank_name', 'a.openid', 'a.parentopenid', 'aa.available_money'])
+            ->leftJoin('cards as c', 'c.agent_id', '=', 'a.id')
+            ->leftJoin('banks as b', 'b.id', '=', 'c.bank_id')
+            ->leftJoin('agent_accounts as aa', 'aa.agent_id', '=', 'a.id')
+            ->where(function ($query) use ($request) {
+                $name = $request->input('name');
+                if (!empty($name)) {
+                    $query->where('a.name', 'like binary', '%' . $name . '%');
+                }
+            })
+            ->where(function ($query) use ($request) {
+                $amount = $request->input('amount');
+                if (!empty($amount)) {
+                    // 等于1是取出余额大于0的数据
+                    if ($amount == '1') {
+                        $query->where('aa.available_money', '>', '0');
+                    } else {
+                        $query->where('aa.available_money', '0');
+                    }
+                }
+            })
+            ->where(function ($query) use ($request) {
+                $mobile = $request->input('mobile');
+                if (!empty($mobile)) {
+                    $query->where('a.mobile', $mobile);
+                }
+            })
+            ->where(function ($query) use ($request) {
+                $sid = $request->input('sid');
+                if (!empty($sid)) {
+                    $query->where('a.sid', $sid);
+                }
+            })
+            ->where(function ($query) use ($request) {
+                $start_time = $request->input('start_time');
+                if (!empty($start_time)) {
+                    $query->where('a.created_at', '>=', $start_time);
+                }
+            })
+            ->where(function ($query) use ($request) {
+                $end_time = $request->input('end_time');
+                if (!empty($end_time)) {
+                    $query->where('a.created_at', '<=', $end_time);
+                }
+            })
+            ->where(function ($query) use ($request) {
+                $status = $request->get('status');
+                if (isset($status)) {
+                    $query->where('a.status', $status);
+                }
+            })
+            ->orderBy('a.created_at', 'desc')
+            ->get();
+
+        // 定义一个excel对象
+        $cellData = [];
+
+        // 数据处理逻辑
+        foreach ($lists as $k => $list) {
+
+            // 审核状态
+            $status_name = '';
+            if ($list->status == '0') {
+                $status_name = '未审核';
+            } elseif ($list->status == '1') {
+                $status_name = '审核通过';
+            } elseif ($list->status == '2') {
+                $status_name = '审核未通过';
+            } else {
+                $status_name = '未知状态';
+            }
+            $lists[$k]->status = $status_name;
+
+            // 注册途径
+            $method = '';
+            if ($list->method == '1') {
+                $method = '管理员后台开户';
+            } elseif ($list->method == '2') {
+                $method = '办卡自动添加';
+            } elseif ($list->method == '3') {
+                $method = '微信主动注册';
+            } elseif ($list->method == '4') {
+                $method = '实名认证注册';
+            } elseif ($list->method == '5') {
+                $method = '首页授权添加';
+            } else {
+                $method = '其他途径';
+            }
+            $lists[$k]->method = $method;
+
+            // excel对象赋值
+            $cellData[] = [$list->sid, $list->sname, $list->name, $list->mobile, $method, $list->created_at, $status_name, $list->available_money];
+
+        }
+
+        // cellData头部插入标题
+        array_unshift($cellData, ['ID', '简称', '姓名', '手机号', '注册途径', '注册时间', '审核状态', '分润余额']);
+
+        // excel导出逻辑
+        Excel::create('合伙人导出记录', function ($excel) use ($cellData) {
+            $excel->sheet('合伙人导出记录', function ($sheet) use ($cellData) {
+                $sheet->rows($cellData);
+            });
+        })->export('xls');
     }
 
 

@@ -17,7 +17,7 @@ class WeChatController extends Controller
     protected $app;
     // 请求
     protected $request;
-    
+
     // 构造函数
     // 使用request注入，便于session整合
     public function __construct(Request $request)
@@ -27,7 +27,7 @@ class WeChatController extends Controller
 
         // 全局配置
         $config = Config::get("wechat.official_account.default");
-        
+
         // 使用配置来初始化一个公众号应用实例
         $this->app = Factory::officialAccount($config);
     }
@@ -39,7 +39,7 @@ class WeChatController extends Controller
     public function serve()
     {
         // 推送消息
-        $this->app->server->push(function($message) {
+        $this->app->server->push(function ($message) {
             // 到这里，说明用户已经进入到微信号了，那么就继续
             // 拿到openid
             $openId = $message['FromUserName'];
@@ -64,22 +64,22 @@ class WeChatController extends Controller
                         // 接入Log日志
                         // 注意：Log 为 Laravel 组件，所以它记的日志去 Laravel 日志看，而不是 EasyWeChat 日志
                         $msg = '';
-                        $msg .= '<pre>'.PHP_EOL;
-                        $msg .= '用户'.$openId.'已经关注了意远合伙人公众号，该用户的详细资料如下：'.PHP_EOL;
+                        $msg .= '<pre>' . PHP_EOL;
+                        $msg .= '用户' . $openId . '已经关注了意远合伙人公众号，该用户的详细资料如下：' . PHP_EOL;
                         $arr = print_r($user_arr, true);
                         $msg .= "$arr";
-                        $msg .= PHP_EOL.PHP_EOL;
+                        $msg .= PHP_EOL . PHP_EOL;
                         // 写入日志
                         Log::info($msg);
 
                         // 返回
-                        return '尊敬的'.$user['nickname'].'，您好，感谢关注意远合伙人。'.PHP_EOL.PHP_EOL.'在意远办卡完全免费，不需要交一分钱！分享办卡最高可得90元/张返佣，0投资，赶快行动吧！';
+                        return '尊敬的' . $user['nickname'] . '，您好，感谢关注意远合伙人。' . PHP_EOL . PHP_EOL . '在意远办卡完全免费，不需要交一分钱！分享办卡最高可得90元/张返佣，0投资，赶快行动吧！';
 
                     } else if ($message['Event'] == 'VIEW') {
 
                         // 如果是view则写入
                         $msg = '';
-                        $msg .= '当前用户的操作行为是：'.$message['Event']."，也就是说点击了下面的合伙人按钮。\n";
+                        $msg .= '当前用户的操作行为是：' . $message['Event'] . "，也就是说点击了下面的合伙人按钮。\n";
                         // 写入日志
                         Log::info($msg);
 
@@ -87,12 +87,12 @@ class WeChatController extends Controller
                         // 如果是取消关注
                         // 注意：Log 为 Laravel 组件，所以它记的日志去 Laravel 日志看，而不是 EasyWeChat 日志
                         $msg = '';
-                        $msg .= '<pre>'.PHP_EOL;
-                        $msg .= '当前用户的操作行为是：'.$message['Event'].PHP_EOL;
-                        $msg .= '用户'.$openId.'已经取消关注了意远合伙人公众号，该用户的详细资料如下：'.PHP_EOL;
+                        $msg .= '<pre>' . PHP_EOL;
+                        $msg .= '当前用户的操作行为是：' . $message['Event'] . PHP_EOL;
+                        $msg .= '用户' . $openId . '已经取消关注了意远合伙人公众号，该用户的详细资料如下：' . PHP_EOL;
                         $arr = print_r($user_arr, true);
                         $msg .= "$arr";
-                        $msg .= PHP_EOL.PHP_EOL;
+                        $msg .= PHP_EOL . PHP_EOL;
                         // 写入日志
                         Log::info($msg);
 
@@ -105,7 +105,7 @@ class WeChatController extends Controller
                     } else {
                         // 如果是其他行为，则另行判断，api里面没写
                         $msg = '';
-                        $msg .= '当前用户的操作行为是：'.$message['Event'].PHP_EOL;
+                        $msg .= '当前用户的操作行为是：' . $message['Event'] . PHP_EOL;
                         // 写入日志
                         Log::info($msg);
                     }
@@ -117,13 +117,13 @@ class WeChatController extends Controller
                     // 接收的内容写入Log日志
                     // 注意：Log 为 Laravel 组件，所以它记的日志去 Laravel 日志看，而不是 EasyWeChat 日志
                     $msg = '';
-                    $msg .= '<pre>'.PHP_EOL;
-                    $msg .= '用户'.$openId.'向您发送了一条消息，该用户的详细资料如下：'.PHP_EOL;
+                    $msg .= '<pre>' . PHP_EOL;
+                    $msg .= '用户' . $openId . '向您发送了一条消息，该用户的详细资料如下：' . PHP_EOL;
                     $arr = print_r($user_arr, true);
                     $msg .= "$arr";
-                    $msg .= PHP_EOL.PHP_EOL;
-                    $msg .= "发送的消息内容为：".$message['Content'];
-                    $msg .= PHP_EOL.PHP_EOL;
+                    $msg .= PHP_EOL . PHP_EOL;
+                    $msg .= "发送的消息内容为：" . $message['Content'];
+                    $msg .= PHP_EOL . PHP_EOL;
                     // 写入日志
                     Log::info($msg);
 
@@ -143,7 +143,7 @@ class WeChatController extends Controller
                         }
                         // 发送消息
                         $this->app->customer_service->message($arr[2])->to($arr[1])->send();
-                        return '您的消息已成功送达到 '.$user_arr['nickname'].'，请耐心等待对方回复~';
+                        return '您的消息已成功送达到 ' . $user_arr['nickname'] . '，请耐心等待对方回复~';
                     } else {
                         // 如果非测试字符串，那么就录入数据库
                         // 用户openid
@@ -164,25 +164,25 @@ class WeChatController extends Controller
                         // 李龙的openid
                         $admin_openid = 'ol0Z1uLbitksYmYY9IDKfuVsiU1g';
                         // 超级用户的openid
-                        $superuser_openid = 'ol0Z1uAO8pkZLapzV3SFJO-msRHg';
+                        // $superuser_openid = 'ol0Z1uAO8pkZLapzV3SFJO-msRHg';
                         // 安总的openid
                         $an_openid = 'ol0Z1uKKDG7lHEAzwMvf0W21FCgw';
                         $msg = '';
-                        $msg .= '您好，"意远合伙人"公众号收到一条新留言，请知悉~'.PHP_EOL.PHP_EOL;
+                        $msg .= '您好，"意远合伙人"公众号收到一条新留言，请知悉~' . PHP_EOL . PHP_EOL;
                         // $msg .= '该留言的相关信息如下：'.PHP_EOL;
-                        $msg .= '用户昵称：'.$user_arr['nickname'].PHP_EOL;
+                        $msg .= '用户昵称：' . $user_arr['nickname'] . PHP_EOL;
                         // $msg .= 'openid：'.$user_arr['openid'].PHP_EOL;
-                        $msg .= '留言内容：'.$message['Content'].PHP_EOL;
-                        $msg .= '留言时间：'.$created_at.PHP_EOL.PHP_EOL;
+                        $msg .= '留言内容：' . $message['Content'] . PHP_EOL;
+                        $msg .= '留言时间：' . $created_at . PHP_EOL . PHP_EOL;
                         // $msg .= '如果需要回复该留言，请输入如下指令：'.PHP_EOL.PHP_EOL;
-                        $msg .= '如果需要回复该留言，请点击下面的链接地址：'.PHP_EOL.PHP_EOL;
+                        $msg .= '如果需要回复该留言，请点击下面的链接地址：' . PHP_EOL . PHP_EOL;
                         // $msg .= 'HF｜'.$openId.'｜这里写消息内容，注意第2个|前面的内容千万不要删除';
                         // 改成链接形式的提交
-                        $msg .= '<a href="http://hhr.yiopay.com/wechat/'.$new_msg_id.'">我要回复</a>';
+                        $msg .= '<a href="http://hhr.yiopay.com/wechat/' . $new_msg_id . '">我要回复</a>';
                         // 给李龙发
                         $this->app->customer_service->message($msg)->to($admin_openid)->send();
                         // 超级用户【刘宗阳】
-                        $this->app->customer_service->message($msg)->to($superuser_openid)->send();
+                        // $this->app->customer_service->message($msg)->to($superuser_openid)->send();
                         // 给安总发
                         $this->app->customer_service->message($msg)->to($an_openid)->send();
                     }
@@ -282,9 +282,9 @@ class WeChatController extends Controller
         // 逻辑
         $url = $this->getQrcodeUrl($this->request->ticket);
         // 得到二进制图片内容
-        $content = file_get_contents($url); 
+        $content = file_get_contents($url);
         // 写入文件
-        file_put_contents(public_path() . '/static/images/code.png', $content); 
+        file_put_contents(public_path() . '/static/images/code.png', $content);
     }
 
     /**

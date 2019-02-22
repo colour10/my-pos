@@ -85,7 +85,6 @@ Route::group(['prefix' => '/test'], function () {
 });
 
 
-
 // 微信开发处理库
 Route::any('/easywechat', 'WeChatController@serve');
 
@@ -123,7 +122,7 @@ Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
     // 消息转发
     // 消息转发页面，在微信端，使用get传输，openid需要使用授权方式获取
     Route::get('/wechat/{id}', 'Agent\AgentauthController@wxask')->name('wechat.wxask');
-    
+
     // 获取当前提问用户的消息列表
     Route::post('/wechat/list', 'Agent\AgentauthController@wechatmsgs')->name('wechat.wechatmsgs');
 
@@ -195,7 +194,7 @@ Route::group(['prefix' => '/agent/wx'], function () {
     Route::get('/getcardboxeslist', 'Agent\AgentauthController@getCardboxesList')->name('wxgetcardboxeslist');
 
     // 获取银行列表 【缓存】 【测试】
-    Route::get('/getcardboxes', 'Agent\AgentauthController@getCardboxesCache')->name('wxgetcardboxescache'); 
+    Route::get('/getcardboxes', 'Agent\AgentauthController@getCardboxesCache')->name('wxgetcardboxescache');
 
     // 生成合伙人查询缓存
     Route::get('/createagentcache/{openid}', 'Agent\AgentauthController@createAgentCache')->name('wxcreateagentcache');
@@ -233,7 +232,7 @@ Route::group(['middleware' => ['agent.auth'], 'prefix' => '/agent'], function ()
 
     // // 提现记录列表【必须登录】
     // Route::post('/withdraws', 'Agent\AgentauthController@withdraws')->name('AgentauthWithdraws');
-    
+
     // // 当前余额【必须登录】
     // Route::get('/available', 'Agent\AgentauthController@available')->name('AgentauthAvailable');
 
@@ -241,9 +240,6 @@ Route::group(['middleware' => ['agent.auth'], 'prefix' => '/agent'], function ()
     // Route::get('/logout', 'Agent\AgentauthController@logout')->name('AgentauthLogout');
 
 });
-
-
-
 
 
 // 微信访问页面路由,必须通过微信访问
@@ -279,10 +275,8 @@ Route::group(['middleware' => ['wx.auth'], 'prefix' => '/agent/wx'], function ()
 
     // 新增清除验证码缓存
     // 清除验证码
-    Route::post('/removewxyzm', 'Agent\AgentauthController@removewxyzm')->name('wxremovewxyzm');  
+    Route::post('/removewxyzm', 'Agent\AgentauthController@removewxyzm')->name('wxremovewxyzm');
 });
-
-
 
 
 // 微信，必须拿到授权用户资料
@@ -292,7 +286,7 @@ Route::group(['middleware' => ['web', 'wechat.oauth'], 'prefix' => '/agent/wx'],
     Route::get('/getauthuser', 'Agent\AgentauthController@getauthuser')->name('wxgetauthuser');
 
     // 取出授权的合伙人模型 [接口]
-    Route::post('/checkbyopenid', 'Agent\AgentauthController@wxcheckbyopenid')->name('wxcheckbyopenid');    
+    Route::post('/checkbyopenid', 'Agent\AgentauthController@wxcheckbyopenid')->name('wxcheckbyopenid');
 
     // 首页 [模板]
     Route::get('/', 'Agent\AgentauthController@wxindex')->name('wxindex');
@@ -319,7 +313,7 @@ Route::group(['middleware' => ['web', 'wechat.oauth'], 'prefix' => '/agent/wx'],
     Route::post('/getsignpackage', 'Agent\AgentauthController@getSignPackage')->name('wxgetsignpackage');
 
     // 邀请 [模板]
-    Route::get('/invitation', 'Agent\AgentauthController@wxinvitation')->name('wxinvitation');    
+    Route::get('/invitation', 'Agent\AgentauthController@wxinvitation')->name('wxinvitation');
 
     // 分享 [模板]
     Route::get('/share', 'Agent\AgentauthController@wxshare')->name('wxshare');
@@ -332,7 +326,7 @@ Route::group(['middleware' => ['web', 'wechat.oauth'], 'prefix' => '/agent/wx'],
 
     // 我的订单
     Route::get('/order', 'Agent\AgentauthController@wxorder')->name('wxorder');
-    
+
     // 审核中订单列表 [接口]
     Route::post('/revieworders', 'Agent\AgentauthController@wxrevieworders')->name('wxrevieworders');
 
@@ -345,7 +339,7 @@ Route::group(['middleware' => ['web', 'wechat.oauth'], 'prefix' => '/agent/wx'],
 
     // 实名认证类 [模板]
     Route::get('/identityforreal', 'Agent\AgentauthController@wxidentityforreal')->name('wxidentityforreal');
-    
+
     // 实名认证类【逻辑】
     Route::post('/identityforrealstore', 'Agent\AgentauthController@wxidentityforrealstore')->name('wxidentityforrealstore');
 
@@ -423,7 +417,7 @@ Route::group(['middleware' => ['web', 'wechat.oauth'], 'prefix' => '/agent/wx'],
 
     // 提现记录列表【必须登录】
     Route::post('/withdraws', 'Agent\AgentauthController@withdraws')->name('AgentauthWithdraws');
-    
+
     // 当前余额【必须登录】
     Route::get('/available', 'Agent\AgentauthController@available')->name('AgentauthAvailable');
 
@@ -460,122 +454,14 @@ Route::group(['middleware' => ['web', 'wechat.oauth'], 'prefix' => '/agent/wx'],
 });
 
 
-
-
-
-
-
-
-// 微信，必须拿到授权用户资料，TestController [测试类]
-Route::group(['middleware' => ['web', 'wechat.oauth'], 'prefix' => '/test/wx'], function () {
-
-    // 获得用户授权资料
-    Route::get('/getauthuser', 'Test\TestController@getauthuser')->name('testwxgetauthuser');
-
-    // 测试controller接口类 [测试]
-    // 微信合伙人首页 [测试]
-    Route::get('/', 'Test\TestController@wxindex')->name('testwxindex');
-
-    // 当前合伙人的下线
-    Route::get('/myteam', 'Test\TestController@wxmyteam')->name('testwxmyteam');
-
-    // 显示信用卡推广的下线-团队列表
-    Route::post('/getmyteam', 'Test\TestController@wxgetmyteam')->name('testwxgetmyteam');
-    
-    // 微信推送消息
-    Route::post('/sendwxmsg', 'Test\TestController@sendwxmsg')->name('testwxsendwxmsg');
-
-    // 申请办卡
-    Route::get('/applycard/{bankid}', 'Test\TestController@wxapplycard')->name('testwxapplycard');
-
-    // 申请办卡-逻辑
-    Route::post('/applycardstore', 'Test\TestController@wxapplycardstore')->name('testwxapplycardstore');
-
-    // 当前用户的激励金明细
-    Route::post('/getincent', 'Test\TestController@wxgetincent')->name('testwxgetincent');
-
-    // 分润调账明细
-    Route::get('/incentivedetail', 'Test\TestController@wxincentivedetail')->name('testwxincentivedetail');
-
-    // 账户详情
-    Route::get('/mysum', 'Test\TestController@wxmysum')->name('testwxmysum');
-
-    // 我的默认首页
-    Route::get('/mine', 'Test\TestController@wxmine')->name('testwxmine');
-
-    // 设置
-    Route::get('/setting', 'Test\TestController@wxsetting')->name('testwxsetting');
-
-    // 我的客服
-    Route::get('/customerService', 'Test\TestController@wxcustomerService')->name('testwxcustomerService');
-
-    // 邀请
-    Route::get('/invitation', 'Test\TestController@wxinvitation')->name('testwxinvitation');
-
-    // 我的银行卡(模板)
-    Route::get('/rankcard', 'Test\TestController@wxrankcard')->name('testwxrankcard');
-
-    // 我的信息
-    Route::get('/message', 'Test\TestController@wxmessage')->name('testwxmessage');
-
-    // 我的订单
-    Route::get('/order', 'Test\TestController@wxorder')->name('testwxorder');
-
-    // 进度查询
-    Route::get('/progress', 'Test\TestController@wxprogress')->name('testwxprogress');
-
-    // 登录页面
-    Route::get('/login', 'Test\TestController@wxlogin')->name('testwxlogin');
-
-    // 是否实名认证
-    Route::post('/wxisreal', 'Test\TestController@wxisreal')->name('testwxisreal');
-
-    // 判断当前授权用户是否为合伙人
-    Route::post('/checkbyopenid', 'Test\TestController@wxcheckbyopenid')->name('testwxcheckbyopenid');
-
-    // 信用卡介绍
-    Route::get('/cardinfo/{bankid}', 'Test\TestController@wxcardinfo')->name('testwxcardinfo');
-
-    // 实名认证类
-    Route::get('/identityforreal', 'Test\TestController@wxidentityforreal')->name('testwxidentityforreal');
-    
-    // 实名认证类【逻辑】
-    Route::post('/identityforrealstore', 'Test\TestController@wxidentityforrealstore')->name('testwxidentityforrealstore');
-
-    // 判断当前手机能否被使用
-    Route::post('/checkmobilevalid', 'Test\TestController@wxcheckmobilevalid')->name('testwxcheckmobilevalid');
-
-    // 判断当前身份证能否被使用
-    Route::post('/checkidnumbervalid', 'Test\TestController@wxcheckidnumbervalid')->name('testwxcheckidnumbervalid');
-
-    // 意远平台服务协议
-    Route::get('/agreement', 'Test\TestController@wxagreement')->name('testwxagreement');
-
-    // 修改合伙人手机号逻辑
-    Route::post('/modifymobile', 'Test\TestController@wxmodifymobile')->name('testwxmodifymobile');
-
-    // 添加银行卡
-    Route::get('/wxaddcard', 'Test\TestController@wxaddcard')->name('testwxaddcard');
-
-    // 银行卡四要素认证
-    Route::post('/checkbankcard', 'Test\TestController@checkbankcard')->name('testwxcheckbankcard');
-
-    // 添加银行卡逻辑
-    Route::post('/wxaddcardstore', 'Test\TestController@wxaddcardstore')->name('testwxaddcardstore');
-
-});
-
-
-
-
-
-
-
 // Admin后台模板所有功能
 Route::group(['middleware' => ['manager.auth', 'permission.control'], 'prefix' => '/admin'], function () {
 
     // 合伙人搜索
     Route::get('/agents/search', 'Admin\AgentController@search')->name('agents.search');
+
+    // 数据导出excel
+    Route::get('/agents/export', 'Admin\AgentController@export')->name('agents.export');
 
     // 合伙人审核通过
     Route::post('/agents/review/{id}/successed', 'Admin\AgentController@reviewsuccessed')->name('agents.review.successed');
@@ -729,34 +615,33 @@ Route::group(['middleware' => ['manager.auth', 'permission.control'], 'prefix' =
 
     // 员工模块-管理员
     // 管理员列表
-    Route::get('/manager', 'Admin\SystemController@managerindex')->name('ManagerIndex'); 
+    Route::get('/manager', 'Admin\SystemController@managerindex')->name('ManagerIndex');
 
     Route::get('/manager/search', 'Admin\SystemController@managersearch')->name('ManagerSearch');
 
     // 管理员添加页面
-    Route::get('/manager/create', 'Admin\SystemController@managercreate')->name('ManagerCreate'); 
+    Route::get('/manager/create', 'Admin\SystemController@managercreate')->name('ManagerCreate');
 
     // 管理员添加逻辑
-    Route::post('/manager/store', 'Admin\SystemController@managerstore')->name('ManagerStore'); 
+    Route::post('/manager/store', 'Admin\SystemController@managerstore')->name('ManagerStore');
 
     // 管理员修改
-    Route::get('/manager/{id}/edit', 'Admin\SystemController@manageredit')->name('ManagerEdit'); 
+    Route::get('/manager/{id}/edit', 'Admin\SystemController@manageredit')->name('ManagerEdit');
 
     // 管理员修改逻辑
-    Route::put('/manager/{id}/update', 'Admin\SystemController@managerupdate')->name('ManagerUpdate'); 
+    Route::put('/manager/{id}/update', 'Admin\SystemController@managerupdate')->name('ManagerUpdate');
 
     // 管理员显示
-    Route::get('/manager/{id}', 'Admin\SystemController@managershow')->name('ManagerShow'); 
+    Route::get('/manager/{id}', 'Admin\SystemController@managershow')->name('ManagerShow');
 
     // 管理员删除
-    Route::delete('/manager/{id}', 'Admin\SystemController@managerdestroy')->name('ManagerDestroy'); 
+    Route::delete('/manager/{id}', 'Admin\SystemController@managerdestroy')->name('ManagerDestroy');
 
     // 管理员分配角色页面
     Route::get('/manager/{id}/role', 'Admin\SystemController@managerrole')->name('ManagerRole');
 
     // 管理员赋予角色
     Route::put('/manager/{id}/assignrole', 'Admin\SystemController@managerassignRole')->name('ManagerAssignrole');
-
 
 
     // 银行开户行管理
@@ -785,8 +670,6 @@ Route::group(['middleware' => ['manager.auth', 'permission.control'], 'prefix' =
     // Route::get('/bank', 'Admin\SystemController@bankindex')->name('bankindex'); 
 
 
-
-
     // 角色管理模块
     // 添加角色
     Route::get('/role/create', 'Admin\SystemController@rolecreate')->name('RoleCreate');
@@ -795,7 +678,7 @@ Route::group(['middleware' => ['manager.auth', 'permission.control'], 'prefix' =
     // 角色管理
     Route::get('/role', 'Admin\SystemController@roleindex')->name('RoleIndex');
     // 角色授权页面
-    Route::get('/role/{id}/permission', 'Admin\SystemController@rolepermission')->name('RolePermission'); 
+    Route::get('/role/{id}/permission', 'Admin\SystemController@rolepermission')->name('RolePermission');
     // 角色授权页面逻辑
     Route::post('/role/{id}/assignpermission', 'Admin\SystemController@roleassignpermission')->name('RoleAssignpermission');
     // 角色编辑
@@ -814,12 +697,11 @@ Route::group(['middleware' => ['manager.auth', 'permission.control'], 'prefix' =
     // 权限管理
     Route::get('/permission', 'Admin\SystemController@permissionindex')->name('PermissionIndex');
     // 权限修改
-    Route::get('/permission/{id}/edit', 'Admin\SystemController@permissionedit')->name('PermissionEdit'); 
+    Route::get('/permission/{id}/edit', 'Admin\SystemController@permissionedit')->name('PermissionEdit');
     // 权限修改逻辑
     Route::put('/permission/{id}/update', 'Admin\SystemController@permissionupdate')->name('PermissionUpdate');
     // 权限删除
     Route::delete('/permission/{id}', 'Admin\SystemController@permissiondestroy')->name('PermissionDestroy');
-
 
 
     // 本人信息维护
@@ -832,29 +714,26 @@ Route::group(['middleware' => ['manager.auth', 'permission.control'], 'prefix' =
     // 系统设置逻辑
     Route::get('/setupupdate', 'Admin\SystemController@setupupdate')->name('SetupUpdate');
 
-    
-
 
     // 公告列表
-    Route::get('/notice', 'Admin\SystemController@noticeindex')->name('NoticeIndex'); 
+    Route::get('/notice', 'Admin\SystemController@noticeindex')->name('NoticeIndex');
 
     // 公告添加页面
-    Route::get('/notice/create', 'Admin\SystemController@create')->name('NoticeCreate'); 
+    Route::get('/notice/create', 'Admin\SystemController@create')->name('NoticeCreate');
 
     // 公告添加逻辑
-    Route::post('/notice/store', 'Admin\SystemController@store')->name('NoticeStore'); 
+    Route::post('/notice/store', 'Admin\SystemController@store')->name('NoticeStore');
 
     // 公告修改
-    Route::get('/notice/{id}/edit', 'Admin\SystemController@edit')->name('NoticeEdit'); 
+    Route::get('/notice/{id}/edit', 'Admin\SystemController@edit')->name('NoticeEdit');
 
     // 公告修改逻辑
-    Route::put('/notice/{id}/update', 'Admin\SystemController@update')->name('NoticeUpdate'); 
+    Route::put('/notice/{id}/update', 'Admin\SystemController@update')->name('NoticeUpdate');
     // 公告显示
-    Route::get('/notice/{id}', 'Admin\SystemController@show')->name('NoticeShow'); 
+    Route::get('/notice/{id}', 'Admin\SystemController@show')->name('NoticeShow');
 
     // 公告删除
-    Route::delete('/notice/{id}', 'Admin\SystemController@destroy')->name('NoticeDestroy'); 
-
+    Route::delete('/notice/{id}', 'Admin\SystemController@destroy')->name('NoticeDestroy');
 
 
     // 账户类型管理
@@ -880,9 +759,6 @@ Route::group(['middleware' => ['manager.auth', 'permission.control'], 'prefix' =
     Route::delete('/account/{id}', 'Admin\SystemController@accountdestroy')->name('AccountDestroy');
 
 });
-
-
-
 
 
 // 产品管理

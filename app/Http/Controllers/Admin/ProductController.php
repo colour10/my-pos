@@ -44,21 +44,21 @@ class ProductController extends Controller
     {
         // DB类搜索逻辑
         $cardboxes = DB::table('cardboxes')
-                    ->select(['id', 'merCardName', 'merCardImg', 'cardAmount', 'created_at', 'updated_at', 'littleFlag', 'status', 'sort', 'creditCardUrl', 'cardBankAmount', 'cardTopAmount', 'source'])
-                    ->where(function ($query) use ($request) {
-                        $merCardName = $request->get('merCardName');
-                        if (!empty($merCardName)) {
-                            $query->where('merCardName', 'like binary', '%'.$merCardName.'%');
-                        }
-                    })
-                    ->where(function ($query) use ($request) {
-                        $status = $request->get('status');
-                        if (isset($status)) {
-                            $query->where('status', $status);
-                        }
-                    })
-                    ->orderBy('sort', 'desc')
-                    ->paginate(10);
+            ->select(['id', 'merCardName', 'merCardImg', 'cardAmount', 'created_at', 'updated_at', 'littleFlag', 'status', 'sort', 'creditCardUrl', 'cardBankAmount', 'cardTopAmount', 'source'])
+            ->where(function ($query) use ($request) {
+                $merCardName = $request->get('merCardName');
+                if (!empty($merCardName)) {
+                    $query->where('merCardName', 'like binary', '%' . $merCardName . '%');
+                }
+            })
+            ->where(function ($query) use ($request) {
+                $status = $request->get('status');
+                if (isset($status)) {
+                    $query->where('status', $status);
+                }
+            })
+            ->orderBy('sort', 'desc')
+            ->paginate(10);
 
         // 渲染
         $page_title = '办卡银行';
@@ -77,7 +77,6 @@ class ProductController extends Controller
         $page_title = '办卡银行创建';
         return view('admin.products.cardbox.create', compact('page_title'));
     }
-
 
 
     /**
@@ -120,17 +119,17 @@ class ProductController extends Controller
         // 办卡封面
         if (!empty($request->file('merCardImg'))) {
             $path = $request->file('merCardImg')->storePublicly(date('Ymd'));
-            $merCardImg = '/storage/'.$path;
+            $merCardImg = '/storage/' . $path;
         }
 
         // 广告封面
         if (!empty($request->file('advertiseImg'))) {
             $path = $request->file('advertiseImg')->storePublicly(date('Ymd'));
-            $advertiseImg = '/storage/'.$path;
+            $advertiseImg = '/storage/' . $path;
         }
 
         $orderpath = $request->file('merCardOrderImg')->storePublicly(date('Ymd'));
-        $merCardOrderImg = '/storage/'.$orderpath;
+        $merCardOrderImg = '/storage/' . $orderpath;
 
         $cardbox = Cardbox::create(compact('merCardName', 'merCardImg', 'advertiseImg', 'cardAmount', 'creditCardUrl', 'littleFlag', 'creditCardJinduUrl', 'cardContent', 'cardBankAmount', 'cardTopAmount', 'source', 'rate', 'method', 'merCardOrderImg'));
 
@@ -142,7 +141,7 @@ class ProductController extends Controller
 
             // 重写缓存
             Cache::forever('cardboxes', $this->agent_auth->getCardboxesList());
-            
+
             $data = [
                 'code' => '0',
                 'msg' => '卡片添加成功',
@@ -155,7 +154,6 @@ class ProductController extends Controller
         }
         return $data;
     }
-    
 
 
     /**
@@ -171,7 +169,6 @@ class ProductController extends Controller
         $page_title = '编辑办卡银行';
         return view('admin.products.cardbox.edit', compact('page_title', 'cardbox'));
     }
-
 
 
     /**
@@ -214,7 +211,7 @@ class ProductController extends Controller
         // 办卡封面
         if (!empty($request->file('merCardImg'))) {
             $path = $request->file('merCardImg')->storePublicly(date('Ymd'));
-            $merCardImg = '/storage/'.$path;
+            $merCardImg = '/storage/' . $path;
         } else {
             $merCardImg = $cardbox->merCardImg;
         }
@@ -222,7 +219,7 @@ class ProductController extends Controller
         // 广告封面
         if (!empty($request->file('advertiseImg'))) {
             $path = $request->file('advertiseImg')->storePublicly(date('Ymd'));
-            $advertiseImg = '/storage/'.$path;
+            $advertiseImg = '/storage/' . $path;
         } else {
             $advertiseImg = $cardbox->advertiseImg;
         }
@@ -230,7 +227,7 @@ class ProductController extends Controller
         // 卡片订单封面
         if (!empty($request->file('merCardOrderImg'))) {
             $orderpath = $request->file('merCardOrderImg')->storePublicly(date('Ymd'));
-            $merCardOrderImg = '/storage/'.$orderpath;
+            $merCardOrderImg = '/storage/' . $orderpath;
         } else {
             $merCardOrderImg = $cardbox->merCardOrderImg;
         }
@@ -254,7 +251,6 @@ class ProductController extends Controller
         }
         return $data;
     }
-
 
 
     /**
@@ -309,7 +305,6 @@ class ProductController extends Controller
         // 最终返回
         return $response;
     }
-
 
 
     /**
@@ -432,31 +427,31 @@ class ProductController extends Controller
     {
         // DB类搜索逻辑
         $applycards = DB::table('apply_cards as ac')
-                    ->select(['ac.id', 'ac.order_id', 'ac.order_id', 'ac.card_id', 'a.name', 'a.mobile', 'ac.status', 'ac.created_at', 'ac.updated_at', 'c.merCardName', 'c.source',  'ac.invite_money', 'ac.top_money', 'ac.invite_openid', 'ac.top_openid', 'a.id_number'])
-                    ->leftJoin('agents as a', 'a.openid', '=', 'ac.user_openid')
-                    ->leftJoin('cardboxes as c', 'c.id', '=', 'ac.card_id')
-                    ->where(function ($query) use ($request) {
-                        $method = $request->method;
-                        $applyer = $request->applyer;
-                        if (!empty($method)) {
-                            if ($method == '1') {
-                                $query->where('a.name', 'like', '%'.$applyer.'%');
-                            } elseif ($method == '2') {
-                                $query->where('a.mobile', 'like', '%'.$applyer.'%');
-                            } elseif ($method == '3') {
-                                $query->where('a.id_number', 'like', '%'.$applyer.'%');
-                            }
-                        }
-                    })
-                    ->where(function ($query) use ($request) {
-                        $merCardName = $request->merCardName;
-                        if (!empty($merCardName)) {
-                            $query->where('c.merCardName', $merCardName);
-                        }
-                    })
-                    ->where('ac.status', '0')
-                    ->orderBy('ac.created_at', 'desc')
-                    ->paginate(10);
+            ->select(['ac.id', 'ac.order_id', 'ac.order_id', 'ac.card_id', 'a.name', 'a.mobile', 'ac.status', 'ac.created_at', 'ac.updated_at', 'c.merCardName', 'c.source', 'ac.invite_money', 'ac.top_money', 'ac.invite_openid', 'ac.top_openid', 'a.id_number'])
+            ->leftJoin('agents as a', 'a.openid', '=', 'ac.user_openid')
+            ->leftJoin('cardboxes as c', 'c.id', '=', 'ac.card_id')
+            ->where(function ($query) use ($request) {
+                $method = $request->method;
+                $applyer = $request->applyer;
+                if (!empty($method)) {
+                    if ($method == '1') {
+                        $query->where('a.name', 'like', '%' . $applyer . '%');
+                    } elseif ($method == '2') {
+                        $query->where('a.mobile', 'like', '%' . $applyer . '%');
+                    } elseif ($method == '3') {
+                        $query->where('a.id_number', 'like', '%' . $applyer . '%');
+                    }
+                }
+            })
+            ->where(function ($query) use ($request) {
+                $merCardName = $request->merCardName;
+                if (!empty($merCardName)) {
+                    $query->where('c.merCardName', $merCardName);
+                }
+            })
+            ->where('ac.status', '0')
+            ->orderBy('ac.created_at', 'desc')
+            ->paginate(10);
 
         // 数据加工
         foreach ($applycards as $k => $applycard) {
@@ -493,7 +488,6 @@ class ProductController extends Controller
     }
 
 
-
     /**
      * 已完毕信用卡申请记录
      * @param Request $request
@@ -503,37 +497,37 @@ class ProductController extends Controller
     {
         // DB类搜索逻辑
         $applycards = DB::table('apply_cards as ac')
-                    ->select(['ac.id', 'ac.order_id', 'ac.order_id', 'ac.card_id', 'a.name', 'a.mobile', 'ac.status', 'ac.created_at', 'ac.updated_at', 'c.merCardName', 'c.source', 'ac.invite_money', 'ac.top_money', 'ac.invite_openid', 'ac.top_openid', 'ac.invite_openid', 'ac.top_openid', 'a.id_number'])
-                    ->leftJoin('agents as a', 'a.openid', '=', 'ac.user_openid')
-                    ->leftJoin('cardboxes as c', 'c.id', '=', 'ac.card_id')
-                    ->where(function ($query) use ($request) {
-                        $method = $request->method;
-                        $applyer = $request->applyer;
-                        if (!empty($method)) {
-                            if ($method == '1') {
-                                $query->where('a.name', 'like', '%'.$applyer.'%');
-                            } elseif ($method == '2') {
-                                $query->where('a.mobile', 'like', '%'.$applyer.'%');
-                            } elseif ($method == '3') {
-                                $query->where('a.id_number', 'like', '%'.$applyer.'%');
-                            }
-                        }
-                    })
-                    ->where(function ($query) use ($request) {
-                        $merCardName = $request->merCardName;
-                        if (!empty($merCardName)) {
-                            $query->where('c.merCardName', 'like', '%'.$merCardName.'%');
-                        }
-                    })
-                    ->where(function ($query) use ($request) {
-                        if ($request->status) {
-                            $query->where('ac.status', $request->status);
-                        } else {
-                            $query->where('ac.status', '>', '0');
-                        }
-                    })
-                    ->orderBy('ac.created_at', 'desc')
-                    ->paginate(10);
+            ->select(['ac.id', 'ac.order_id', 'ac.order_id', 'ac.card_id', 'a.name', 'a.mobile', 'ac.status', 'ac.created_at', 'ac.updated_at', 'c.merCardName', 'c.source', 'ac.invite_money', 'ac.top_money', 'ac.invite_openid', 'ac.top_openid', 'ac.invite_openid', 'ac.top_openid', 'a.id_number'])
+            ->leftJoin('agents as a', 'a.openid', '=', 'ac.user_openid')
+            ->leftJoin('cardboxes as c', 'c.id', '=', 'ac.card_id')
+            ->where(function ($query) use ($request) {
+                $method = $request->method;
+                $applyer = $request->applyer;
+                if (!empty($method)) {
+                    if ($method == '1') {
+                        $query->where('a.name', 'like', '%' . $applyer . '%');
+                    } elseif ($method == '2') {
+                        $query->where('a.mobile', 'like', '%' . $applyer . '%');
+                    } elseif ($method == '3') {
+                        $query->where('a.id_number', 'like', '%' . $applyer . '%');
+                    }
+                }
+            })
+            ->where(function ($query) use ($request) {
+                $merCardName = $request->merCardName;
+                if (!empty($merCardName)) {
+                    $query->where('c.merCardName', 'like', '%' . $merCardName . '%');
+                }
+            })
+            ->where(function ($query) use ($request) {
+                if ($request->status) {
+                    $query->where('ac.status', $request->status);
+                } else {
+                    $query->where('ac.status', '>', '0');
+                }
+            })
+            ->orderBy('ac.created_at', 'desc')
+            ->paginate(10);
 
         // 数据加工
         foreach ($applycards as $k => $applycard) {
@@ -560,7 +554,6 @@ class ProductController extends Controller
     }
 
 
-
     /**
      * 卡片状态查看
      * @param $id
@@ -572,11 +565,11 @@ class ProductController extends Controller
         $page_title = '卡片状态查看';
         // DB类搜索逻辑
         $applycard = DB::table('apply_cards as ac')
-                    ->select(['ac.id', 'ac.order_id', 'ac.order_id', 'ac.card_id', 'a.name', 'a.mobile', 'ac.status', 'ac.created_at', 'ac.updated_at', 'c.merCardName', 'c.source', 'ac.invite_money', 'ac.top_money', 'a.id_number'])
-                    ->leftJoin('agents as a', 'a.openid', '=', 'ac.user_openid')
-                    ->leftJoin('cardboxes as c', 'c.id', '=', 'ac.card_id')
-                    ->where('ac.id', $id)
-                    ->first();
+            ->select(['ac.id', 'ac.order_id', 'ac.order_id', 'ac.card_id', 'a.name', 'a.mobile', 'ac.status', 'ac.created_at', 'ac.updated_at', 'c.merCardName', 'c.source', 'ac.invite_money', 'ac.top_money', 'a.id_number'])
+            ->leftJoin('agents as a', 'a.openid', '=', 'ac.user_openid')
+            ->leftJoin('cardboxes as c', 'c.id', '=', 'ac.card_id')
+            ->where('ac.id', $id)
+            ->first();
 
         // 格式化数据
         switch ($applycard->status) {
@@ -667,7 +660,7 @@ class ProductController extends Controller
                 // 通过
                 $status = '1';
                 if (!$applycard->update(compact('status'))) {
-                    throw new \Exception('编号为'.$applycard->id.'的信用卡申请通过操作失败了，请知悉...');
+                    throw new \Exception('编号为' . $applycard->id . '的信用卡申请通过操作失败了，请知悉...');
                 }
                 // 新增一条分润记录，系统自动分配
                 // 合伙人id
@@ -675,7 +668,7 @@ class ProductController extends Controller
                 if (!empty($applycard->invite_openid)) {
                     $agent = Agent::where('openid', $applycard->invite_openid)->first();
                     if (!$agent) {
-                        throw new \Exception('微信openid为：'.$applycard->invite_openid.'的推荐人还不是合伙人，不能为其分润，请知悉...');
+                        throw new \Exception('微信openid为：' . $applycard->invite_openid . '的推荐人还不是合伙人，不能为其分润，请知悉...');
                     }
                     // 参数组装
                     $agent_id = $agent->id;
@@ -702,13 +695,13 @@ class ProductController extends Controller
                     // $description = '成功推荐了 '.$applycard->user_name.' '.$applycard->user_phone.' 办理了 '.$applycard->cardbox->merCardName.' 信用卡';
 
                     // 前面的1代表来自一级合伙人的佣金
-                    $description = '1----'.$agent_name.'----'.$card_user_name.'----'.$card_user_phone.'----'.$card_name.'----'.$invite_money.'----'.$order_id;
+                    $description = '1----' . $agent_name . '----' . $card_user_name . '----' . $card_user_phone . '----' . $card_name . '----' . $invite_money . '----' . $order_id;
 
                     $account_type = '1';
                     // 如果分润>0，那么就新增一条分润记录
                     if ($amount > 0) {
                         if (!Finance::create(compact('agent_id', 'type', 'amount', 'description', 'account_type'))) {
-                            throw new \Exception('添加新分润记录失败，当前操作失败的合伙人ID为：'.$agent_id);
+                            throw new \Exception('添加新分润记录失败，当前操作失败的合伙人ID为：' . $agent_id);
                         }
                     }
 
@@ -719,7 +712,7 @@ class ProductController extends Controller
                     if (!empty($agent->parentopenid) && ($agent->parentopenid != 'null') && ($agent->parentopenid != 'NULL')) {
                         $parent_agent = Agent::where('openid', $agent->parentopenid)->first();
                         if (!$parent_agent) {
-                            throw new \Exception('合伙人编号为：'.$agent_id.'的上级合伙人在数据库不存在！');
+                            throw new \Exception('合伙人编号为：' . $agent_id . '的上级合伙人在数据库不存在！');
                         } else {
                             // 如果分润>0，那么就新增一条分润记录
                             if ($applycard->top_money > 0) {
@@ -731,12 +724,12 @@ class ProductController extends Controller
                                     // 'description' => '您的下线'.$agent->name.'成功推荐了 '.$applycard->user_name.' '.$applycard->user_phone.' 办理了 '.$applycard->cardbox->merCardName.' 信用卡',
 
                                     // 前面的2代表来自二级合伙人的佣金
-                                    'description' => '2----'.$agent_name.'----'.$card_user_name.'----'.$card_user_phone.'----'.$card_name.'----'.$top_money.'----'.$order_id,
+                                    'description' => '2----' . $agent_name . '----' . $card_user_name . '----' . $card_user_phone . '----' . $card_name . '----' . $top_money . '----' . $order_id,
 
                                     'creater' => null,
                                     'account_type' => '1',
                                 ])) {
-                                    throw new \Exception('添加合伙人上级新分润记录失败，当前操作失败的合伙人ID为：'.$parent_agent->id);
+                                    throw new \Exception('添加合伙人上级新分润记录失败，当前操作失败的合伙人ID为：' . $parent_agent->id);
                                 }
                             }
                         }
@@ -788,7 +781,7 @@ class ProductController extends Controller
             // 批量
             foreach ($applycards as $applycard) {
                 if (!$applycard->update(compact('status'))) {
-                    throw new \Exception('编号为'.$applycard->id.'的信用卡申请不通过操作失败，请知悉...');
+                    throw new \Exception('编号为' . $applycard->id . '的信用卡申请不通过操作失败，请知悉...');
                 }
             }
 
@@ -814,7 +807,6 @@ class ProductController extends Controller
     }
 
 
-
     /**
      * 卡片批量审核为无记录
      * @param Request $request
@@ -837,7 +829,7 @@ class ProductController extends Controller
             // 批量
             foreach ($applycards as $applycard) {
                 if (!$applycard->update(compact('status'))) {
-                    throw new \Exception('编号为'.$applycard->id.'的信用卡申请为无记录操作失败，请知悉...');
+                    throw new \Exception('编号为' . $applycard->id . '的信用卡申请为无记录操作失败，请知悉...');
                 }
             }
 
@@ -861,8 +853,6 @@ class ProductController extends Controller
             return $response;
         }
     }
-
-
 
 
     /**
@@ -898,7 +888,7 @@ class ProductController extends Controller
             if (!empty($applycard->invite_openid)) {
                 $agent = Agent::where('openid', $applycard->invite_openid)->first();
                 if (!$agent) {
-                    throw new \Exception('微信openid为：'.$applycard->invite_openid.'的推荐人还不是合伙人，不能为其分润，请知悉...');
+                    throw new \Exception('微信openid为：' . $applycard->invite_openid . '的推荐人还不是合伙人，不能为其分润，请知悉...');
                 }
                 // 推荐人参数组装
                 $agent_id = $agent->id;
@@ -923,7 +913,7 @@ class ProductController extends Controller
                 $order_id = $applycard->order_id;
 
                 // 前面的1代表一级合伙人
-                $description = '1----'.$agent_name.'----'.$card_user_name.'----'.$card_user_phone.'----'.$card_name.'----'.$invite_money.'----'.$order_id;
+                $description = '1----' . $agent_name . '----' . $card_user_name . '----' . $card_user_phone . '----' . $card_name . '----' . $invite_money . '----' . $order_id;
 
                 // 系统虚拟账户，暂且为0
                 // 推荐人分润
@@ -933,7 +923,7 @@ class ProductController extends Controller
                 // 如果分润>0，那么就新增一条分润记录
                 if ($amount > 0) {
                     if (!Finance::create(compact('agent_id', 'type', 'amount', 'description', 'account_type'))) {
-                        throw new \Exception('添加新分润记录失败，当前操作失败的合伙人ID为：'.$agent_id);
+                        throw new \Exception('添加新分润记录失败，当前操作失败的合伙人ID为：' . $agent_id);
                     }
                 }
 
@@ -944,7 +934,7 @@ class ProductController extends Controller
                 if (!empty($agent->parentopenid) && ($agent->parentopenid != 'null') && ($agent->parentopenid != 'NULL')) {
                     $parent_agent = Agent::where('openid', $agent->parentopenid)->first();
                     if (!$parent_agent) {
-                        throw new \Exception('合伙人编号为：'.$agent_id.'的上级合伙人在数据库不存在！');
+                        throw new \Exception('合伙人编号为：' . $agent_id . '的上级合伙人在数据库不存在！');
                     } else {
                         // 如果分润>0，那么就新增一条分润记录
                         if ($applycard->top_money > 0) {
@@ -956,12 +946,12 @@ class ProductController extends Controller
                                 // 'description' => '您的下线'.$agent->name.'成功推荐了 '.$applycard->user_name.' '.$applycard->user_phone.' 办理了 '.$applycard->cardbox->merCardName.' 信用卡',
 
                                 // 前面的2代表来自二级合伙人的佣金
-                                'description' => '2----'.$agent_name.'----'.$card_user_name.'----'.$card_user_phone.'----'.$card_name.'----'.$top_money.'----'.$order_id,
+                                'description' => '2----' . $agent_name . '----' . $card_user_name . '----' . $card_user_phone . '----' . $card_name . '----' . $top_money . '----' . $order_id,
 
                                 'creater' => null,
                                 'account_type' => '1',
                             ])) {
-                                throw new \Exception('添加合伙人上级新分润记录失败，当前操作失败的合伙人ID为：'.$parent_agent->id);
+                                throw new \Exception('添加合伙人上级新分润记录失败，当前操作失败的合伙人ID为：' . $parent_agent->id);
                             }
                         }
                     }
@@ -1070,7 +1060,6 @@ class ProductController extends Controller
     }
 
 
-
     /**
      * 卡片单条审核-无记录
      * @param $id
@@ -1129,7 +1118,6 @@ class ProductController extends Controller
     }
 
 
-
     /**
      * Excel文件导出功能-未审核
      * @param Request $request
@@ -1139,7 +1127,7 @@ class ProductController extends Controller
         // 逻辑
         // DB类搜索逻辑
         $applycards = DB::table('apply_cards as ac')
-            ->select(['ac.id', 'ac.order_id', 'ac.order_id', 'ac.card_id', 'a.name', 'a.mobile', 'ac.status', 'ac.created_at', 'ac.updated_at', 'c.merCardName', 'c.source',  'ac.invite_money', 'ac.top_money', 'ac.invite_openid', 'ac.top_openid', 'a.id_number'])
+            ->select(['ac.id', 'ac.order_id', 'ac.order_id', 'ac.card_id', 'a.name', 'a.mobile', 'ac.status', 'ac.created_at', 'ac.updated_at', 'c.merCardName', 'c.source', 'ac.invite_money', 'ac.top_money', 'ac.invite_openid', 'ac.top_openid', 'a.id_number'])
             ->leftJoin('agents as a', 'a.openid', '=', 'ac.user_openid')
             ->leftJoin('cardboxes as c', 'c.id', '=', 'ac.card_id')
             ->where(function ($query) use ($request) {
@@ -1147,11 +1135,11 @@ class ProductController extends Controller
                 $applyer = $request->applyer;
                 if (!empty($method)) {
                     if ($method == '1') {
-                        $query->where('a.name', 'like', '%'.$applyer.'%');
+                        $query->where('a.name', 'like', '%' . $applyer . '%');
                     } elseif ($method == '2') {
-                        $query->where('a.mobile', 'like', '%'.$applyer.'%');
+                        $query->where('a.mobile', 'like', '%' . $applyer . '%');
                     } elseif ($method == '3') {
-                        $query->where('a.id_number', 'like', '%'.$applyer.'%');
+                        $query->where('a.id_number', 'like', '%' . $applyer . '%');
                     }
                 }
             })
@@ -1207,15 +1195,15 @@ class ProductController extends Controller
             $applycards[$k]->top_name = $top_name;
 
             // excel对象赋值
-            $cellData[] = [$applycard->order_id, $applycard->merCardName, $applycard->source, $applycard->name, $applycard->mobile, $applycard->id_number."\t", $applycard->status_name, $applycard->created_at, $applycard->parent_name, $applycard->top_name, $applycard->invite_money, $applycard->top_money];
+            $cellData[] = [$applycard->order_id, $applycard->merCardName, $applycard->source, $applycard->name, $applycard->mobile, $applycard->id_number . "\t", $applycard->status_name, $applycard->created_at, $applycard->parent_name, $applycard->top_name, $applycard->invite_money, $applycard->top_money];
         }
 
         // cellData头部插入标题
-        array_unshift($cellData, ['订单号','卡片名称','渠道来源','申请人', '申请人手机号', '申请人身份证','申请状态','申请时间','邀请人姓名','邀请人上级姓名','预计邀请人返佣','预计邀请人上级返佣']);
+        array_unshift($cellData, ['订单号', '卡片名称', '渠道来源', '申请人', '申请人手机号', '申请人身份证', '申请状态', '申请时间', '邀请人姓名', '邀请人上级姓名', '预计邀请人返佣', '预计邀请人上级返佣']);
 
         // excel导出逻辑
-        Excel::create('卡片申请列表', function($excel) use ($cellData) {
-            $excel->sheet('卡片申请列表', function($sheet) use ($cellData) {
+        Excel::create('卡片申请列表', function ($excel) use ($cellData) {
+            $excel->sheet('卡片申请列表', function ($sheet) use ($cellData) {
                 $sheet->rows($cellData);
             });
         })->export('xls');
@@ -1239,18 +1227,18 @@ class ProductController extends Controller
                 $applyer = $request->applyer;
                 if (!empty($method)) {
                     if ($method == '1') {
-                        $query->where('a.name', 'like', '%'.$applyer.'%');
+                        $query->where('a.name', 'like', '%' . $applyer . '%');
                     } elseif ($method == '2') {
-                        $query->where('a.mobile', 'like', '%'.$applyer.'%');
+                        $query->where('a.mobile', 'like', '%' . $applyer . '%');
                     } elseif ($method == '3') {
-                        $query->where('a.id_number', 'like', '%'.$applyer.'%');
+                        $query->where('a.id_number', 'like', '%' . $applyer . '%');
                     }
                 }
             })
             ->where(function ($query) use ($request) {
                 $merCardName = $request->merCardName;
                 if (!empty($merCardName)) {
-                    $query->where('c.merCardName', 'like', '%'.$merCardName.'%');
+                    $query->where('c.merCardName', 'like', '%' . $merCardName . '%');
                 }
             })
             ->where(function ($query) use ($request) {
@@ -1305,15 +1293,15 @@ class ProductController extends Controller
             $applycards[$k]->top_name = $top_name;
 
             // excel对象赋值
-            $cellData[] = [$applycard->order_id, $applycard->merCardName, $applycard->source, $applycard->name, $applycard->mobile, $applycard->id_number."\t", $applycard->status_name, $applycard->created_at, $applycard->parent_name, $applycard->top_name, $applycard->invite_money, $applycard->top_money];       
+            $cellData[] = [$applycard->order_id, $applycard->merCardName, $applycard->source, $applycard->name, $applycard->mobile, $applycard->id_number . "\t", $applycard->status_name, $applycard->created_at, $applycard->parent_name, $applycard->top_name, $applycard->invite_money, $applycard->top_money];
         }
 
         // cellData头部插入标题
-        array_unshift($cellData, ['订单号','卡片名称','渠道来源','申请人', '申请人手机号', '申请人身份证','申请状态','申请时间','邀请人姓名','邀请人上级姓名','预计邀请人返佣','预计邀请人上级返佣']);
+        array_unshift($cellData, ['订单号', '卡片名称', '渠道来源', '申请人', '申请人手机号', '申请人身份证', '申请状态', '申请时间', '邀请人姓名', '邀请人上级姓名', '预计邀请人返佣', '预计邀请人上级返佣']);
 
         // excel导出逻辑
-        Excel::create('卡片申请列表', function($excel) use ($cellData) {
-            $excel->sheet('卡片申请列表', function($sheet) use ($cellData) {
+        Excel::create('卡片申请列表', function ($excel) use ($cellData) {
+            $excel->sheet('卡片申请列表', function ($sheet) use ($cellData) {
                 $sheet->rows($cellData);
             });
         })->export('xls');
