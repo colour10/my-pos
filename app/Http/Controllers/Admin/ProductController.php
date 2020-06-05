@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Agent;
-use App\Model\Cardbox;
-use App\Model\ApplyCard;
+use App\Models\Agent;
+use App\Models\Cardbox;
+use App\Models\ApplyCard;
 use Illuminate\Support\Facades\DB;
-use App\Model\Finance;
+use App\Models\Finance;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Agent\AgentauthController;
 use Illuminate\Support\Facades\Cache;
@@ -1107,7 +1107,7 @@ class ProductController extends Controller
         // // 逻辑
         Cache::forget('cardboxes');
         // $cardboxes = Cardbox::select(['id', 'merCardName', 'merCardImg', 'merCardJinduImg', 'littleFlag', 'creditCardUrl', 'creditCardJinduUrl', 'cardAmount', 'rate', 'method', 'merCardOrderImg'])->where('status', '1')->orderBy('sort', 'desc')->get()->toArray();
-        // // 写入session   
+        // // 写入session
         // Session::put('cardboxes', $cardboxes);
         // // 返回
         // return Session::get('cardboxes');

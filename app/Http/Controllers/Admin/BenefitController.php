@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Zhuzhichao\BankCardInfo\BankCard;
-use App\Model\AdvanceMethod;
+use App\Models\AdvanceMethod;
 use Maatwebsite\Excel\Facades\Excel;
 
 class BenefitController extends Controller
@@ -269,12 +269,12 @@ class BenefitController extends Controller
         $controller_action = $this->controller_action;
         $methods = $this->methods;
         return view('admin.benefit.withdraw', compact('page_title', 'lists', 'request', 'controller_action', 'methods', 'sum'));
-    }    
+    }
 
     /**
      * Excel文件导出功能
      */
-    public function export(Request $request) 
+    public function export(Request $request)
     {
         // 逻辑
         $lists = DB::table('withdraws as w')

@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Bank;
-use App\Model\Role;
-use App\Model\Permission;
-use App\Model\Manager;
-use App\Model\Account;
-use App\Model\Card;
+use App\Models\Bank;
+use App\Models\Role;
+use App\Models\Permission;
+use App\Models\Manager;
+use App\Models\Account;
+use App\Models\Card;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -708,7 +708,7 @@ class SystemController extends Controller
         }
 
     }
-    
+
 
     // 系统设置
     public function setupindex()

@@ -2,37 +2,28 @@
 
 namespace App\Http\Controllers\Agent;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Agent;
-use App\Model\Card;
-use App\Model\Bank;
-use Zhuzhichao\BankCardInfo\BankCard;
-use App\Model\AdvanceMethod;
-use App\Model\Withdraw;
-use Illuminate\Support\Facades\DB;
-use App\Model\AgentAccount;
-use App\Model\Finance;
-use App\Model\Cardbox;
-use App\Model\ApplyCard;
-// 微信存储消息
-use App\Model\WechatMessage;
-// 队列
 use App\Jobs\MakePayment;
-// Session
-use Illuminate\Support\Facades\Session;
+use App\Models\AdvanceMethod;
+use App\Models\Agent;
+use App\Models\AgentAccount;
+use App\Models\ApplyCard;
+use App\Models\Bank;
+use App\Models\Card;
+use App\Models\Cardbox;
+use App\Models\Finance;
+use App\Models\WechatMessage;
+use App\Models\Withdraw;
+use BankCard;
+use Cache;
+use DB;
 use EasyWeChat\Factory;
-use Illuminate\Support\Facades\Cache;
-// 为了防止Redis和系统内部的冲突，这里写全路径
-use Illuminate\Support\Facades\Redis;
-use Illuminate\Support\Facades\Hash;
-// 验证码
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
-// 启用日志
-use Illuminate\Support\Facades\Log;
-// 自定义验证器
-use Illuminate\Support\Facades\Validator;
+use Hash;
+use Illuminate\Http\Request;
+use Log;
+use Session;
 
 class AgentauthController extends Controller
 {
@@ -123,16 +114,16 @@ class AgentauthController extends Controller
     // }
 
     /**
-     * 提现逻辑 [微信] 
+     * 提现逻辑 [微信]
      */
     public function cash(Request $request)
     {
         // 验证
         $this->validate($request, [
-            'card_id' => 'required|integer',
-            'sum' => 'required|numeric|min:2',
+            'card_id'       => 'required|integer',
+            'sum'           => 'required|numeric|min:2',
             'cash_password' => 'required|digits:6',
-            'openid' => 'required',
+            'openid'        => 'required',
         ]);
 
         // 逻辑
@@ -143,7 +134,7 @@ class AgentauthController extends Controller
         if ($agentResult['code'] != '0') {
             $response = [
                 'code' => $agentResult['code'],
-                'msg' => $agentResult['msg'],
+                'msg'  => $agentResult['msg'],
             ];
             return $response;
         }
@@ -159,7 +150,7 @@ class AgentauthController extends Controller
         if (!\Hash::check($cash_password, $agent->cash_password)) {
             $response = [
                 'code' => '1',
-                'msg' => '提现密码不正确！',
+                'msg'  => '提现密码不正确！',
             ];
             return $response;
         }
@@ -240,8 +231,8 @@ class AgentauthController extends Controller
             // 然后更改用户账户表的余额，增加提现中余额(+$account)，可用余额(-$sum)，总金额(-$charge)
             if (!$agentaccount->update([
                 'available_money' => $available_money,
-                'cash_money' => $cash_money,
-                'sum_money' => $sum_money,
+                'cash_money'      => $cash_money,
+                'sum_money'       => $sum_money,
             ])) {
                 throw new \Exception('更新合伙人资产表失败！');
             }
@@ -267,10 +258,10 @@ class AgentauthController extends Controller
             // 结果返回
             $response = [
                 'code' => '0',
-                'msg' => '您的提现已受理，请5分钟后查看到账情况~',
+                'msg'  => '您的提现已受理，请5分钟后查看到账情况~',
                 'data' => [
                     'available_money' => $available_money,
-                    'cash_money' => $cash_money,
+                    'cash_money'      => $cash_money,
                 ],
             ];
             return $response;
@@ -279,7 +270,7 @@ class AgentauthController extends Controller
             DB::rollback();
             $response = [
                 'code' => '1',
-                'msg' => $e->getMessage(),
+                'msg'  => $e->getMessage(),
             ];
             // 记录错误日志
             $msg = '';
@@ -634,7 +625,7 @@ class AgentauthController extends Controller
                 $parentopenid = null;
             }
         }
-        
+
         // 保存
         // 因为要记录两次，所以这里启用事务处理
         DB::beginTransaction();
@@ -666,9 +657,9 @@ class AgentauthController extends Controller
 
                 // 如果agentaccount表没有这个用户，那么就新增
                 if (!AgentAccount::firstOrCreate(['agent_id' => $agent_id], [
-                    'frozen_money' => '0.00',
+                    'frozen_money'    => '0.00',
                     'available_money' => '0.00',
-                    'sum_money' => '0.00',
+                    'sum_money'       => '0.00',
                 ])) {
                     throw new \Exception('写入合伙人资产表失败');
                 }
@@ -704,7 +695,7 @@ class AgentauthController extends Controller
             $msg .= '该合伙人的信息如下：' . PHP_EOL;
             $arr = print_r($agent_arr, true);
             $msg .= "$arr";
-            $msg .= PHP_EOL . PHP_EOL;            
+            $msg .= PHP_EOL . PHP_EOL;
             // 写入日志
             Log::info($msg);
 
@@ -721,7 +712,7 @@ class AgentauthController extends Controller
             $msg .= PHP_EOL . PHP_EOL;
             $msg .= '错误信息：' . PHP_EOL;
             $msg .= $e->getMessage();
-            $msg .= PHP_EOL . PHP_EOL;            
+            $msg .= PHP_EOL . PHP_EOL;
             // 写入日志
             Log::info($msg);
         }
@@ -729,7 +720,6 @@ class AgentauthController extends Controller
         // 渲染
         return view('agent.wx', compact('user', 'app_id', 'secret', 'signPackage'));
     }
-
 
 
     /**
@@ -740,7 +730,7 @@ class AgentauthController extends Controller
         // 拿到配置参数
         $app_id = $this->config['app_id'];
         $secret = $this->config['secret'];
-        $user = $this->getauthuser();        
+        $user = $this->getauthuser();
         // 微信jssdk
         $signPackage = $this->getSignPackage($user['id']);
         // 渲染
@@ -776,7 +766,7 @@ class AgentauthController extends Controller
     public function wxwithdraw()
     {
         // 取出授权user
-        $user = $this->getauthuser();        
+        $user = $this->getauthuser();
         // 渲染
         return view('agent.withdraw', compact('user'));
     }
@@ -787,7 +777,7 @@ class AgentauthController extends Controller
     public function wxdrawcash()
     {
         // 取出授权user
-        $user = $this->getauthuser();        
+        $user = $this->getauthuser();
         // 渲染
         return view('agent.drawcash', compact('user'));
     }
@@ -798,7 +788,7 @@ class AgentauthController extends Controller
     public function wxprogress()
     {
         // 取出授权user
-        $user = $this->getauthuser();        
+        $user = $this->getauthuser();
         // 渲染
         return view('agent.progress', compact('user'));
     }
@@ -830,7 +820,7 @@ class AgentauthController extends Controller
         }
         // 返回结果
         $data = [
-            'agent' => $agent,
+            'agent'   => $agent,
             'account' => $account,
         ];
         return $data;
@@ -848,27 +838,27 @@ class AgentauthController extends Controller
             // 取出agent_id
             $agent_id = $agent->id;
             $account = AgentAccount::firstOrCreate(['agent_id' => $agent_id], [
-                'frozen_money' => '0.00',
+                'frozen_money'    => '0.00',
                 'available_money' => '0.00',
-                'sum_money' => '0.00',
+                'sum_money'       => '0.00',
             ]);
             // 代付通道
             $method = $this->getAdvanceMethod();
             // 返回
             $response = [
-                'agent' => $agent,
+                'agent'   => $agent,
                 'account' => $account,
-                'method' => $method,
-                'code' => '0',
-                'msg' => '合伙人存在',
+                'method'  => $method,
+                'code'    => '0',
+                'msg'     => '合伙人存在',
             ];
         } else {
             $response = [
-                'agent' => null,
+                'agent'   => null,
                 'account' => null,
-                'method' => null,
-                'code' => '1',
-                'msg' => '合伙人不存在',
+                'method'  => null,
+                'code'    => '1',
+                'msg'     => '合伙人不存在',
             ];
         }
         // 最终返回
@@ -951,12 +941,12 @@ class AgentauthController extends Controller
             // 返回数据
             $data = [
                 'code' => '0',
-                'msg' => '提现密码设置成功',
+                'msg'  => '提现密码设置成功',
             ];
         } else {
             $data = [
                 'code' => '1',
-                'msg' => '提现密码设置失败',
+                'msg'  => '提现密码设置失败',
             ];
         }
         return $data;
@@ -980,8 +970,8 @@ class AgentauthController extends Controller
     {
         // 验证
         $this->validate($request, [
-            'mobile' => 'regex:/^1[34578][0-9]{9}$/',
-            'password' => 'required',
+            'mobile'        => 'regex:/^1[34578][0-9]{9}$/',
+            'password'      => 'required',
             'cash_password' => 'required|digits:6|confirmed',
         ]);
 
@@ -1002,7 +992,7 @@ class AgentauthController extends Controller
         if (!Hash::check($password, $agent->cash_password)) {
             $data = [
                 'code' => '1',
-                'msg' => '手机号或提现密码不正确，请重新输入！',
+                'msg'  => '手机号或提现密码不正确，请重新输入！',
             ];
         } else {
             // 如果匹配，就修改
@@ -1015,19 +1005,18 @@ class AgentauthController extends Controller
                 // 返回数据
                 $data = [
                     'code' => '0',
-                    'msg' => '提现密码修改成功',
+                    'msg'  => '提现密码修改成功',
                 ];
             } else {
                 $data = [
                     'code' => '1',
-                    'msg' => '提现密码修改失败',
+                    'msg'  => '提现密码修改失败',
                 ];
             }
         }
         // 返回结果
         return $data;
     }
-
 
 
     /**
@@ -1038,7 +1027,7 @@ class AgentauthController extends Controller
         // 逻辑
         $agent = Agent::find($id);
         // 取出授权user
-        $user = $this->getauthuser();        
+        $user = $this->getauthuser();
         // 渲染
         return view('agent.resetpwd', compact('id', 'agent', 'user'));
     }
@@ -1050,7 +1039,7 @@ class AgentauthController extends Controller
     {
         // 验证
         $this->validate($request, [
-            'id_number' => 'required',
+            'id_number'     => 'required',
             'cash_password' => 'required|digits:6|confirmed',
         ]);
 
@@ -1067,7 +1056,7 @@ class AgentauthController extends Controller
         if ($agent->id_number != $id_number) {
             $data = [
                 'code' => '-1',
-                'msg' => '身份证号码和本人不匹配，请重新输入！',
+                'msg'  => '身份证号码和本人不匹配，请重新输入！',
             ];
         } else {
             // 如果匹配，就修改
@@ -1075,17 +1064,17 @@ class AgentauthController extends Controller
 
                 // 更新当前合伙人缓存
                 $this->deleteAgentCache($agent->openid);
-                $this->createAgentCache($agent->openid);                
+                $this->createAgentCache($agent->openid);
 
                 // 返回
                 $data = [
                     'code' => '0',
-                    'msg' => '提现密码修改成功',
+                    'msg'  => '提现密码修改成功',
                 ];
             } else {
                 $data = [
                     'code' => '1',
-                    'msg' => '提现密码修改失败',
+                    'msg'  => '提现密码修改失败',
                 ];
             }
         }
@@ -1101,7 +1090,7 @@ class AgentauthController extends Controller
     // public function wxresetloginpwd()
     // {
     //     // 取出授权user
-    //     $user = $this->getauthuser();        
+    //     $user = $this->getauthuser();
     //     // 渲染
     //     return view('agent.resetloginpwd', compact('user'));
     // }
@@ -1155,14 +1144,13 @@ class AgentauthController extends Controller
     // }
 
 
-
     /**
      * 微信-修改登录密码
      */
     // public function wxmodifyloginpwd(Request $request, $id)
     // {
     //     // 取出授权user
-    //     $user = $this->getauthuser();        
+    //     $user = $this->getauthuser();
     //     // 渲染
     //     return view('agent.modifyloginpwd', compact('user', 'id'));
     // }
@@ -1223,7 +1211,7 @@ class AgentauthController extends Controller
     public function wxsetting()
     {
         // 获取授权用户信息
-        $user = $this->getauthuser();      
+        $user = $this->getauthuser();
         // 渲染
         return view('agent.setting', compact('user'));
     }
@@ -1255,9 +1243,9 @@ class AgentauthController extends Controller
         $agentResult = $this->wxcheckbyopenid();
         if ($agentResult['code'] != '0') {
             $response = [
-                'code' => $agentResult['code'],
-                'msg' => $agentResult['msg'],
-                'data' => null,
+                'code'   => $agentResult['code'],
+                'msg'    => $agentResult['msg'],
+                'data'   => null,
                 'length' => '0',
             ];
             return $response;
@@ -1278,7 +1266,7 @@ class AgentauthController extends Controller
 
         // 返回
         $response = [
-            'data' => $cards,
+            'data'   => $cards,
             'length' => $cards->count(),
         ];
         return $response;
@@ -1295,9 +1283,9 @@ class AgentauthController extends Controller
         $agentResult = $this->wxcheckbyopenid();
         if ($agentResult['code'] != '0') {
             $response = [
-                'code' => $agentResult['code'],
-                'msg' => $agentResult['msg'],
-                'data' => null,
+                'code'   => $agentResult['code'],
+                'msg'    => $agentResult['msg'],
+                'data'   => null,
                 'length' => '0',
             ];
             return $response;
@@ -1311,7 +1299,7 @@ class AgentauthController extends Controller
         $card = Card::select(['id', 'card_number', 'bank_id', 'isdefault'])->where('agent_id', $agent_id)->where('isdefault', '1')->first();
         if ($card === null) {
             $response = [
-                'data' => $card,
+                'data'   => $card,
                 'length' => '0',
             ];
         } else {
@@ -1324,7 +1312,7 @@ class AgentauthController extends Controller
             // $card->bankImg = $bankinfo['bankImg'];
             // $card->new_card_number = $this->substr_cut($card->card_number);
             $response = [
-                'data' => $card,
+                'data'   => $card,
                 'length' => '1',
             ];
         }
@@ -1359,7 +1347,7 @@ class AgentauthController extends Controller
         if ($agentResult['code'] != '0') {
             $response = [
                 'code' => $agentResult['code'],
-                'msg' => $agentResult['msg'],
+                'msg'  => $agentResult['msg'],
             ];
             return $response;
         }
@@ -1371,13 +1359,13 @@ class AgentauthController extends Controller
         if ($name !== $agent->name) {
             $response = [
                 'code' => '1',
-                'msg' => '抱歉，您只能绑定自己的银行卡！',
+                'msg'  => '抱歉，您只能绑定自己的银行卡！',
             ];
         } else {
             // 否则就允许绑卡
             $response = [
                 'code' => '0',
-                'msg' => '姓名一致性验证通过',
+                'msg'  => '姓名一致性验证通过',
             ];
         }
         return $response;
@@ -1413,7 +1401,7 @@ class AgentauthController extends Controller
         if ($cardinfo['validated'] == false) {
             $data = [
                 'code' => '1',
-                'msg' => '银行卡号错误，请重新输入',
+                'msg'  => '银行卡号错误，请重新输入',
             ];
             return $data;
         }
@@ -1426,13 +1414,13 @@ class AgentauthController extends Controller
         if ($newid) {
             $response = [
                 'code' => '0',
-                'msg' => '银行卡添加成功',
+                'msg'  => '银行卡添加成功',
             ];
             return $response;
         } else {
             $response = [
                 'code' => '1',
-                'msg' => '银行卡添加失败',
+                'msg'  => '银行卡添加失败',
             ];
             return $response;
         }
@@ -1459,7 +1447,7 @@ class AgentauthController extends Controller
         if ($agentResult['code'] != '0') {
             $response = [
                 'code' => $agentResult['code'],
-                'msg' => $agentResult['msg'],
+                'msg'  => $agentResult['msg'],
             ];
             return $response;
         }
@@ -1487,7 +1475,7 @@ class AgentauthController extends Controller
         if ($cardinfo['validated'] == false) {
             $data = [
                 'code' => '1',
-                'msg' => '银行卡号错误，请重新输入',
+                'msg'  => '银行卡号错误，请重新输入',
             ];
             return $data;
         }
@@ -1521,7 +1509,7 @@ class AgentauthController extends Controller
             // 返回
             $response = [
                 'code' => '0',
-                'msg' => '银行卡添加成功',
+                'msg'  => '银行卡添加成功',
             ];
             return $response;
 
@@ -1530,7 +1518,7 @@ class AgentauthController extends Controller
             DB::rollback();
             $data = [
                 'code' => '1',
-                'msg' => $e->getMessage(),
+                'msg'  => $e->getMessage(),
             ];
             return $data;
         }
@@ -1543,7 +1531,7 @@ class AgentauthController extends Controller
     public function wxeditcard(Request $request, $id)
     {
         // 获取授权用户信息
-        $user = $this->getauthuser();        
+        $user = $this->getauthuser();
         // 渲染
         $card = Card::find($id);
         return view('agent.cardedit', compact('card', 'user'));
@@ -1558,7 +1546,7 @@ class AgentauthController extends Controller
         // 验证
         $this->validate($request, [
             'card_number' => 'required|unique:cards,card_number,' . $id,
-            'isdefault' => 'required|integer',
+            'isdefault'   => 'required|integer',
         ]);
 
         // 逻辑
@@ -1573,7 +1561,7 @@ class AgentauthController extends Controller
         if ($cardinfo['validated'] == false) {
             $data = [
                 'code' => '1',
-                'msg' => '银行卡号错误，请重新输入',
+                'msg'  => '银行卡号错误，请重新输入',
             ];
             return $data;
         }
@@ -1606,7 +1594,7 @@ class AgentauthController extends Controller
             // 返回
             $data = [
                 'code' => '0',
-                'msg' => '银行卡修改成功',
+                'msg'  => '银行卡修改成功',
             ];
             return $data;
 
@@ -1614,7 +1602,7 @@ class AgentauthController extends Controller
             DB::rollback();
             $data = [
                 'code' => '1',
-                'msg' => $e->getMessage(),
+                'msg'  => $e->getMessage(),
             ];
             return $data;
         }
@@ -1645,7 +1633,7 @@ class AgentauthController extends Controller
         if ($cardinfo['validated'] == false) {
             $data = [
                 'code' => '1',
-                'msg' => '银行卡号错误，请重新输入',
+                'msg'  => '银行卡号错误，请重新输入',
             ];
             return $data;
         }
@@ -1678,7 +1666,7 @@ class AgentauthController extends Controller
             // 返回
             $data = [
                 'code' => '0',
-                'msg' => '银行卡修改成功',
+                'msg'  => '银行卡修改成功',
             ];
             return $data;
 
@@ -1686,7 +1674,7 @@ class AgentauthController extends Controller
             DB::rollback();
             $data = [
                 'code' => '1',
-                'msg' => $e->getMessage(),
+                'msg'  => $e->getMessage(),
             ];
             return $data;
         }
@@ -1703,7 +1691,7 @@ class AgentauthController extends Controller
         if (!$card->count()) {
             $data = [
                 'code' => '1',
-                'msg' => '该记录不存在，删除失败',
+                'msg'  => '该记录不存在，删除失败',
             ];
             return $data;
         }
@@ -1711,12 +1699,12 @@ class AgentauthController extends Controller
         if ($card->delete()) {
             $data = [
                 'code' => '0',
-                'msg' => '删除成功',
+                'msg'  => '删除成功',
             ];
         } else {
             $data = [
                 'code' => '1',
-                'msg' => '删除失败',
+                'msg'  => '删除失败',
             ];
         }
         return $data;
@@ -1766,9 +1754,9 @@ class AgentauthController extends Controller
         $agentResult = $this->wxcheckbyopenid();
         if ($agentResult['code'] != '0') {
             $response = [
-                'code' => $agentResult['code'],
-                'msg' => $agentResult['msg'],
-                'data' => null,
+                'code'   => $agentResult['code'],
+                'msg'    => $agentResult['msg'],
+                'data'   => null,
                 'length' => '0',
             ];
             return $response;
@@ -1797,12 +1785,12 @@ class AgentauthController extends Controller
                 }
             }
             $response = [
-                'data' => $withdraws,
+                'data'   => $withdraws,
                 'length' => $withdraws->count(),
             ];
         } else {
             $response = [
-                'data' => null,
+                'data'   => null,
                 'length' => 0,
             ];
         }
@@ -1894,7 +1882,7 @@ class AgentauthController extends Controller
 
     /**
      * 通过openid拉取用户信息
-     * @param  string $openid [description]
+     * @param string $openid [description]
      * @return [type]         [description]
      */
     public function getUserInfo()
@@ -1922,11 +1910,11 @@ class AgentauthController extends Controller
     {
         // 创建一个新cURL资源
         $ch = curl_init();
-        
+
         // 设置URL和相应的选项
         curl_setopt($ch, CURLOPT_URL, $curl);    //要访问的网站
         curl_setopt($ch, CURLOPT_HEADER, false);    //启用时会将头文件的信息作为数据流输出。
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  //将curl_exec()获取的信息以字符串返回，而不是直接输出。 
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  //将curl_exec()获取的信息以字符串返回，而不是直接输出。
 
         if ($https) {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);  //FALSE 禁止 cURL 验证对等证书（peer's certificate）。
@@ -1936,7 +1924,7 @@ class AgentauthController extends Controller
             curl_setopt($ch, CURLOPT_POST, true);  //发送 POST 请求
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);  //全部数据使用HTTP协议中的 "POST" 操作来发送。
         }
-        
+
         // 抓取URL并把它传递给浏览器
         $content = curl_exec($ch);
         if ($content === false) {
@@ -1945,7 +1933,7 @@ class AgentauthController extends Controller
         }
         //关闭cURL资源，并且释放系统资源
         curl_close($ch);
-        
+
         // 返回
         return $content;
     }
@@ -1979,7 +1967,7 @@ class AgentauthController extends Controller
         $tel = $this->request->tel;
         $openid = $this->request->openid;
         // 请求url
-        $url = 'http://api.id98.cn/api/v2/bankcard?appkey=' . self::MSG_APPKEY . '&name=' . $name . '&idcardno=' . $idcardno . '&bankcardno=' . $bankcardno . '&tel=' . $tel;  
+        $url = 'http://api.id98.cn/api/v2/bankcard?appkey=' . self::MSG_APPKEY . '&name=' . $name . '&idcardno=' . $idcardno . '&bankcardno=' . $bankcardno . '&tel=' . $tel;
 
         // 判断合伙人
         $agentResult = $this->wxcheckbyopenid();
@@ -1990,9 +1978,9 @@ class AgentauthController extends Controller
                 'desc' => '抱歉，您没有权限请求四要素接口！',
                 'data' => [
                     'bankcardno' => $bankcardno,
-                    'name' => $name,
-                    'idcardno' => $idcardno,
-                    'tel' => $tel,
+                    'name'       => $name,
+                    'idcardno'   => $idcardno,
+                    'tel'        => $tel,
                 ],
             ];
             return $response;
@@ -2092,13 +2080,13 @@ class AgentauthController extends Controller
         if (Cache::get('wxyzm') == $capcha) {
             $data = [
                 'code' => '0',
-                'msg' => '验证码输入正确',
+                'msg'  => '验证码输入正确',
             ];
         } else {
             $data = [
                 'code' => '1',
-                'yzm' => Cache::get('wxyzm'),
-                'msg' => '验证码输入错误',
+                'yzm'  => Cache::get('wxyzm'),
+                'msg'  => '验证码输入错误',
             ];
         }
         return $data;
@@ -2144,12 +2132,12 @@ class AgentauthController extends Controller
         if ($agent) {
             $response = [
                 'code' => '0',
-                'msg' => '手机号已被注册',
+                'msg'  => '手机号已被注册',
             ];
         } else {
             $response = [
                 'code' => '1',
-                'msg' => '手机号可以注册',
+                'msg'  => '手机号可以注册',
             ];
         }
         // 返回
@@ -2207,12 +2195,12 @@ class AgentauthController extends Controller
         if (Session::get('wxcode') == $capcha) {
             $data = [
                 'code' => '0',
-                'msg' => '验证码输入正确',
+                'msg'  => '验证码输入正确',
             ];
         } else {
             $data = [
                 'code' => '1',
-                'msg' => '验证码输入错误',
+                'msg'  => '验证码输入错误',
             ];
         }
         return $data;
@@ -2390,18 +2378,18 @@ class AgentauthController extends Controller
                 }
             }
             $response = [
-                'code' => '0',
+                'code'  => '0',
                 'count' => $finances->count(),
-                'data' => [
-                    'agent' => $agent,
+                'data'  => [
+                    'agent'    => $agent,
                     'finances' => $finances,
                 ],
             ];
         } else {
             $response = [
-                'code' => '1',
+                'code'  => '1',
                 'count' => '0',
-                'data' => null,
+                'data'  => null,
             ];
         }
         return $response;
@@ -2457,7 +2445,7 @@ class AgentauthController extends Controller
         // // 逻辑
         // $this->request->session()->forget('cardboxes');
         // $cardboxes = Cardbox::select(['id', 'merCardName', 'merCardImg', 'merCardJinduImg', 'littleFlag', 'creditCardUrl', 'creditCardJinduUrl', 'cardAmount', 'rate', 'method', 'merCardOrderImg'])->where('status', '1')->orderBy('sort', 'desc')->get()->toArray();
-        // // 写入session   
+        // // 写入session
         // Session::put('cardboxes', $cardboxes);
         // // 返回
         // return Session::get('cardboxes');
@@ -2557,22 +2545,21 @@ class AgentauthController extends Controller
         if ($agent) {
             $account = AgentAccount::select(['available_money', 'frozen_money', 'cash_money', 'sum_money'])->where('agent_id', $agent->id)->first();
             $data = [
-                'agent' => $agent,
+                'agent'   => $agent,
                 'account' => $account,
-                'code' => '0',
+                'code'    => '0',
             ];
         } else {
             $account = null;
             $data = [
-                'agent' => $agent,
+                'agent'   => $agent,
                 'account' => $account,
-                'code' => '1',
+                'code'    => '1',
             ];
         }
         // 返回结果
         return $data;
     }
-
 
 
     /**
@@ -2693,29 +2680,29 @@ class AgentauthController extends Controller
                 }
 
                 $tree[] = [
-                    'id' => $v['id'],
-                    'name' => empty($v['name']) ? '****' : $v['name'],
-                    'hide_name' => empty($v['name']) || ($v['name'] == '****') ? '****' : $this->substr_cutname($v['name']),
-                    'mobile' => $v['mobile'],
-                    'hide_mobile' => $this->hidephone($v['mobile']),
-                    'openid' => $v['openid'],
-                    'parentopenid' => $v['parentopenid'],
-                    'created_at' => $v['created_at'],
-                    'level' => $level,
-                    'level_str' => str_repeat($repeat_str, $level) . $v['name'],
+                    'id'                        => $v['id'],
+                    'name'                      => empty($v['name']) ? '****' : $v['name'],
+                    'hide_name'                 => empty($v['name']) || ($v['name'] == '****') ? '****' : $this->substr_cutname($v['name']),
+                    'mobile'                    => $v['mobile'],
+                    'hide_mobile'               => $this->hidephone($v['mobile']),
+                    'openid'                    => $v['openid'],
+                    'parentopenid'              => $v['parentopenid'],
+                    'created_at'                => $v['created_at'],
+                    'level'                     => $level,
+                    'level_str'                 => str_repeat($repeat_str, $level) . $v['name'],
                     // 上级合伙人
-                    'parent_id' => $parent_id,
-                    'parent_mobile' => $parent_mobile,
-                    'parent_name' => $parent_name,
-                    'hide_parent_mobile' => $hide_parent_mobile,
-                    'hide_parent_name' => $hide_parent_name,
+                    'parent_id'                 => $parent_id,
+                    'parent_mobile'             => $parent_mobile,
+                    'parent_name'               => $parent_name,
+                    'hide_parent_mobile'        => $hide_parent_mobile,
+                    'hide_parent_name'          => $hide_parent_name,
                     // 上级合伙人的上级
-                    'parent_parent_id' => $parent_parent_id,
-                    'parent_parent_openid' => $parent_parent_openid,
-                    'parent_parent_mobile' => $parent_parent_mobile,
-                    'parent_parent_name' => $parent_parent_name,
+                    'parent_parent_id'          => $parent_parent_id,
+                    'parent_parent_openid'      => $parent_parent_openid,
+                    'parent_parent_mobile'      => $parent_parent_mobile,
+                    'parent_parent_name'        => $parent_parent_name,
                     'parent_hide_parent_mobile' => $parent_hide_parent_mobile,
-                    'parent_hide_parent_name' => $parent_hide_parent_name,
+                    'parent_hide_parent_name'   => $parent_hide_parent_name,
                 ];
                 // 再去找下面的分级代理
                 $tree = array_merge($tree, $this->formatagents($result, $v['openid'], $level + 1));
@@ -2724,7 +2711,6 @@ class AgentauthController extends Controller
         // 返回
         return $tree;
     }
-
 
 
     /**
@@ -2752,7 +2738,7 @@ class AgentauthController extends Controller
         if (!$agent) {
             $response = [
                 'code' => '1',
-                'msg' => '当前合伙人不存在，上级合伙人也不存在！',
+                'msg'  => '当前合伙人不存在，上级合伙人也不存在！',
             ];
         } else {
             // 看看parentopenid是否存在，如果不存在，说明没有上级代理人
@@ -2763,12 +2749,12 @@ class AgentauthController extends Controller
                 if (!$parent_agent) {
                     $response = [
                         'code' => '1',
-                        'msg' => '上级合伙人不存在！',
+                        'msg'  => '上级合伙人不存在！',
                     ];
                 } else {
                     $response = [
                         'code' => '0',
-                        'msg' => '上级合伙人存在',
+                        'msg'  => '上级合伙人存在',
                         'data' => $parent_agent,
                     ];
                 }
@@ -2813,7 +2799,7 @@ class AgentauthController extends Controller
     public function wxstrategy()
     {
         // 获取授权用户信息
-        $user = $this->getauthuser();       
+        $user = $this->getauthuser();
         // 渲染
         return view('agent.strategy', compact('user'));
     }
@@ -2840,18 +2826,18 @@ class AgentauthController extends Controller
     {
         // 验证
         $this->validate($request, [
-            'user_openid' => 'required',
-            'card_id' => 'required|integer',
-            'user_name' => 'required',
+            'user_openid'   => 'required',
+            'card_id'       => 'required|integer',
+            'user_name'     => 'required',
             'user_identity' => 'required',
-            'user_phone' => 'required',
+            'user_phone'    => 'required',
         ]);
         // 逻辑
         $user_openid = request('user_openid');
         $card_id = request('card_id');
         $user_name = request('user_name');
         $user_identity = request('user_identity');
-        $user_phone = request('user_phone');        
+        $user_phone = request('user_phone');
         // 卡片模型
         $cardbox = Cardbox::findOrFail($card_id);
         // 合伙人模型
@@ -2861,7 +2847,7 @@ class AgentauthController extends Controller
         if (!$agent) {
             $response = [
                 'code' => '1',
-                'msg' => '合伙人不存在，请返回首页重新授权...',
+                'msg'  => '合伙人不存在，请返回首页重新授权...',
             ];
             return $response;
         }
@@ -2870,7 +2856,7 @@ class AgentauthController extends Controller
         $invite_openid = null;
         $top_openid = null;
         $invite_money = '0.00';
-        $top_money = '0.00';        
+        $top_money = '0.00';
 
         // 上级和上上级推测逻辑
         // 需要判断这个推荐人还有没有上级
@@ -2879,7 +2865,7 @@ class AgentauthController extends Controller
             $parentAgent = $this->getAgent($agent->parentopenid);
             if ($parentAgent) {
                 $invite_openid = $agent->parentopenid;
-                $invite_money = $cardbox->cardAmount;       
+                $invite_money = $cardbox->cardAmount;
                 // 上上级
                 // 先判断不为null
                 if ($parentAgent->parentopenid) {
@@ -2909,7 +2895,7 @@ class AgentauthController extends Controller
                 $response = [
                     'code' => '0',
                     // 'msg' => '您之前申请过该卡片，将直接为您跳转，请稍候...',
-                    'msg' => '信息登记成功，即将跳转到银行申请页面，请稍候...',
+                    'msg'  => '信息登记成功，即将跳转到银行申请页面，请稍候...',
                 ];
                 return $response;
             } else {
@@ -2936,12 +2922,12 @@ class AgentauthController extends Controller
             if (!empty($invite_openid)) {
                 // 开始推送推荐成交通知模板
                 $this->app->template_message->send([
-                    'touser' => $invite_openid,
+                    'touser'      => $invite_openid,
                     'template_id' => 'PcGOMAmyFCBqklWpWSVX_0w-70JMwObKHu9TfMDO8JM',
                     // 这里推送当前用户的推广链接
-                    'url' => 'http://hhr.yiopay.com/agent/wx?wxshare=wxshare&appuuid=wx88d48c474331a7f5&parentopenId=' . $invite_openid,
-                    'data' => [
-                        'first' => [
+                    'url'         => 'http://hhr.yiopay.com/agent/wx?wxshare=wxshare&appuuid=wx88d48c474331a7f5&parentopenId=' . $invite_openid,
+                    'data'        => [
+                        'first'    => [
                             'value' => '您的客户' . $hide_user_name . '正在办理' . $card_name . '信用卡，预计返佣金额' . $invite_money . '元，返佣到账以信用卡申请通过为准，请知悉。',
                             'color' => '#173177',
                         ],
@@ -2961,7 +2947,7 @@ class AgentauthController extends Controller
                             "value" => $card_name . '【' . $cardbox->littleFlag . '】',
                             "color" => "#173177",
                         ],
-                        "remark" => [
+                        "remark"   => [
                             "value" => "推荐好友办卡一张最高奖励90元，赶快行动哦！" . PHP_EOL . '点击查看详情',
                             "color" => "#173177",
                         ],
@@ -2976,7 +2962,7 @@ class AgentauthController extends Controller
             $response = [
                 'code' => '0',
                 'data' => $applycard,
-                'msg' => '信息登记成功，即将跳转到银行申请页面，请稍候...',
+                'msg'  => '信息登记成功，即将跳转到银行申请页面，请稍候...',
             ];
             return $response;
 
@@ -2985,7 +2971,7 @@ class AgentauthController extends Controller
             DB::rollback();
             $response = [
                 'code' => '1',
-                'msg' => $e->getMessage(),
+                'msg'  => $e->getMessage(),
             ];
 
             // 记录错误信息
@@ -3036,12 +3022,12 @@ class AgentauthController extends Controller
         if ($result) {
             $response = [
                 'code' => '0',
-                'msg' => '您已经申请了该卡，请不要重复申请',
+                'msg'  => '您已经申请了该卡，请不要重复申请',
             ];
         } else {
             $response = [
                 'code' => '1',
-                'msg' => '可以正常申请',
+                'msg'  => '可以正常申请',
             ];
         }
         return $response;
@@ -3084,7 +3070,7 @@ class AgentauthController extends Controller
         foreach ($orders as $k => $order) {
             $orders[$k]->cardbox = $order->cardbox;
             // 审核人
-            $orders[$k]->agent = $order->agent;            
+            $orders[$k]->agent = $order->agent;
             // 审核状态
             if ($order->status == '1') {
                 $orders[$k]->status_name = '已通过';
@@ -3108,19 +3094,19 @@ class AgentauthController extends Controller
         $log = $this->request->log;
         return $log;
 
-        
+
         // 写入日志
         $date = date('Y-m-d');
         $file = storage_path('logs/frontend-log-' . $date . '.log');
         if (file_put_contents($file, $log . PHP_EOL, FILE_APPEND)) {
             $response = [
                 'code' => '0',
-                'msg' => '日志写入成功',
+                'msg'  => '日志写入成功',
             ];
         } else {
             $response = [
                 'code' => '1',
-                'msg' => '日志写入失败',
+                'msg'  => '日志写入失败',
             ];
         }
         return $response;
@@ -3189,12 +3175,12 @@ class AgentauthController extends Controller
         if (($answer_openid != 'ol0Z1uLbitksYmYY9IDKfuVsiU1g') && ($answer_openid != 'ol0Z1uAO8pkZLapzV3SFJO-msRHg') && ($answer_openid != 'ol0Z1uKKDG7lHEAzwMvf0W21FCgw')) {
             $response = [
                 'code' => '1',
-                'msg' => '抱歉，非管理员不能回复用户留言！',
+                'msg'  => '抱歉，非管理员不能回复用户留言！',
             ];
             return $response;
         }
         // 消息模型
-        $wechat_message = WechatMessage::findOrFail($id);  
+        $wechat_message = WechatMessage::findOrFail($id);
         // 首先转发至用户
         $this->app->customer_service->message($answer_msg)->to($wechat_message->ask_openid)->send();
         // 接下来写入数据库
@@ -3215,12 +3201,12 @@ class AgentauthController extends Controller
         if ($result) {
             $response = [
                 'code' => '0',
-                'msg' => '回复成功',
+                'msg'  => '回复成功',
             ];
         } else {
             $response = [
                 'code' => '1',
-                'msg' => '回复失败',
+                'msg'  => '回复失败',
             ];
         }
 
@@ -3242,12 +3228,12 @@ class AgentauthController extends Controller
         if (empty($wechat_message->answer_openid) || empty($wechat_message->answer_msg)) {
             $response = [
                 'code' => '0',
-                'msg' => '该留言还未被管理员回复',
+                'msg'  => '该留言还未被管理员回复',
             ];
         } else {
             $response = [
                 'code' => '1',
-                'msg' => '温馨提示：该留言已被管理员回复',
+                'msg'  => '温馨提示：该留言已被管理员回复',
             ];
         }
         // 返回
@@ -3265,7 +3251,7 @@ class AgentauthController extends Controller
         if (empty($this->request->openid)) {
             $response = [
                 'code' => '1',
-                'msg' => 'openid不存在，请先进行微信授权再访问此页面',
+                'msg'  => 'openid不存在，请先进行微信授权再访问此页面',
                 'data' => null,
             ];
             return $response;
@@ -3276,13 +3262,13 @@ class AgentauthController extends Controller
         if (!$agent) {
             $response = [
                 'code' => '1',
-                'msg' => '合伙人不存在，请先进行微信授权再访问此页面',
+                'msg'  => '合伙人不存在，请先进行微信授权再访问此页面',
                 'data' => null,
             ];
         } else {
             $response = [
                 'code' => '0',
-                'msg' => '合伙人存在',
+                'msg'  => '合伙人存在',
                 'data' => $agent,
             ];
         }
@@ -3379,20 +3365,20 @@ class AgentauthController extends Controller
             if (empty($agent->name) || empty($agent->id_number) || empty($agent->mobile)) {
                 $response = [
                     'code' => '1',
-                    'msg' => '合伙人未实名认证',
+                    'msg'  => '合伙人未实名认证',
                 ];
             } else {
                 $response = [
                     'code' => '0',
                     'data' => $agent,
-                    'msg' => '已实名认证',
+                    'msg'  => '已实名认证',
                 ];
             }
         } else {
             // 如果不存在，说明还不是合伙人，更加没有实名认证
             $response = [
                 'code' => '1',
-                'msg' => '非合伙人未实名认证',
+                'msg'  => '非合伙人未实名认证',
             ];
         }
         // 最终返回
@@ -3422,12 +3408,12 @@ class AgentauthController extends Controller
                 if ($agent->update(compact('name', 'id_number', 'mobile'))) {
                     $response = [
                         'code' => '0',
-                        'msg' => '修改合伙人认证成功',
+                        'msg'  => '修改合伙人认证成功',
                     ];
                 } else {
                     $response = [
                         'code' => '1',
-                        'msg' => '修改合伙人认证失败',
+                        'msg'  => '修改合伙人认证失败',
                     ];
                 }
             }
@@ -3442,39 +3428,38 @@ class AgentauthController extends Controller
             }
             // 添加新合伙人，也用$agent命名
             $agent = Agent::create([
-                'sname' => $name,
-                'name' => $name,
-                'id_number' => $id_number,
-                'wx_openid' => $openid,
-                'openid' => $openid,
+                'sname'        => $name,
+                'name'         => $name,
+                'id_number'    => $id_number,
+                'wx_openid'    => $openid,
+                'openid'       => $openid,
                 'parentopenid' => $parentopenid,
-                'mobile' => $mobile,
+                'mobile'       => $mobile,
                 // 初始密码为123456
-                'password' => bcrypt('123456'),
+                'password'     => bcrypt('123456'),
                 // method为4，实名认证注册
-                'method' => '4',
+                'method'       => '4',
             ]);
             if ($agent) {
                 $response = [
                     'code' => '0',
-                    'msg' => '新增合伙人认证成功',
+                    'msg'  => '新增合伙人认证成功',
                 ];
             } else {
                 $response = [
                     'code' => '1',
-                    'msg' => '新增合伙人认证失败',
+                    'msg'  => '新增合伙人认证失败',
                 ];
             }
         }
 
         // 更新当前合伙人缓存
         $this->deleteAgentCache($openid);
-        $this->createAgentCache($openid);  
+        $this->createAgentCache($openid);
 
         // 最终返回
         return $response;
     }
-
 
 
     /**
@@ -3514,10 +3499,10 @@ class AgentauthController extends Controller
         // 如果是没有注册，那么就进行完全写入
         $this->validate($request, [
             // 'openid' => 'required|unique:agents,openid',
-            'openid' => 'required',
-            'name' => 'required|string',
+            'openid'    => 'required',
+            'name'      => 'required|string',
             // 'mobile' => 'required|unique:agents,mobile|regex:/^1[345678][0-9]{9}$/',
-            'mobile' => 'required|regex:/^1[345678][0-9]{9}$/',
+            'mobile'    => 'required|regex:/^1[345678][0-9]{9}$/',
             // 'id_number' => 'required|unique:agents,id_number',
             'id_number' => 'required',
         ]);
@@ -3546,7 +3531,7 @@ class AgentauthController extends Controller
             if ($checkIdentity['code'] == '1') {
                 throw new \Exception($checkIdentity['msg']);
             }
-                    
+
             // 判断手机号能否使用
             $checkMobile = $this->wxcheckmobilevalid();
             // 如果不可用
@@ -3564,7 +3549,7 @@ class AgentauthController extends Controller
                     if (!$agent->update(compact('wx_openid', 'openid'))) {
                         throw new \Exception('更新合伙人openid失败');
                     }
-                }                
+                }
                 // 更新姓名，身份证，手机号
                 if (!$agent->update(compact('name', 'id_number', 'mobile', 'sname'))) {
                     throw new \Exception('更新合伙人姓名、身份证信息失败');
@@ -3600,9 +3585,9 @@ class AgentauthController extends Controller
 
                 // 如果agentaccount表没有这个用户，那么就新增
                 if (!AgentAccount::firstOrCreate(['agent_id' => $agent_id], [
-                    'frozen_money' => '0.00',
+                    'frozen_money'    => '0.00',
                     'available_money' => '0.00',
-                    'sum_money' => '0.00',
+                    'sum_money'       => '0.00',
                 ])) {
                     throw new \Exception('写入用户资产表失败');
                 }
@@ -3628,7 +3613,7 @@ class AgentauthController extends Controller
             $response = [
                 'code' => '0',
                 'data' => $agent,
-                'msg' => '合伙人实名认证成功',
+                'msg'  => '合伙人实名认证成功',
             ];
             return $response;
 
@@ -3638,7 +3623,7 @@ class AgentauthController extends Controller
             // 错误返回
             $response = [
                 'code' => '1',
-                'msg' => $e->getMessage(),
+                'msg'  => $e->getMessage(),
             ];
             return $response;
         }
@@ -3661,18 +3646,18 @@ class AgentauthController extends Controller
             if ($agent->openid == $openid) {
                 $response = [
                     'code' => '0',
-                    'msg' => '手机号可以使用',
+                    'msg'  => '手机号可以使用',
                 ];
             } else {
                 $response = [
                     'code' => '1',
-                    'msg' => '手机号不可以使用',
+                    'msg'  => '手机号不可以使用',
                 ];
             }
         } else {
             $response = [
                 'code' => '0',
-                'msg' => '手机号可以使用',
+                'msg'  => '手机号可以使用',
             ];
         }
         // 最终返回
@@ -3696,18 +3681,18 @@ class AgentauthController extends Controller
             if ($agent->openid == $openid) {
                 $response = [
                     'code' => '0',
-                    'msg' => '身份证号可以使用',
+                    'msg'  => '身份证号可以使用',
                 ];
             } else {
                 $response = [
                     'code' => '1',
-                    'msg' => '身份证号不可以使用',
+                    'msg'  => '身份证号不可以使用',
                 ];
             }
         } else {
             $response = [
                 'code' => '0',
-                'msg' => '身份证号可以使用',
+                'msg'  => '身份证号可以使用',
             ];
         }
         // 最终返回
@@ -3744,18 +3729,18 @@ class AgentauthController extends Controller
             if ($agent->update(compact('mobile'))) {
                 $response = [
                     'code' => '0',
-                    'msg' => '合伙人手机号修改成功',
+                    'msg'  => '合伙人手机号修改成功',
                 ];
             } else {
                 $response = [
                     'code' => '1',
-                    'msg' => '合伙人手机号修改失败',
+                    'msg'  => '合伙人手机号修改失败',
                 ];
             }
         } else {
             $response = [
                 'code' => '1',
-                'msg' => '合伙人不存在',
+                'msg'  => '合伙人不存在',
             ];
         }
         // 返回
@@ -3774,7 +3759,7 @@ class AgentauthController extends Controller
         // 返回
         $response = [
             'code' => '0',
-            'msg' => '缓存清除成功',
+            'msg'  => '缓存清除成功',
         ];
         return $response;
     }
@@ -3807,7 +3792,7 @@ class AgentauthController extends Controller
     /**
      * 创建当前游客为合伙人，暂时没用上
      * @param $openid 微信用户openid
-     * @method $openid 添加方式 
+     * @method $openid 添加方式
      */
     // public function createWxAgent($openid, $method)
     // {
@@ -3914,7 +3899,7 @@ class AgentauthController extends Controller
         if (Cache::has('agent_' . $openid . '_cache')) {
             Cache::forget('agent_' . $openid . '_cache');
         }
-    }    
+    }
 
     /**
      * 重新生成父类合伙人查询缓存
@@ -4017,7 +4002,7 @@ class AgentauthController extends Controller
     {
         // 逻辑
         Cache::forever('advance_method', $this->getAdvanceMethodsFromDB());
-    }    
+    }
 
     /**
      * 销毁代付通道缓存

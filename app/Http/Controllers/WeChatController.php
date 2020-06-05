@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use EasyWeChat\Kernel\Messages\Transfer;
 // 微信存储消息
-use App\Model\WechatMessage;
+use App\Models\WechatMessage;
 
 class WeChatController extends Controller
 {
@@ -375,7 +375,7 @@ class WeChatController extends Controller
         //             kf_wx: "lilong5789"
         //         }
         //     ]
-        // }        
+        // }
     }
 
     /**

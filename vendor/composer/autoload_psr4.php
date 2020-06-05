@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'zgldh\\QiniuStorage\\' => array($vendorDir . '/zgldh/qiniu-laravel-storage/src'),
-    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
+    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/type-resolver/src', $vendorDir . '/phpdocumentor/reflection-docblock/src'),
     'Zhuzhichao\\BankCardInfo\\' => array($vendorDir . '/zhuzhichao/bank-card-info/src'),
     'XdgBaseDir\\' => array($vendorDir . '/dnoegel/php-xdg-base-dir/src'),
     'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
@@ -33,7 +33,7 @@ return array(
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Symfony\\Component\\Cache\\' => array($vendorDir . '/symfony/cache'),
     'Symfony\\Bridge\\PsrHttpMessage\\' => array($vendorDir . '/symfony/psr-http-message-bridge'),
-    'SuperClosure\\' => array($vendorDir . '/jeremeamia/SuperClosure/src'),
+    'SuperClosure\\' => array($vendorDir . '/jeremeamia/superclosure/src'),
     'Stevenyangecho\\UEditor\\' => array($vendorDir . '/stevenyangecho/laravel-u-editor/src'),
     'Spatie\\TemporaryDirectory\\' => array($vendorDir . '/spatie/temporary-directory/src'),
     'Spatie\\DbDumper\\' => array($vendorDir . '/spatie/db-dumper/src'),

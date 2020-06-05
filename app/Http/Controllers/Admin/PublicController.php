@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Agent;
-use App\Model\Manager;
+use App\Models\Agent;
+use App\Models\Manager;
 // Redis一定要设置全路径，不能写成use Redis，以免命名冲突
 use Illuminate\Support\Facades\Redis;
 use Session;

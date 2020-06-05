@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Agent;
-use App\Model\Bank;
-use App\Model\Card;
-use App\Model\Role;
-use App\Model\AgentAccount;
+use App\Models\Agent;
+use App\Models\Bank;
+use App\Models\Card;
+use App\Models\Role;
+use App\Models\AgentAccount;
 use Illuminate\Support\Facades\DB;
 use Zhuzhichao\BankCardInfo\BankCard;
 use App\Http\Controllers\Agent\AgentauthController as AgentApi;

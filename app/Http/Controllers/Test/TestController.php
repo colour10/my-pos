@@ -2,36 +2,36 @@
 
 namespace App\Http\Controllers\Test;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Agent\AgentauthController;
 use App\Http\Controllers\Controller;
-use App\Model\Bank;
-use App\Model\Agent;
-use App\Model\AgentAccount;
-use App\Model\Role;
-use App\Model\Permission;
-use Webpatser\Uuid\Uuid;
-use Zhuzhichao\BankCardInfo\BankCard;
-use App\Model\Freeze;
-use App\Model\AdvanceMethod;
-use Illuminate\Support\Facades\DB;
-// 引入微信服务器
 use App\Http\Controllers\WeChatController;
-use Symfony\Component\Cache\Simple\RedisCache;
+use App\Jobs\SendMail;
+use App\Models\AdvanceMethod;
+use App\Models\Agent;
+use App\Models\AgentAccount;
+use App\Models\ApplyCard;
+use App\Models\Bank;
+use App\Models\Cardbox;
+use App\Models\Finance;
+use App\Models\Freeze;
+use App\Models\Role;
+use Cache;
 use EasyWeChat\Factory;
-use Illuminate\Support\Facades\Config;
-use Session;
-use Redis;
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
-use Mail;
-// 队列
-use App\Jobs\SendMail;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 use Log;
-use App\Http\Controllers\Agent\AgentauthController;
-use App\Model\Cardbox;
-use App\Model\ApplyCard;
-use App\Model\Finance;
-use Cache;
+use Redis;
+use Session;
+use Symfony\Component\Cache\Simple\RedisCache;
+use Webpatser\Uuid\Uuid;
+use Zhuzhichao\BankCardInfo\BankCard;
+
+// 引入微信服务器
+// 队列
 
 class TestController extends Controller
 {
@@ -51,7 +51,7 @@ class TestController extends Controller
         // 全局配置
         $config = Config::get("wechat.official_account.default");
         // $config_work = Config::get("wechat.work.default");
-        
+
         // 使用配置来初始化一个公众号应用实例
         $this->app = Factory::officialAccount($config);
         // $this->appwork = Factory::work($config_work);
@@ -99,6 +99,8 @@ class TestController extends Controller
 
     /**
      * markdown编辑器测试
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|View
      */
     public function md(Request $request)
     {
@@ -133,7 +135,7 @@ class TestController extends Controller
         // 测试
         // Cache::forget('jsapi_ticket');
         // Cache::forget('access_token');
-        
+
         // echo 'jsapi_ticket='.\Cache::get('jsapi_ticket');
         // echo '<br>';
         // echo 'access_token='.\Cache::get('access_token');
@@ -314,8 +316,8 @@ class TestController extends Controller
      */
     public function ifexists()
     {
-        echo \App\Model\Manager::find(['id' => 1])->count();
-        if (\App\Model\Manager::find(['id' => 1])) {
+        echo \App\Models\Manager::find(['id' => 1])->count();
+        if (\App\Models\Manager::find(['id' => 1])) {
             echo '找到了';
         } else {
             echo '没有找到';
@@ -335,14 +337,14 @@ class TestController extends Controller
      */
     public function orm()
     {
-        $model = \App\Model\AgentAccount::where('agent_id', 3)->toSql();
+        $model = \App\Models\AgentAccount::where('agent_id', 3)->toSql();
 
         echo $model;
         exit;
 
-        echo \App\Model\AgentAccount::where('agent_id', 3)->count();
+        echo \App\Models\AgentAccount::where('agent_id', 3)->count();
         echo '<br >';
-        if (\App\Model\AgentAccount::where('agent_id', 3)->first()) {
+        if (\App\Models\AgentAccount::where('agent_id', 3)->first()) {
             echo $model->agent_id;
         } else {
             echo '没有找到';
@@ -458,25 +460,25 @@ class TestController extends Controller
         $tools = \PhpTools::getInstance();
 
         // 源数组
-        $params = array(
-            'INFO' => array(
-                'TRX_CODE' => '200004',
-                'VERSION' => '03',
+        $params = [
+            'INFO'      => [
+                'TRX_CODE'  => '200004',
+                'VERSION'   => '03',
                 'DATA_TYPE' => '2',
-                'LEVEL' => '6',
+                'LEVEL'     => '6',
                 'USER_NAME' => "$method->username",
                 'USER_PASS' => "$method->password",
-                'REQ_SN' => "DF201808161719478501",
-            ),
-            'QTRANSREQ' => array(
-                'QUERY_SN' => 'DF201808161719478501',
+                'REQ_SN'    => "DF201808161719478501",
+            ],
+            'QTRANSREQ' => [
+                'QUERY_SN'    => 'DF201808161719478501',
                 'MERCHANT_ID' => "$method->merchant_id",
-                'STATUS' => '2',
-                'TYPE' => '1',
-                'START_DAY' => '',
-                'END_DAY' => ''
-            ),
-        );
+                'STATUS'      => '2',
+                'TYPE'        => '1',
+                'START_DAY'   => '',
+                'END_DAY'     => '',
+            ],
+        ];
 
         // 发送请求
         $result = $tools->send($params);
@@ -505,7 +507,7 @@ class TestController extends Controller
         //                     [RET_CODE] => 0000
         //                     [ERR_MSG] => 处理完成
         //                 )
-        
+
         //             [QTRANSRSP] => Array
         //                 (
         //                     [QTDETAIL] => Array
@@ -525,14 +527,12 @@ class TestController extends Controller
         //                             [RET_CODE] => 0000
         //                             [ERR_MSG] => 处理成功
         //                         )
-        
+
         //                 )
-        
+
         //         )
-        
+
         // )
-
-
 
 
         // Array
@@ -548,7 +548,7 @@ class TestController extends Controller
         //                     [RET_CODE] => 0000
         //                     [ERR_MSG] => 处理完成@CChS
         //                 )
-        
+
         //             [QTRANSRSP] => Array
         //                 (
         //                     [QTDETAIL] => Array
@@ -567,15 +567,12 @@ class TestController extends Controller
         //                             [RET_CODE] => 3999
         //                             [ERR_MSG] => 您输入的卡号无效，详询发卡行[1020114]
         //                         )
-        
+
         //                 )
-        
+
         //         )
-        
+
         // )
-        
-
-
 
 
         // 失败输出结果：
@@ -592,7 +589,7 @@ class TestController extends Controller
         //                     [RET_CODE] => 0000
         //                     [ERR_MSG] => 处理完成
         //                 )
-        
+
         //             [QTRANSRSP] => Array
         //                 (
         //                     [QTDETAIL] => Array
@@ -612,11 +609,11 @@ class TestController extends Controller
         //                             [RET_CODE] => 3030
         //                             [ERR_MSG] => 账号错误
         //                         )
-        
+
         //                 )
-        
+
         //         )
-        
+
         // )
 
 
@@ -633,9 +630,9 @@ class TestController extends Controller
         //                     [RET_CODE] => 1002
         //                     [ERR_MSG] => 无此交易
         //                 )
-        
+
         //         )
-        
+
         // )
 
 
@@ -652,9 +649,9 @@ class TestController extends Controller
         //                     [RET_CODE] => 1000
         //                     [ERR_MSG] => 用户或密码错误
         //                 )
-        
+
         //         )
-        
+
         // )
 
 
@@ -791,8 +788,8 @@ class TestController extends Controller
 
         $user = [
             'name' => 'liuzongyang',
-            'age' => 30,
-            'sex' => '男',
+            'age'  => 30,
+            'sex'  => '男',
         ];
         session(['wx' => json_encode($user)]);
         $data = $request->session()->all();
@@ -818,11 +815,11 @@ class TestController extends Controller
         $openid = $cacheObj->openid;
         if (DB::table('agents')->where('wx_openid', $openid)->first()) {
             $this->app->template_message->send([
-                'touser' => $openid,
+                'touser'      => $openid,
                 'template_id' => 'nXh_FRtLazHNeDBssYkvbSEGLY-5Nh8HND1FhaMwfXc',
-                'url' => 'http://jxc.liuzongyang.com',
-                'data' => [
-                    'first' => [
+                'url'         => 'http://jxc.liuzongyang.com',
+                'data'        => [
+                    'first'    => [
                         'value' => '您好，您已申请提现成功。',
                         'color' => '#173177',
                     ],
@@ -846,7 +843,7 @@ class TestController extends Controller
                         "value" => '2018-05-12 08:08:08',
                         "color" => "#173177",
                     ],
-                    "remark" => [
+                    "remark"   => [
                         "value" => "本次提现预计2个工作日内到达您指定银行账户，请注意查询！",
                         "color" => "#173177",
                     ],
@@ -854,7 +851,7 @@ class TestController extends Controller
             ]);
         }
     }
-    
+
     // 测试继承
     public function recurrence(Request $request)
     {
@@ -878,12 +875,11 @@ class TestController extends Controller
         $method = AdvanceMethod::select(['per_charge'])->where('status', '1')->first();
         // 返回
         $data = [
-            'agent' => $agent,
+            'agent'   => $agent,
             'account' => $account,
-            'method' => $method,
+            'method'  => $method,
         ];
         return $data;
-
 
 
         echo '<pre>';
@@ -892,7 +888,6 @@ class TestController extends Controller
         // echo '对象：'.$agent->id;
         // echo '数组：'.$agent['id'];
         exit();
-
 
 
         // agent: {
@@ -912,7 +907,6 @@ class TestController extends Controller
         //     per_charge: 2
         //     }
         // }
-
 
 
         // \Log::info('我就是做个测试');
@@ -993,11 +987,11 @@ class TestController extends Controller
         //                             [name] => 账户提现
         //                             [url] => http://hhr.yiopay.com/agent/wx
         //                         )
-        
+
         //                 )
-        
+
         //         )
-        
+
         // )
     }
 
@@ -1016,12 +1010,12 @@ class TestController extends Controller
         //                 (
         //                     [template_id] => hRTrbQKHmFdqPJlXemeciEHLSPSjxrFoMu-XpMYO1kc
         //                     [title] => 订阅模板消息
-        //                     [primary_industry] => 
-        //                     [deputy_industry] => 
+        //                     [primary_industry] =>
+        //                     [deputy_industry] =>
         //                     [content] => {{content.DATA}}
-        //                     [example] => 
+        //                     [example] =>
         //                 )
-        
+
         //             [1] => Array
         //                 (
         //                     [template_id] => hcXQLL9XChHYJYaGNDQgI0G60G8aKh__YuPMNnsI_Xk
@@ -1039,7 +1033,7 @@ class TestController extends Controller
         //                                     警告摘要：服务已停止运行，请尽快处理。
         //                                     节点”win-385CSTY“当前的状态：已停止运行
         //                 )
-        
+
         //             [2] => Array
         //                 (
         //                     [template_id] => itwKOvlLf5xRW2YnUkobBEPPWgFuUq6Ju-Way_Y84TA
@@ -1057,7 +1051,7 @@ class TestController extends Controller
         //                                 失败原因：输入的名称不正确
         //                                 请您按照失败原因修改相关信息后，重新提现！
         //                 )
-        
+
         //             [3] => Array
         //                 (
         //                     [template_id] => nXh_FRtLazHNeDBssYkvbSEGLY-5Nh8HND1FhaMwfXc
@@ -1079,9 +1073,9 @@ class TestController extends Controller
         //                                     时间：2014年11月11日 11:11
         //                                     本次提现预计2个工作日内到达您指定银行账户，请注意查询！
         //                 )
-        
+
         //         )
-        
+
         // )
     }
 
@@ -1147,12 +1141,12 @@ class TestController extends Controller
         if (Session::get('logcode') == $captcha) {
             $response = [
                 'code' => '0',
-                'msg' => '验证码输入正确',
+                'msg'  => '验证码输入正确',
             ];
         } else {
             $response = [
                 'code' => '1',
-                'msg' => '验证码输入错误，正确的验证码是：' . Session::get('logcode') . '，您输入的验证码是：' . $captcha,
+                'msg'  => '验证码输入错误，正确的验证码是：' . Session::get('logcode') . '，您输入的验证码是：' . $captcha,
             ];
         }
         // 返回结果
@@ -1185,7 +1179,7 @@ class TestController extends Controller
         //             [name] => 阳鸣天下
         //             [nickname] => 阳鸣天下
         //             [avatar] => http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJNgTDyC5c3bArt4F57nVwrlVA8B2yiboib9dbtx1uFhGvmwtuHgOib763qqOjpfrL9libbqaK0zicianfQ/132
-        //             [email] => 
+        //             [email] =>
         //             [original] => Array
         //                 (
         //                     [openid] => ol0Z1uAO8pkZLapzV3SFJO-msRHg
@@ -1199,9 +1193,9 @@ class TestController extends Controller
         //                     [privilege] => Array
         //                         (
         //                         )
-        
+
         //                 )
-        
+
         //             [token] => Overtrue\Socialite\AccessToken Object
         //                 (
         //                     [attributes:protected] => Array
@@ -1212,12 +1206,12 @@ class TestController extends Controller
         //                             [openid] => ol0Z1uAO8pkZLapzV3SFJO-msRHg
         //                             [scope] => snsapi_userinfo
         //                         )
-        
+
         //                 )
-        
+
         //             [provider] => WeChat
         //         )
-        
+
         // )
     }
 
@@ -1227,7 +1221,7 @@ class TestController extends Controller
     public function wxaddcard()
     {
         // 获取授权用户信息
-        $user = $this->getauthuser();        
+        $user = $this->getauthuser();
         // 渲染
         return view('test.wx.cardadd', compact('user'));
 
@@ -1243,8 +1237,8 @@ class TestController extends Controller
         // 验证
         $this->validate($request, [
             'card_number' => 'required|unique:cards,card_number,' . Session::get('agent')['agent_id'],
-            'name' => 'required|string',
-            'id_number' => 'required|unique:agents,id_number,' . Session::get('agent')['agent_id'],
+            'name'        => 'required|string',
+            'id_number'   => 'required|unique:agents,id_number,' . Session::get('agent')['agent_id'],
         ]);
 
         // 逻辑
@@ -1260,7 +1254,7 @@ class TestController extends Controller
         if ($cardinfo['validated'] == false) {
             $data = [
                 'code' => '1',
-                'msg' => '银行卡号错误，请重新输入',
+                'msg'  => '银行卡号错误，请重新输入',
             ];
             return $data;
         }
@@ -1296,7 +1290,7 @@ class TestController extends Controller
             // 返回
             $response = [
                 'code' => '0',
-                'msg' => '银行卡添加成功',
+                'msg'  => '银行卡添加成功',
             ];
             return $response;
 
@@ -1305,7 +1299,7 @@ class TestController extends Controller
             DB::rollback();
             $data = [
                 'code' => '1',
-                'msg' => $e->getMessage(),
+                'msg'  => $e->getMessage(),
             ];
             return $data;
         }
@@ -1323,7 +1317,7 @@ class TestController extends Controller
         if (empty($openid)) {
             $response = [
                 'code' => '1',
-                'msg' => '非法授权，请先注册或登录',
+                'msg'  => '非法授权，请先注册或登录',
             ];
             return $response;
         }
@@ -1333,7 +1327,7 @@ class TestController extends Controller
         if (!$agent) {
             $response = [
                 'code' => '1',
-                'msg' => '当前合伙人不存在，请先注册或登录之后再来进行本操作',
+                'msg'  => '当前合伙人不存在，请先注册或登录之后再来进行本操作',
             ];
         } else {
             $response = [
@@ -1371,7 +1365,7 @@ class TestController extends Controller
         // $schedule->call(function() {
         //     // 判断是否有当天新备份的邮件
         //     $filepath = storage_path('app/Laravel');
-            
+
         //     $aid = mt_rand(1, 9999);
         //     Wechat::create(compact('aid'));
         // })->everyMinute();
@@ -1397,15 +1391,15 @@ class TestController extends Controller
                 // 如果找到了，那么就发邮件
                 $message = [
                     // 邮件标题
-                    'title' => $current_date . '网站完整备份',
+                    'title'               => $current_date . '网站完整备份',
                     // 收件人
-                    'to' => '806316776@qq.com',
+                    'to'                  => '806316776@qq.com',
                     // 昵称
-                    'name' => '意远支付',
+                    'name'                => '意远支付',
                     // 邮件正文内容
-                    'content' => '尊敬的管理员，您好，附件是意远支付 hhr.yiopay.com ' . $current_date . '网站完整备份，请查收。',
+                    'content'             => '尊敬的管理员，您好，附件是意远支付 hhr.yiopay.com ' . $current_date . '网站完整备份，请查收。',
                     // 附件地址
-                    'attachment' => storage_path('app/Laravel') . '/' . $file,
+                    'attachment'          => storage_path('app/Laravel') . '/' . $file,
                     // 附件在邮件中的别名
                     'attachment_filename' => $current_date . '网站完整备份',
                 ];
@@ -1555,9 +1549,9 @@ class TestController extends Controller
 
                 // 如果agentaccount表没有这个用户，那么就新增
                 if (!TestAgentAccount::firstOrCreate(['agent_id' => $agent_id], [
-                    'frozen_money' => '0.00',
+                    'frozen_money'    => '0.00',
                     'available_money' => '0.00',
-                    'sum_money' => '0.00',
+                    'sum_money'       => '0.00',
                 ])) {
                     throw new \Exception('写入用户资产表失败');
                 }
@@ -1583,7 +1577,7 @@ class TestController extends Controller
             $msg .= '该合伙人的信息如下：' . PHP_EOL;
             $arr = print_r($agent, true);
             $msg .= "$arr";
-            $msg .= PHP_EOL . PHP_EOL;            
+            $msg .= PHP_EOL . PHP_EOL;
             // 写入日志
             Log::info($msg);
 
@@ -1600,7 +1594,7 @@ class TestController extends Controller
             $msg .= PHP_EOL . PHP_EOL;
             $msg .= '错误信息：' . PHP_EOL;
             $msg .= $e->getMessage();
-            $msg .= PHP_EOL . PHP_EOL;            
+            $msg .= PHP_EOL . PHP_EOL;
             // 写入日志
             Log::info($msg);
         }
@@ -1683,7 +1677,7 @@ class TestController extends Controller
     {
         // 验证
         $this->validate($request, [
-            'msg' => 'required',
+            'msg'    => 'required',
             'openid' => 'required',
         ]);
 
@@ -1711,7 +1705,6 @@ class TestController extends Controller
     }
 
 
-
     /**
      * 申请办卡-逻辑 [接口]
      */
@@ -1719,11 +1712,11 @@ class TestController extends Controller
     {
         // 验证
         $this->validate($request, [
-            'user_openid' => 'required',
-            'card_id' => 'required|integer',
-            'user_name' => 'required',
+            'user_openid'   => 'required',
+            'card_id'       => 'required|integer',
+            'user_name'     => 'required',
             'user_identity' => 'required',
-            'user_phone' => 'required',
+            'user_phone'    => 'required',
         ]);
         // 逻辑
         $user_openid = request('user_openid');
@@ -1758,17 +1751,17 @@ class TestController extends Controller
                 }
                 // 添加新合伙人，也用$agent命名
                 $agent = Agent::create([
-                    'sname' => $user_name,
-                    'name' => $user_name,
-                    'id_number' => $user_identity,
-                    'wx_openid' => $user_openid,
-                    'openid' => $user_openid,
+                    'sname'        => $user_name,
+                    'name'         => $user_name,
+                    'id_number'    => $user_identity,
+                    'wx_openid'    => $user_openid,
+                    'openid'       => $user_openid,
                     'parentopenid' => $parentopenid,
-                    'mobile' => $user_phone,
+                    'mobile'       => $user_phone,
                     // 初始密码为123456
-                    'password' => bcrypt('123456'),
+                    'password'     => bcrypt('123456'),
                     // method为2，办卡自动添加
-                    'method' => '2',
+                    'method'       => '2',
                 ]);
 
                 // 新增失败，那么就报错
@@ -1794,9 +1787,9 @@ class TestController extends Controller
                 // 写入合伙人账户余额表
                 // 如果agentaccount表没有这个用户，那么就新增
                 if (!AgentAccount::firstOrCreate(['agent_id' => $agent_id], [
-                    'frozen_money' => '0.00',
+                    'frozen_money'    => '0.00',
                     'available_money' => '0.00',
-                    'sum_money' => '0.00',
+                    'sum_money'       => '0.00',
                 ])) {
                     throw new \Exception('写入用户资产表失败');
                 }
@@ -1858,12 +1851,12 @@ class TestController extends Controller
             if (!empty($invite_openid)) {
                 // 开始推送推荐成交通知模板
                 $this->app->template_message->send([
-                    'touser' => $invite_openid,
+                    'touser'      => $invite_openid,
                     'template_id' => 'PcGOMAmyFCBqklWpWSVX_0w-70JMwObKHu9TfMDO8JM',
                     // 这里推送当前用户的推广链接
-                    'url' => 'http://hhr.yiopay.com/agent/wx?wxshare=wxshare&appuuid=wx88d48c474331a7f5&parentopenId=' . $invite_openid,
-                    'data' => [
-                        'first' => [
+                    'url'         => 'http://hhr.yiopay.com/agent/wx?wxshare=wxshare&appuuid=wx88d48c474331a7f5&parentopenId=' . $invite_openid,
+                    'data'        => [
+                        'first'    => [
                             'value' => '您的客户' . $hide_user_name . '办了一张' . $card_name . '信用卡，预计返佣金额' . $invite_money . '元，返佣到账以信用卡申请通过为准，请知悉。',
                             'color' => '#173177',
                         ],
@@ -1883,7 +1876,7 @@ class TestController extends Controller
                             "value" => $card_name . '【' . $cardbox->littleFlag . '】',
                             "color" => "#173177",
                         ],
-                        "remark" => [
+                        "remark"   => [
                             "value" => "招代理最高补贴90元，赶快去招代理吧！" . PHP_EOL . '点击查看详情',
                             "color" => "#173177",
                         ],
@@ -1898,7 +1891,7 @@ class TestController extends Controller
             $response = [
                 'code' => '0',
                 'data' => $applycard,
-                'msg' => '信息登记成功，即将跳转到银行申请页面，请稍候...',
+                'msg'  => '信息登记成功，即将跳转到银行申请页面，请稍候...',
             ];
             return $response;
 
@@ -1907,7 +1900,7 @@ class TestController extends Controller
             DB::rollback();
             $response = [
                 'code' => '1',
-                'msg' => $e->getMessage(),
+                'msg'  => $e->getMessage(),
             ];
 
             // 记录错误信息
@@ -1954,7 +1947,7 @@ class TestController extends Controller
     //     } else {
     //         $invite_money = '0.00';
     //     }
-        
+
     //     // 判断逻辑
     //     $order_id = 'CR'.date('YmdHis').mt_rand(1000, 9999);
     //     $result = ApplyCard::Create(compact('order_id', 'user_openid', 'card_id', 'invite_openid', 'invite_money', 'user_name', 'user_identity', 'user_phone'));
@@ -2037,18 +2030,18 @@ class TestController extends Controller
                 }
             }
             $response = [
-                'code' => '0',
+                'code'  => '0',
                 'count' => $finances->count(),
-                'data' => [
-                    'agent' => $agent,
+                'data'  => [
+                    'agent'    => $agent,
                     'finances' => $finances,
                 ],
             ];
         } else {
             $response = [
-                'code' => '1',
+                'code'  => '1',
                 'count' => '0',
-                'data' => null,
+                'data'  => null,
             ];
         }
         return $response;
@@ -2092,17 +2085,17 @@ class TestController extends Controller
 
                 if (!$agent) {
                     $new_agent = Agent::create([
-                        'sname' => $record['user_name'],
-                        'name' => $record['user_name'],
-                        'id_number' => $record['user_identity'],
-                        'wx_openid' => $record['user_openid'],
-                        'openid' => $record['user_openid'],
+                        'sname'        => $record['user_name'],
+                        'name'         => $record['user_name'],
+                        'id_number'    => $record['user_identity'],
+                        'wx_openid'    => $record['user_openid'],
+                        'openid'       => $record['user_openid'],
                         'parentopenid' => $parentopenid,
-                        'mobile' => $record['user_phone'],
+                        'mobile'       => $record['user_phone'],
                         // 初始密码为123456
-                        'password' => bcrypt('123456'),
+                        'password'     => bcrypt('123456'),
                         // method为2，办卡自动添加
-                        'method' => '2',
+                        'method'       => '2',
                     ]);
 
                     // 新增失败，那么就报错
@@ -2128,9 +2121,9 @@ class TestController extends Controller
                     // 写入合伙人账户余额表
                     // 如果agentaccount表没有这个用户，那么就新增
                     if (!AgentAccount::firstOrCreate(['agent_id' => $agent_id], [
-                        'frozen_money' => '0.00',
+                        'frozen_money'    => '0.00',
                         'available_money' => '0.00',
-                        'sum_money' => '0.00',
+                        'sum_money'       => '0.00',
                     ])) {
                         throw new \Exception('写入用户资产表失败');
                     }
@@ -2153,7 +2146,7 @@ class TestController extends Controller
             DB::rollback();
             $response = [
                 'code' => '1',
-                'msg' => $e->getMessage(),
+                'msg'  => $e->getMessage(),
             ];
             // 返回错误信息并记录
             return $response;
@@ -2203,12 +2196,12 @@ class TestController extends Controller
         if (!empty($invite_openid)) {
             // 开始推送推荐成交通知模板
             $this->app->template_message->send([
-                'touser' => $invite_openid,
+                'touser'      => $invite_openid,
                 'template_id' => 'PcGOMAmyFCBqklWpWSVX_0w-70JMwObKHu9TfMDO8JM',
                 // 这里推送当前用户的推广链接
-                'url' => 'http://hhr.yiopay.com/agent/wx?wxshare=wxshare&appuuid=wx88d48c474331a7f5&parentopenId=' . $invite_openid,
-                'data' => [
-                    'first' => [
+                'url'         => 'http://hhr.yiopay.com/agent/wx?wxshare=wxshare&appuuid=wx88d48c474331a7f5&parentopenId=' . $invite_openid,
+                'data'        => [
+                    'first'    => [
                         'value' => '您的客户' . $hide_user_name . '办了一张' . $card_name . '信用卡，预计返佣金额' . $invite_money . '元，返佣到账以信用卡申请通过为准，请知悉。',
                         'color' => '#173177',
                     ],
@@ -2228,7 +2221,7 @@ class TestController extends Controller
                         "value" => $card_name . '【' . $littleFlag . '】',
                         "color" => "#173177",
                     ],
-                    "remark" => [
+                    "remark"   => [
                         "value" => "招代理最高补贴90元，赶快去招代理吧！" . PHP_EOL . '点击查看详情',
                         "color" => "#173177",
                     ],
@@ -2238,14 +2231,14 @@ class TestController extends Controller
 
         return [
             'code' => '0',
-            'msg' => '发送成功',
+            'msg'  => '发送成功',
         ];
 
         // 逻辑
         $token = $this->request->token;
         $timestamp = $this->request->timestamp;
         $nonce = $this->request->nonce;
-        $tmpArr = array($token, $timestamp, $nonce);
+        $tmpArr = [$token, $timestamp, $nonce];
         sort($tmpArr);
         $tmpStr = implode($tmpArr);
         $tmpStr = sha1($tmpStr);
@@ -2259,7 +2252,7 @@ class TestController extends Controller
     /**
      * 文件自动添加版本号
      * @param $file 文件绝对路径
-     * 调用规则：<link rel="stylesheet" href="<?=AutoVersion('assets/css/style.css')?>" type="text/css" /> 
+     * 调用规则：<link rel="stylesheet" href="<?=AutoVersion('assets/css/style.css')?>" type="text/css" />
      * 如果存在，那么就是如下的形式：
      * <link rel="stylesheet" href="assets/css/style.css?v=1367936144322" type="text/css" />
      */
@@ -2333,7 +2326,7 @@ class TestController extends Controller
     public function wxrankcard()
     {
         // 取出授权user，Changing
-        $user = $this->getauthuser();        
+        $user = $this->getauthuser();
         // 渲染
         return view('test.wx.rankcard', compact('user'));
 
@@ -2419,10 +2412,10 @@ class TestController extends Controller
         // 如果是没有注册，那么就进行完全写入
         $this->validate($request, [
             // 'openid' => 'required|unique:agents,openid',
-            'openid' => 'required',
-            'name' => 'required|string',
+            'openid'    => 'required',
+            'name'      => 'required|string',
             // 'mobile' => 'required|unique:agents,mobile|regex:/^1[345678][0-9]{9}$/',
-            'mobile' => 'required|regex:/^1[345678][0-9]{9}$/',
+            'mobile'    => 'required|regex:/^1[345678][0-9]{9}$/',
             // 'id_number' => 'required|unique:agents,id_number',
             'id_number' => 'required',
         ]);
@@ -2451,7 +2444,7 @@ class TestController extends Controller
             if ($checkIdentity['code'] == '1') {
                 throw new \Exception($checkIdentity['msg']);
             }
-                    
+
             // 判断手机号能否使用
             $checkMobile = $this->wxcheckmobilevalid();
             // 如果不可用
@@ -2469,7 +2462,7 @@ class TestController extends Controller
                     if (!$agent->update(compact('wx_openid', 'openid'))) {
                         throw new \Exception('更新合伙人openid失败');
                     }
-                }                
+                }
                 // 更新姓名，身份证，手机号
                 if (!$agent->update(compact('name', 'id_number', 'mobile', 'sname'))) {
                     throw new \Exception('更新合伙人姓名、身份证信息失败');
@@ -2505,9 +2498,9 @@ class TestController extends Controller
 
                 // 如果agentaccount表没有这个用户，那么就新增
                 if (!TestAgentAccount::firstOrCreate(['agent_id' => $agent_id], [
-                    'frozen_money' => '0.00',
+                    'frozen_money'    => '0.00',
                     'available_money' => '0.00',
-                    'sum_money' => '0.00',
+                    'sum_money'       => '0.00',
                 ])) {
                     throw new \Exception('写入用户资产表失败');
                 }
@@ -2521,7 +2514,7 @@ class TestController extends Controller
             $response = [
                 'code' => '0',
                 'data' => $agent,
-                'msg' => '合伙人实名认证成功',
+                'msg'  => '合伙人实名认证成功',
             ];
             return $response;
 
@@ -2531,7 +2524,7 @@ class TestController extends Controller
             // 错误返回
             $response = [
                 'code' => '1',
-                'msg' => $e->getMessage(),
+                'msg'  => $e->getMessage(),
             ];
             return $response;
         }
@@ -2554,18 +2547,18 @@ class TestController extends Controller
             if ($agent->openid == $openid) {
                 $response = [
                     'code' => '0',
-                    'msg' => '手机号可以使用',
+                    'msg'  => '手机号可以使用',
                 ];
             } else {
                 $response = [
                     'code' => '1',
-                    'msg' => '手机号不可以使用',
+                    'msg'  => '手机号不可以使用',
                 ];
             }
         } else {
             $response = [
                 'code' => '0',
-                'msg' => '手机号可以使用',
+                'msg'  => '手机号可以使用',
             ];
         }
         // 最终返回
@@ -2589,18 +2582,18 @@ class TestController extends Controller
             if ($agent->openid == $openid) {
                 $response = [
                     'code' => '0',
-                    'msg' => '身份证号可以使用',
+                    'msg'  => '身份证号可以使用',
                 ];
             } else {
                 $response = [
                     'code' => '1',
-                    'msg' => '身份证号不可以使用',
+                    'msg'  => '身份证号不可以使用',
                 ];
             }
         } else {
             $response = [
                 'code' => '0',
-                'msg' => '身份证号可以使用',
+                'msg'  => '身份证号可以使用',
             ];
         }
         // 最终返回
@@ -2657,20 +2650,20 @@ class TestController extends Controller
             if (empty($agent->name) || empty($agent->id_number) || empty($agent->mobile)) {
                 $response = [
                     'code' => '1',
-                    'msg' => '合伙人未实名认证',
+                    'msg'  => '合伙人未实名认证',
                 ];
             } else {
                 $response = [
                     'code' => '0',
                     'data' => $agent,
-                    'msg' => '已实名认证',
+                    'msg'  => '已实名认证',
                 ];
             }
         } else {
             // 如果不存在，说明还不是合伙人，更加没有实名认证
             $response = [
                 'code' => '1',
-                'msg' => '非合伙人未实名认证',
+                'msg'  => '非合伙人未实名认证',
             ];
         }
         // 最终返回
@@ -2697,18 +2690,18 @@ class TestController extends Controller
             if ($agent->update(compact('mobile'))) {
                 $response = [
                     'code' => '0',
-                    'msg' => '合伙人手机号修改成功',
+                    'msg'  => '合伙人手机号修改成功',
                 ];
             } else {
                 $response = [
                     'code' => '1',
-                    'msg' => '合伙人手机号修改失败',
+                    'msg'  => '合伙人手机号修改失败',
                 ];
             }
         } else {
             $response = [
                 'code' => '1',
-                'msg' => '合伙人不存在',
+                'msg'  => '合伙人不存在',
             ];
         }
         // 返回
@@ -2727,7 +2720,7 @@ class TestController extends Controller
         // 返回
         $response = [
             'code' => '0',
-            'msg' => '缓存清除成功',
+            'msg'  => '缓存清除成功',
         ];
         return $response;
     }
@@ -2767,13 +2760,13 @@ class TestController extends Controller
         if (Cache::get('testwxyzm') == $capcha) {
             $data = [
                 'code' => '0',
-                'msg' => '验证码输入正确',
+                'msg'  => '验证码输入正确',
             ];
         } else {
             $data = [
                 'code' => '1',
-                'yzm' => Cache::get('testwxyzm'),
-                'msg' => '验证码输入错误',
+                'yzm'  => Cache::get('testwxyzm'),
+                'msg'  => '验证码输入错误',
             ];
         }
         return $data;
@@ -2793,7 +2786,7 @@ class TestController extends Controller
         if (!$agent) {
             $response = [
                 'code' => '1',
-                'msg' => '当前合伙人不存在，绑卡失败，请先注册合伙人再进行此操作',
+                'msg'  => '当前合伙人不存在，绑卡失败，请先注册合伙人再进行此操作',
             ];
             return $response;
         }
@@ -2809,9 +2802,9 @@ class TestController extends Controller
             'desc' => '持卡人认证成功',
             'data' => [
                 'bankcardno' => $bankcardno,
-                'name' => $name,
-                'idcardno' => $idcardno,
-                'tel' => $tel,
+                'name'       => $name,
+                'idcardno'   => $idcardno,
+                'tel'        => $tel,
             ],
         ];
         // 返回

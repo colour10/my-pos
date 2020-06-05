@@ -1,10 +1,10 @@
 <?php
 	// 关联
     use \App\Http\Controllers\Controller;
-	use \App\Model\Agent;
-	use \App\Model\Manager;
-	use \App\Model\Role;
-    use \App\Model\Permission;
+	use \App\Models\Agent;
+	use \App\Models\Manager;
+	use \App\Models\Role;
+    use \App\Models\Permission;
     use Illuminate\Support\Facades\Session;
     use Illuminate\Support\Facades\Request;
     use Illuminate\Support\Facades\Redis;
@@ -613,7 +613,7 @@ em.red {
 
 </div>
 <div class="container" style="min-width:600px">
-	<span class="breadcrumbs"> 当前位置： <a href="/admin/system"><i class="fa fa-dashboard"></i> 后台首页</a> > {{ $page_title }}</span>     
+	<span class="breadcrumbs"> 当前位置： <a href="/admin/system"><i class="fa fa-dashboard"></i> 后台首页</a> > {{ $page_title }}</span>
 	@component('admin.composer.alert')
     @endcomponent
     @yield('content')
@@ -681,7 +681,7 @@ em.red {
 		});
 		<?php } ?>
 
-        <?php 
+        <?php
             if ($controller_action['controller'] == 'ProductController') {
                 if (strpos($path, 'cardbox') !== false) {
         ?>

@@ -5,7 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 // 微信
-use App\Model\Wechat;
+use App\Models\Wechat;
 
 class Kernel extends ConsoleKernel
 {

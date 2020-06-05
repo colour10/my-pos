@@ -2,18 +2,18 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Manager;
+use App\Models\Permission;
 use Closure;
-use App\Model\Manager;
-use App\Model\Role;
-use App\Model\Permission;
+use Illuminate\Http\Request;
 
 class PermissionControl
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
+     * @param Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -32,7 +32,7 @@ class PermissionControl
             // 取出控制器
             $controller = substr($path, 0, $controller_pos);
             // 取出方法
-            $action = substr($path, $controller_pos+1);
+            $action = substr($path, $controller_pos + 1);
         } else {
             $controller = $path;
             $action = '';
@@ -50,7 +50,7 @@ class PermissionControl
             // echo '您有该模块下所有访问权限';
             return $next($request);
         }
-        
+
         // 判断当前用户是否有访问当前路由的权限
         // 我们规定，如果当前路由没有定义，那么就没有访问权限
         $permission_current = Permission::where('name', $path)->first();

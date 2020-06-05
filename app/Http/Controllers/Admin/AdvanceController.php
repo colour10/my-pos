@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\AdvanceMethod;
-use App\Model\Withdraw;
+use App\Models\AdvanceMethod;
+use App\Models\Withdraw;
 use Zhuzhichao\BankCardInfo\BankCard;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;

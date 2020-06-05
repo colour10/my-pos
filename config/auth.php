@@ -90,13 +90,13 @@ return [
 
         'managers' => [
             'driver' => 'eloquent',
-            'model' => App\Model\Manager::class,
+            'model' => App\Models\Manager::class,
         ],
 
         // 添加agent
         'agents' => [
             'driver' => 'eloquent',
-            'model' => App\Model\Agent::class,
+            'model' => App\Models\Agent::class,
         ],
 
     ],

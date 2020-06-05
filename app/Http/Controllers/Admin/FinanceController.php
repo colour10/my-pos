@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Finance;
-use App\Model\Freeze;
-use App\Model\Agent;
-use App\Model\Account;
-use App\Model\AgentAccount;
-use App\Model\Manager;
-use App\Model\AdvanceMethod;
-use App\Model\Withdraw;
+use App\Models\Finance;
+use App\Models\Freeze;
+use App\Models\Agent;
+use App\Models\Account;
+use App\Models\AgentAccount;
+use App\Models\Manager;
+use App\Models\AdvanceMethod;
+use App\Models\Withdraw;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Cache;
@@ -33,7 +33,7 @@ class FinanceController extends Controller
     {
         // 全局配置
         $config = config('wechat.official_account.default');
-        
+
         // 使用配置来初始化一个公众号应用实例
         $this->app = Factory::officialAccount($config);
     }
@@ -135,7 +135,7 @@ class FinanceController extends Controller
 
             // 返回
             return $data;
-            
+
         } catch (\Exception $e) {
             // 回滚
             DB::rollback();
@@ -150,7 +150,7 @@ class FinanceController extends Controller
 
     /**
      * 分润复核-列表
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function benefitcheck(Request $request)
@@ -307,7 +307,7 @@ class FinanceController extends Controller
                 // 申请人名字
                 // $card_user_name = !$description[2] ? '空' : $description[2];
                 // 申请人名字隐藏处理
-                $card_user_name = $this->substr_cutname($description[2]);               
+                $card_user_name = $this->substr_cutname($description[2]);
                 // 申请人手机号
                 $card_user_phone = !$description[3] ? '空' : $description[3];
                 // 申请卡名字
@@ -319,7 +319,7 @@ class FinanceController extends Controller
             }
 
             // 写入操作时间
-            $created_at = date('Y-m-d H:i:s');            
+            $created_at = date('Y-m-d H:i:s');
 
             // 添加操作人
             $modelresult = $model->update([
@@ -368,11 +368,11 @@ class FinanceController extends Controller
                                     'color' => '#173177',
                                 ],
                                 "keyword1" => [
-                                    "value" => $money.'元', 
+                                    "value" => $money.'元',
                                     "color" => "#FF0000",
                                 ],
                                 "keyword2" => [
-                                    "value" => '办卡佣金', 
+                                    "value" => '办卡佣金',
                                     "color" => "#173177",
                                 ],
                                 "keyword3" => [
@@ -384,7 +384,7 @@ class FinanceController extends Controller
                                     "color" => "#173177",
                                 ],
                                 "remark" => [
-                                    "value"=>"再接再厉，继续努力哦！".PHP_EOL.'点击查看详情', 
+                                    "value"=>"再接再厉，继续努力哦！".PHP_EOL.'点击查看详情',
                                     "color"=>"#173177",
                                 ],
                             ],
@@ -487,7 +487,7 @@ class FinanceController extends Controller
                 }
 
                 // 写入操作时间
-                $created_at = date('Y-m-d H:i:s'); 
+                $created_at = date('Y-m-d H:i:s');
 
                 // 执行审核通过逻辑
                 $updated_at = date('Y-m-d H:i:s', time());
@@ -540,23 +540,23 @@ class FinanceController extends Controller
                                     'color' => '#173177',
                                 ],
                                 "keyword1" => [
-                                    "value" => $money.'元', 
+                                    "value" => $money.'元',
                                     "color" => "#FF0000",
                                 ],
                                 "keyword2" => [
-                                    "value" => '办卡佣金', 
+                                    "value" => '办卡佣金',
                                     "color" => "#173177",
                                 ],
                                 "keyword3" => [
-                                    "value" => $order_id, 
+                                    "value" => $order_id,
                                     "color" => "#173177",
                                 ],
                                 "keyword4" => [
-                                    "value" => $created_at, 
+                                    "value" => $created_at,
                                     "color" => "#173177",
                                 ],
                                 "remark" => [
-                                    "value"=>"再接再厉，继续努力哦！".PHP_EOL.'点击查看详情', 
+                                    "value"=>"再接再厉，继续努力哦！".PHP_EOL.'点击查看详情',
                                     "color"=>"#173177",
                                 ],
                             ],
@@ -702,7 +702,7 @@ class FinanceController extends Controller
                 'sendmsg' => "$count",
             ];
             return $data;
-            
+
         } catch (\Exception $e) {
             // 回滚
             DB::rollback();
@@ -980,7 +980,7 @@ class FinanceController extends Controller
                 }
 
             }
-            
+
             // 提交
             DB::commit();
 
@@ -1042,7 +1042,7 @@ class FinanceController extends Controller
 
 				//获取excel的第几张表
                 $reader = $reader->getSheet(0);
-                
+
 				//获取表中的数据
                 $records = $reader->toArray();
 
@@ -1134,7 +1134,7 @@ class FinanceController extends Controller
                     // 删除出错文件
                     @unlink($fileurl);
                 }
- 
+
             });
         } else {
             $data = [
@@ -1230,7 +1230,7 @@ class FinanceController extends Controller
         //                     [ERR_MSG] => 查询成功
         //                     [REPTIME] => 20180830143951
         //                 )
-        
+
         //             [ACQUERYREP] => Array
         //                 (
         //                     [ACNODE] => Array
@@ -1247,11 +1247,11 @@ class FinanceController extends Controller
         //                             [PAYABLE] => 1
         //                             [DEFCLR] => 0
         //                         )
-        
+
         //                 )
-        
+
         //         )
-        
+
         // )
 
 
@@ -1271,10 +1271,10 @@ class FinanceController extends Controller
         //                     [ERR_MSG] => 查询成功
         //                     [REPTIME] => 20180830144328
         //                 )
-        
-        //             [ACQUERYREP] => 
+
+        //             [ACQUERYREP] =>
         //         )
-        
+
         // )
 
     }
@@ -1372,7 +1372,7 @@ class FinanceController extends Controller
     /**
      * Excel文件导出功能
      */
-    public function export(Request $request) 
+    public function export(Request $request)
     {
         // 逻辑
         // DB类搜索逻辑

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb4effc8941f7654f9668771f2fcd582f
+class ComposerStaticInita0537824cca05dd6cf1a0a8e66370649
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -12,23 +12,23 @@ class ComposerStaticInitb4effc8941f7654f9668771f2fcd582f
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-        '3a37ebac017bc098e9a86b35401e7a68' => __DIR__ . '/..' . '/mongodb/mongodb/src/functions.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '3a37ebac017bc098e9a86b35401e7a68' => __DIR__ . '/..' . '/mongodb/mongodb/src/functions.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
-        '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
+        '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
         '841780ea2e1d6545ea3a253239d59c05' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '34122c0574b76bf21c9a8db62b5b9cf3' => __DIR__ . '/..' . '/cakephp/chronos/src/carbon_compat.php',
+        '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
-        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'f0e7e63bbb278a92db02393536748c5f' => __DIR__ . '/..' . '/overtrue/wechat/src/Kernel/Support/Helpers.php',
         '6747f579ad6817f318cc3a7e7a0abb93' => __DIR__ . '/..' . '/overtrue/wechat/src/Kernel/Helpers.php',
-        '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
+        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '45666312c918b0614e5cc1eb34ac4159' => __DIR__ . '/..' . '/baijunyao/laravel-print/src/helpers.php',
         'b38f791fd54b348a25d84dd9f08bfead' => __DIR__ . '/..' . '/laravelchen/laravel-editormd/src/helper.php',
         '5e8fe2a5ffaded85af682684fe3bbf5a' => __DIR__ . '/..' . '/mews/captcha/src/helpers.php',
@@ -216,8 +216,8 @@ class ComposerStaticInitb4effc8941f7654f9668771f2fcd582f
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
         ),
         'Zhuzhichao\\BankCardInfo\\' => 
         array (
@@ -321,7 +321,7 @@ class ComposerStaticInitb4effc8941f7654f9668771f2fcd582f
         ),
         'SuperClosure\\' => 
         array (
-            0 => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src',
+            0 => __DIR__ . '/..' . '/jeremeamia/superclosure/src',
         ),
         'Stevenyangecho\\UEditor\\' => 
         array (
@@ -736,31 +736,29 @@ class ComposerStaticInitb4effc8941f7654f9668771f2fcd582f
         'App\\Jobs\\MakePayment' => __DIR__ . '/../..' . '/app/Jobs/MakePayment.php',
         'App\\Jobs\\SendMail' => __DIR__ . '/../..' . '/app/Jobs/SendMail.php',
         'App\\Listeners\\QueryListener' => __DIR__ . '/../..' . '/app/Listeners/QueryListener.php',
-        'App\\Model' => __DIR__ . '/../..' . '/app/Model.php',
-        'App\\Model\\Account' => __DIR__ . '/../..' . '/app/Model/Account.php',
-        'App\\Model\\AdvanceList' => __DIR__ . '/../..' . '/app/Model/AdvanceList.php',
-        'App\\Model\\AdvanceMethod' => __DIR__ . '/../..' . '/app/Model/AdvanceMethod.php',
-        'App\\Model\\Agent' => __DIR__ . '/../..' . '/app/Model/Agent.php',
-        'App\\Model\\AgentAccount' => __DIR__ . '/../..' . '/app/Model/AgentAccount.php',
-        'App\\Model\\ApplyCard' => __DIR__ . '/../..' . '/app/Model/ApplyCard.php',
-        'App\\Model\\Bank' => __DIR__ . '/../..' . '/app/Model/Bank.php',
-        'App\\Model\\Benefit' => __DIR__ . '/../..' . '/app/Model/Benefit.php',
-        'App\\Model\\Card' => __DIR__ . '/../..' . '/app/Model/Card.php',
-        'App\\Model\\Cardbox' => __DIR__ . '/../..' . '/app/Model/Cardbox.php',
-        'App\\Model\\Finance' => __DIR__ . '/../..' . '/app/Model/Finance.php',
-        'App\\Model\\Freeze' => __DIR__ . '/../..' . '/app/Model/Freeze.php',
-        'App\\Model\\Manager' => __DIR__ . '/../..' . '/app/Model/Manager.php',
-        'App\\Model\\Permission' => __DIR__ . '/../..' . '/app/Model/Permission.php',
-        'App\\Model\\Role' => __DIR__ . '/../..' . '/app/Model/Role.php',
-        'App\\Model\\Wechat' => __DIR__ . '/../..' . '/app/Model/Wechat.php',
-        'App\\Model\\WechatMessage' => __DIR__ . '/../..' . '/app/Model/WechatMessage.php',
-        'App\\Model\\Withdraw' => __DIR__ . '/../..' . '/app/Model/Withdraw.php',
+        'App\\Models\\Account' => __DIR__ . '/../..' . '/app/Models/Account.php',
+        'App\\Models\\AdvanceMethod' => __DIR__ . '/../..' . '/app/Models/AdvanceMethod.php',
+        'App\\Models\\Agent' => __DIR__ . '/../..' . '/app/Models/Agent.php',
+        'App\\Models\\AgentAccount' => __DIR__ . '/../..' . '/app/Models/AgentAccount.php',
+        'App\\Models\\ApplyCard' => __DIR__ . '/../..' . '/app/Models/ApplyCard.php',
+        'App\\Models\\Bank' => __DIR__ . '/../..' . '/app/Models/Bank.php',
+        'App\\Models\\Card' => __DIR__ . '/../..' . '/app/Models/Card.php',
+        'App\\Models\\Cardbox' => __DIR__ . '/../..' . '/app/Models/Cardbox.php',
+        'App\\Models\\Finance' => __DIR__ . '/../..' . '/app/Models/Finance.php',
+        'App\\Models\\Freeze' => __DIR__ . '/../..' . '/app/Models/Freeze.php',
+        'App\\Models\\Manager' => __DIR__ . '/../..' . '/app/Models/Manager.php',
+        'App\\Models\\Model' => __DIR__ . '/../..' . '/app/Models/Model.php',
+        'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',
+        'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
+        'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\Wechat' => __DIR__ . '/../..' . '/app/Models/Wechat.php',
+        'App\\Models\\WechatMessage' => __DIR__ . '/../..' . '/app/Models/WechatMessage.php',
+        'App\\Models\\Withdraw' => __DIR__ . '/../..' . '/app/Models/Withdraw.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
-        'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Appstract\\LushHttp\\Events\\RequestEvent' => __DIR__ . '/..' . '/appstract/lush-http/src/Events/RequestEvent.php',
         'Appstract\\LushHttp\\Events\\RequestExceptionEvent' => __DIR__ . '/..' . '/appstract/lush-http/src/Events/RequestExceptionEvent.php',
         'Appstract\\LushHttp\\Events\\ResponseEvent' => __DIR__ . '/..' . '/appstract/lush-http/src/Events/ResponseEvent.php',
@@ -6670,20 +6668,20 @@ class ComposerStaticInitb4effc8941f7654f9668771f2fcd582f
         'Stevenyangecho\\UEditor\\Uploader\\UploadFile' => __DIR__ . '/..' . '/stevenyangecho/laravel-u-editor/src/Uploader/UploadFile.php',
         'Stevenyangecho\\UEditor\\Uploader\\UploadQiniu' => __DIR__ . '/..' . '/stevenyangecho/laravel-u-editor/src/Uploader/UploadQiniu.php',
         'Stevenyangecho\\UEditor\\Uploader\\UploadScrawl' => __DIR__ . '/..' . '/stevenyangecho/laravel-u-editor/src/Uploader/UploadScrawl.php',
-        'SuperClosure\\Analyzer\\AstAnalyzer' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/AstAnalyzer.php',
-        'SuperClosure\\Analyzer\\ClosureAnalyzer' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/ClosureAnalyzer.php',
-        'SuperClosure\\Analyzer\\Token' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/Token.php',
-        'SuperClosure\\Analyzer\\TokenAnalyzer' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/TokenAnalyzer.php',
-        'SuperClosure\\Analyzer\\Visitor\\ClosureLocatorVisitor' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/Visitor/ClosureLocatorVisitor.php',
-        'SuperClosure\\Analyzer\\Visitor\\MagicConstantVisitor' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/Visitor/MagicConstantVisitor.php',
-        'SuperClosure\\Analyzer\\Visitor\\ThisDetectorVisitor' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Analyzer/Visitor/ThisDetectorVisitor.php',
-        'SuperClosure\\Exception\\ClosureAnalysisException' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Exception/ClosureAnalysisException.php',
-        'SuperClosure\\Exception\\ClosureSerializationException' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Exception/ClosureSerializationException.php',
-        'SuperClosure\\Exception\\ClosureUnserializationException' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Exception/ClosureUnserializationException.php',
-        'SuperClosure\\Exception\\SuperClosureException' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Exception/SuperClosureException.php',
-        'SuperClosure\\SerializableClosure' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/SerializableClosure.php',
-        'SuperClosure\\Serializer' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Serializer.php',
-        'SuperClosure\\SerializerInterface' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/SerializerInterface.php',
+        'SuperClosure\\Analyzer\\AstAnalyzer' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/Analyzer/AstAnalyzer.php',
+        'SuperClosure\\Analyzer\\ClosureAnalyzer' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/Analyzer/ClosureAnalyzer.php',
+        'SuperClosure\\Analyzer\\Token' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/Analyzer/Token.php',
+        'SuperClosure\\Analyzer\\TokenAnalyzer' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/Analyzer/TokenAnalyzer.php',
+        'SuperClosure\\Analyzer\\Visitor\\ClosureLocatorVisitor' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/Analyzer/Visitor/ClosureLocatorVisitor.php',
+        'SuperClosure\\Analyzer\\Visitor\\MagicConstantVisitor' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/Analyzer/Visitor/MagicConstantVisitor.php',
+        'SuperClosure\\Analyzer\\Visitor\\ThisDetectorVisitor' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/Analyzer/Visitor/ThisDetectorVisitor.php',
+        'SuperClosure\\Exception\\ClosureAnalysisException' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/Exception/ClosureAnalysisException.php',
+        'SuperClosure\\Exception\\ClosureSerializationException' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/Exception/ClosureSerializationException.php',
+        'SuperClosure\\Exception\\ClosureUnserializationException' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/Exception/ClosureUnserializationException.php',
+        'SuperClosure\\Exception\\SuperClosureException' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/Exception/SuperClosureException.php',
+        'SuperClosure\\SerializableClosure' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/SerializableClosure.php',
+        'SuperClosure\\Serializer' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/Serializer.php',
+        'SuperClosure\\SerializerInterface' => __DIR__ . '/..' . '/jeremeamia/superclosure/src/SerializerInterface.php',
         'Symfony\\Bridge\\PsrHttpMessage\\Factory\\DiactorosFactory' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Factory/DiactorosFactory.php',
         'Symfony\\Bridge\\PsrHttpMessage\\Factory\\HttpFoundationFactory' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Factory/HttpFoundationFactory.php',
         'Symfony\\Bridge\\PsrHttpMessage\\Factory\\PsrHttpFactory' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Factory/PsrHttpFactory.php',
@@ -7472,10 +7470,10 @@ class ComposerStaticInitb4effc8941f7654f9668771f2fcd582f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb4effc8941f7654f9668771f2fcd582f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb4effc8941f7654f9668771f2fcd582f::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitb4effc8941f7654f9668771f2fcd582f::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitb4effc8941f7654f9668771f2fcd582f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInita0537824cca05dd6cf1a0a8e66370649::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita0537824cca05dd6cf1a0a8e66370649::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInita0537824cca05dd6cf1a0a8e66370649::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInita0537824cca05dd6cf1a0a8e66370649::$classMap;
 
         }, null, ClassLoader::class);
     }
