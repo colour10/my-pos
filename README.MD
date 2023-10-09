@@ -1,13 +1,7 @@
-# 意远代理商分润管理系统后台，基于laravel5.6 + Mysql5.7开发~
-
-## 功能列表：
-
-### 合伙人管理：包含合伙人开户、合伙人查询等功能。
-
-### 分润管理：包含分润明细查询、分润提现记录、分润余额查询等功能。
-
-### 财务处理：包含账户信息、资金冻结、分润制单、分润复核、调账经办、调账查询等功能。
-
-### 代付管理：包含代付通道管理、代付记录、代付账户充值等功能。
-
-### 系统管理：包含员工管理、系统设置、公告管理、开户行管理、本人信息维护、角色管理、权限管理、后台首页等功能。
+# Agent profit sharing management system backend, developed based on laravel5.6 + Mysql5.7~
+## function list:
+### Partner management: including partner account opening, partner query and other functions.
+### Profit sharing management: includes functions such as profit sharing detailed inquiry, profit sharing withdrawal record, and profit sharing balance inquiry.
+### Financial processing: including functions such as account information, fund freezing, profit distribution invoice preparation, profit distribution review, account adjustment processing, and account adjustment inquiry.
+### Agency payment management: including agency payment channel management, agency payment records, agency payment account recharge and other functions.
+### System management: including employee management, system settings, announcement management, account opening bank management, personal information maintenance, role management, authority management, backend homepage and other functions.

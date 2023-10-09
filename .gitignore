@@ -17,3 +17,4 @@ Homestead.json
 /.vagrant
 vendor
 _ide_helper.php
+.idea
